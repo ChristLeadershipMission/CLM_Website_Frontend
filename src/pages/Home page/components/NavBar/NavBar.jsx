@@ -62,7 +62,7 @@ const NavBar = () => {
               </Link>
               <Link to={"/giving"}>
                 {" "}
-                <li>Oline Giving</li>{" "}
+                <li>Online Giving</li>{" "}
               </Link>
               <Link to={"/activities"}>
                 {" "}
