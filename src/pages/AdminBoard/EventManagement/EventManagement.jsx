@@ -1,0 +1,191 @@
+import eventMangement from "./data";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./event.css";
+import {
+  faCalendarPlus,
+  faPenToSquare,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
+import PropTypes from "prop-types";
+// import {  useState } from "react";
+import EmptyData from "../../utils/EmptyData.jsx";
+import Upload from "../../utils/Upload";
+import { useState } from "react";
+// import axios from "axios";
+// import { ToastContainer, toast } from "react-toastify";
+
+
+const EventManagementBoard = ({ hideSideBar }) => {
+  // const [eventMangementList, setEventManagementList] = useState(["ola"]);
+  const [upLoadEvent, setUpLoadEvent] = useState(false);
+  const [eventData,setEventData] = useState(null);
+  const [uploadOrUpdate, setUploadOrUpdate] = useState();
+  const [eventId, setEventId] = useState();
+
+  // useEffect(()=>{
+  //   const fetchData = async()=>{
+  //     try {
+  //       const response = await axios.get("https://kingshillcity-01.onrender.com/api/v1/events");
+  //       console.log(response);
+  //       setEventManagementList(response.data.event);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   fetchData();
+  // },[]);
+
+  const uploadEventHandler = (value) => {
+    setUpLoadEvent(value);
+    setEventData({});
+    setUploadOrUpdate("Upload")
+  };
+
+  // const deleteEvent = async(id)=>{
+  //   try {
+  //     const response = await axios.get(`https://kingshillcity-01.onrender.com/api/v1/events/${id}`);
+  //     console.log(response)
+  //     toast("Event has been deleted successfully. Please refresh to see changes");
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast("An error occurred while deleting, please try again");
+  //   }
+  // };
+
+  // const editEvent = (id) => {
+  //   const newData = eventMangementList.filter(event => event._id === id);
+  //   setEventData(newData[0]);
+  //   setUpLoadEvent(true);
+  //   setUploadOrUpdate("Update");
+  //   setEventId(id);
+  //   // console.log(eventData , "Na legit");
+  //   // console.log("click on edit event");
+  // };
+  return (
+    <>
+      <div className="w-[100%]  lg:w-[82%] h-[90vh] relative">
+        {/* <ToastContainer/> */}
+        <div
+          className="bg-white shadow-lg lg:h-[10vh] lg:p-[.5rem]
+          flex justify-around lg:block"
+        >
+          <h1
+            className="lg:text-2xl md:text-center lg:text-left py-[3vh] md:py-[3vh] 
+           md:text-[1.5rem] lg:pt-[2vh]"
+          > 
+            Event Management
+          </h1>
+          <h1
+            className="lg:hidden text-[2rem] font-black pt-[2vh] pl-[20vw]"
+            onClick={() => hideSideBar(true)}
+          >
+            &#9776;
+          </h1>
+        </div>
+        {upLoadEvent ? (
+          <Upload uploadEventHandler={uploadEventHandler} eventData={eventData} uploadOrupdate={uploadOrUpdate} eventId={eventId}/>
+        ) : null}
+        {eventMangement.length > 0 ? (
+          <div>
+            <div className="my-5 px-[4vh] lg:flex justify-between">
+              <div className="flex">
+                <input
+                  type="text"
+                  className=" bg-gray-300 w-[100%] lg:w-[26vw] h-[6vh] rounded-l-md outline-none pl-5"
+                />
+                <button
+                  className="bg-[#90150D] text-white h-[6vh] w-[40%] rounded-r-md
+              hover:bg-[rgb(184,13,13)] transition-all duration-150 delay-100 "
+                >
+                  search
+                </button>
+              </div>
+              <div
+                className="fontLink bg-[#90150D] text-white h-[6vh] w-[50%] md:w-[35%] lg:w-[20%]
+          rounded-md hover:bg-[rgb(184,13,13)] transition-all duration-150 delay-100 my-[0.9rem] lg:my-0
+          text-center pt-[0.7rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] 
+          "
+              >
+                <button className=""
+                 onClick={() => uploadEventHandler(true)}
+                 >
+                  <span>
+                    <FontAwesomeIcon icon={faCalendarPlus} />
+                  </span>{" "}
+                  &nbsp; Add new event
+                </button>
+              </div>
+            </div>
+            <div
+              className="grid md:grid-cols-2 lg:grid-cols-3 lg:py-[2rem] lg:pl-[8vw] pl-[15vw] md:pl-0
+         overflow-y-scroll no-scrollbar h-[57vh] md:h-[63vh] lg:h-[68vh] 
+        "
+            >
+              {eventMangement.map((data) => {
+                const { _id, title, date, time, image } = data;
+                return (
+                  <>
+                    <div
+                      key={_id}
+                      className="w-[80%]  rounded-lg relative
+                    shadow-lg my-[1rem] md:ml-[5.5vw] md:mt-[6vh] lg:mt-0 lg:ml-0
+                    "
+                    >
+                      <div className="relative">
+                        <img
+                          src={image}
+                          alt="Event Image"
+                          className="w-full lg:h-[30vh]  rounded-t-md"
+                        />
+                        {/* <span className="absolute top-3 right-5 text-2xl text-black bg-[#D3AE6E]"><FontAwesomeIcon icon={faEllipsisVertical} /></span> */}
+                      </div>
+                      <div
+                        className="text-center fontLink font-bold
+                    py-[2vh] px-4 mb-7
+                "
+                      >
+                        <h3>Event: {title}</h3>
+                        <h3>Time: {time}</h3>
+                        <h3 className="pb-5">Date: {date}</h3>
+                      </div>
+                      <div className="flex gap-5 pb-5 pl-5 relative bottom-0">
+                        <p
+                          className=" text-[#90150D] font-bold cursor-pointer 
+                          hover:scale-[1.05] transition-all duration-150 delay-75 
+                          ease-in-out"
+                          id={_id}
+                          // onClick={()=>editEvent(_id)}
+                        >
+                          {" "}
+                          <FontAwesomeIcon icon={faPenToSquare} /> Edit
+                        </p>
+                        <p 
+                          className=" text-[rgb(0,0,128)] font-bold cursor-pointer hover:scale-[1.05]
+                           transition-all duration-150 delay-75 ease-in-out"
+                          //  onClick={()=>deleteEvent(_id)}
+                           >
+                          {" "}
+                          <FontAwesomeIcon icon={faTrash} /> Delete
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          <div className="mt-[13vh] lg:mt-[15vh]">
+            <EmptyData message={"No Event found"} />
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+EventManagementBoard.propTypes = {
+  hideSideBar: PropTypes.func.isRequired,
+};
+
+export default EventManagementBoard;

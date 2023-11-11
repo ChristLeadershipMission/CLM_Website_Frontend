@@ -30,7 +30,9 @@ const SignUpDesktop = ({ viewSignIn }) => {
 
   return (
     <>
-      <div className="lg:flex lg:justify-center lg:pt-[3%] hidden md:hidden">
+      <div 
+       className="lg:flex lg:justify-center lg:pt-[3%] hidden md:hidden
+       overflow-hidden relative">
         <motion.div
           className="px-[1rem] bg-[#0D0A25] h-screen w-screen 
        md:px-[8rem] border-2 border-black lg:w-[30%] lg:h-[32rem] lg:my-5 
@@ -41,14 +43,23 @@ const SignUpDesktop = ({ viewSignIn }) => {
         >
           <div
             className="bg-[url('/src\assets\pictures\clmLogo.svg')] bg-cover 
-          absolute top-[9rem] w-[100%] h-[50%] -ml-4 rounded-lg opacity-[.04] 
-          md:-ml-[8rem] md:h-[80%] md:top-[5rem]"
+          absolute top-[9rem] w-[80vw] h-[50%] -ml-4 rounded-lg opacity-[.04] 
+          md:left-[15vw] md:h-[80vh] md:top-[1rem] overflow-hidden"
           ></div>
           <div>
-            <h1 className="text-center font-['Arial'] text-2xl font-bold pt-10 tracking-wide lg:pt-7">
+            <h1 
+             className={`text-center font-['Arial'] text-2xl 
+             font-bold pt-10 tracking-wide lg:pt-7
+             ${outerWidth > 1000 ? "text-white" : "text-black"}
+             `}>
               Sign Up
             </h1>
-            <p className="text-center py-2">Please sign up to get started.</p>
+            <p 
+            className={`text-center py-2
+            ${outerWidth > 1000 ? "text-white" : "text-black"}
+            `}>
+              Please sign up to get started.
+            </p>
           </div>
           <div>
             <form action="/" method="post">
@@ -91,7 +102,7 @@ const SignUpDesktop = ({ viewSignIn }) => {
                   </span>
                 )}
               </div>
-              <div className="py-4 lg:py-2">
+              <div className={`py-4 lg:py-2 ${outerWidth > 1000 ? "text-white" : "text-black"}`}>
                 <input type="checkbox" className="pr-5 bg-white" />
                 <span>
                   {" "}

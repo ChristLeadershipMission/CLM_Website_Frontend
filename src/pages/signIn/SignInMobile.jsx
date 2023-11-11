@@ -30,11 +30,13 @@ const SignInMobile = ({ viewSignUp }) => {
 
   return (
     <>
-      <div className="lg:hidden lg:justify-center lg:pt-[1%] bg-[#0D0A25] h-screen">
+      <div 
+       className="lg:hidden lg:justify-center lg:pt-[1%] bg-[#0D0A25] 
+       h-screen w-screen overflow-hidden relativ">
         <motion.div
           className="px-[1rem] bg-[#0D0A25] h-screen w-screen 
           md:mx-[5rem] border-2 border-black md:w-[80%] 
-          md:h-[80vh] order-2 md:bg-gray-300 md:relative 
+          md:h-[85vh] order-2 md:bg-gray-300 md:relative 
           md:top-[6rem] md:rounded-2xl"
           animate={{ x: goToSignUp ? 75 : 0, opacity: goToSignUp ? 0 : 1 }}
           initial={{ x: 40, opacity: 0 }}
@@ -48,29 +50,29 @@ const SignInMobile = ({ viewSignUp }) => {
           <div>
             <h1
               className="text-center font-['Arial'] text-2xl 
-            md:text-[#0D0A25]
-            md:text-[2.5rem]
-            font-bold pt-10 tracking-wide lg:pt-7"
+              min-[764px]:text-[#0D0A25] text-white
+               md:text-[2.5rem] pt-[5vh]
+               font-bold tracking-wide lg:pt-7"
             >
               Sign In
             </h1>
             <p
-              className="text-center py-2 md:py-5 md:text-[1.4rem] md:text-[#0D0A25]
-            md:font-semibold"
+              className="text-center py-5 md:py-5 md:text-[1.4rem] min-[764px]:text-[#0D0A25]
+               text-white md:font-semibold"
             >
               Welcome back! Please sign to your account
             </p>
           </div>
           <div>
-            <form action="/" method="post">
+            <form action="/" method="post" className="py-[6vh] md:py-0">
               <input
                 type="text"
                 placeholder="Username or Email"
                 required
-                className="w-[100%] h-[3rem] mb-4 bg-white rounded-lg 
-                md:bg-transparent
+                className="w-[85vw] h-[3rem] mb-10 bg-white rounded-lg 
+                md:bg-transparent ml-[3vw]
                 md:border-b-2 md:border-blue-800 md:rounded-none md:placeholder:text-2xl
-                md:mt-[2rem] md:w-[80%] md:ml-[3rem] md:outline-none md:text-2xl md:font-semibold
+                md:mt-[2rem] md:w-[80%] md:ml-[3vw] md:outline-none md:text-2xl md:font-semibold
               pl-3 placeholder:text-black placeholder:font-medium text-black relative"
               />
               <div className="relative">
@@ -79,21 +81,21 @@ const SignInMobile = ({ viewSignUp }) => {
                   placeholder="Password"
                   required
                   ref={viewPassword}
-                  className="w-[100%] h-[3rem] mb-4 bg-white rounded-lg md:bg-transparent
-                  md:border-b-2 md:border-blue-800 md:rounded-none md:placeholder:text-2xl
-                  md:mt-[2rem] md:w-[80%] md:ml-[3rem] md:outline-none md:text-2xl md:font-semibold
-             pl-3 placeholder:text-black placeholder:font-medium text-black font-semibold"
+                  className="w-[85vw] h-[3rem] mb-10 bg-white rounded-lg md:bg-transparent
+                  md:border-b-2 md:border-blue-800 md:rounded-none md:placeholder:text-2xl ml-[3vw] 
+                  md:mt-[2rem] md:w-[80%] md:ml-[3vw] md:outline-none md:text-2xl md:font-semibold
+                  pl-3 placeholder:text-black placeholder:font-medium text-black font-semibold"
                 />
                 {hideOrShowPassword ? (
                   <span
-                    className="absolute right-6 top-3 md:top-[2rem] md:right-[6rem] text-black"
+                    className="absolute right-10 top-3 md:top-[2rem] md:right-[6rem] text-black"
                     onClick={showPassword}
                   >
                     <FontAwesomeIcon icon={faEye} />
                   </span>
                 ) : (
                   <span
-                    className="absolute right-6 top-3 md:top-[2rem] md:right-[6rem] text-black"
+                    className="absolute right-10 top-3 md:top-[2rem] md:right-[6rem] text-black"
                     onClick={hidePassword}
                   >
                     <FontAwesomeIcon icon={faEyeSlash} />
@@ -102,7 +104,7 @@ const SignInMobile = ({ viewSignUp }) => {
               </div>
               <div className="py-4 lg:py-2 md:ml-[3rem]">
                 <input type="checkbox" className="pr-5 bg-white" />
-                <span className="md:text-2xl md:text-black">
+                <span className="md:text-2xl min-[764px]:text-[#0D0A25] text-white">
                   {" "}
                   Forgot Password?
                 </span>
@@ -116,7 +118,7 @@ const SignInMobile = ({ viewSignUp }) => {
                 {" "}
                 Sign In
               </button>
-              <div className="relative md:mt-[3rem]">
+              {/* <div className="relative md:mt-[3rem]">
                 <hr className="my-5 md:bg-black h-[0.2rem]" />
                 <span
                   className="absolute -top-4 left-[8rem] text-lg bg-[#0D0A25]
@@ -150,7 +152,7 @@ const SignInMobile = ({ viewSignUp }) => {
                   <FontAwesomeIcon icon={faFacebook} />{" "}
                 </span>
                 <span>Continue With Facebook</span>
-              </button>
+                </button> */}
               <div className=" text-center pt-3 md:pt-6">
                 <a
                   href=""
@@ -162,7 +164,7 @@ const SignInMobile = ({ viewSignUp }) => {
                   {" "}
                   Don't have an account? Sign Up.
                 </a>
-              </div>
+              </div> 
             </form>
           </div>
         </motion.div>
