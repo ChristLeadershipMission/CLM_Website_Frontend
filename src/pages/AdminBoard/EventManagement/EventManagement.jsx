@@ -14,64 +14,81 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 // import { ToastContainer, toast } from "react-toastify";
 
-
 const EventManagementBoard = ({ hideSideBar }) => {
   // const [eventMangementList, setEventManagementList] = useState(["ola"]);
   const [upLoadEvent, setUpLoadEvent] = useState(false);
-  const [eventData,setEventData] = useState(null);
+  const [eventData, setEventData] = useState(null);
   const [uploadOrUpdate, setUploadOrUpdate] = useState();
-  // const [eventId, setEventId] = useState();
-  const [eventMangementList, setEventManagementList] = useState();
+  const [eventId, setEventId] = useState();
+  const [eventMangementList, setEventManagementList] = useState([]);
 
-
-  useEffect(()=>{
-    const fetchData = async()=>{
+  useEffect(() => {
+    const fetchData = async () => {
       const token = JSON.parse(sessionStorage.getItem("userData")).access_token;
-      console.log(token);
       try {
-        const response = await axios.get("https://clm-website.onrender.com/clmWebsite/api/v1/event/findAll",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
+        const response = await axios.get(
+          "https://clm-website.onrender.com/clmWebsite/api/v1/event/findAll",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
-        }
         );
-        console.log(response.data);
-        setEventManagementList(response.data);
+        const data = response.data;
+        console.log(data, "data");
+        setEventManagementList((prev) => data);
         console.log(eventMangementList, "event");
       } catch (error) {
         console.log(error);
       }
-    }
+    };
     fetchData();
-  },[]);
+  }, []);
 
   const uploadEventHandler = (value) => {
     setUpLoadEvent(value);
     setEventData({});
-    setUploadOrUpdate("Upload")
+    setUploadOrUpdate("Upload");
   };
 
-  // const deleteEvent = async(id)=>{
-  //   try {
-  //     const response = await axios.get(`https://kingshillcity-01.onrender.com/api/v1/events/${id}`);
-  //     console.log(response)
-  //     toast("Event has been deleted successfully. Please refresh to see changes");
-  //   } catch (error) {
-  //     console.log(error);
-  //     toast("An error occurred while deleting, please try again");
-  //   }
-  // };
+  const deleteEvent = async(id)=>{
+    try {
+      const token = JSON.parse(
+        sessionStorage.getItem("userData")
+      ).access_token;
+      const url = `https://clm-website.onrender.com/clmWebsite/api/v1/event/deleteEventById?id=${id}`;
+      const response = await axios.delete(url,
+      {
+        headers:{
+          Authorization: `Bearer ${token}`,
+        }
+      }
+      );
+      if (response.status === 200) {
+        location.reload();
+      }
+      console.log(response)
+    //  toast("Event has been deleted successfully. Please refresh to see changes");
+    } catch (error) {
+      console.log(error);
+      // toast("An error occurred while deleting, please try again");
+    }
+  };
 
-  // const editEvent = (id) => {
-  //   const newData = eventMangementList.filter(event => event._id === id);
-  //   setEventData(newData[0]);
-  //   setUpLoadEvent(true);
-  //   setUploadOrUpdate("Update");
-  //   setEventId(id);
-  //   // console.log(eventData , "Na legit");
-  //   // console.log("click on edit event");
-  // };
+  
+
+  const editEvent = (id) => {
+    const newData = eventMangementList.filter((event) => event.id === id);
+    // updateEvent(newData);
+    // console.log(newData);
+    setEventData(newData[0]);
+    setUpLoadEvent(true);
+    setUploadOrUpdate("Update");
+    setEventId(id);
+    // console.log(eventData , "Na legit");
+    // console.log("click on edit event");
+  };
+  
   return (
     <>
       <div className="w-[100%]  lg:w-[82%] h-[90vh] relative">
@@ -83,7 +100,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
           <h1
             className="lg:text-2xl md:text-center lg:text-left py-[3vh] md:py-[3vh] 
            md:text-[1.5rem] lg:pt-[2vh]"
-          > 
+          >
             Event Management
           </h1>
           <h1
@@ -94,7 +111,12 @@ const EventManagementBoard = ({ hideSideBar }) => {
           </h1>
         </div>
         {upLoadEvent ? (
-          <Upload uploadEventHandler={uploadEventHandler} eventData={eventData} uploadOrupdate={uploadOrUpdate} eventId={eventId}/>
+          <Upload
+            uploadEventHandler={uploadEventHandler}
+            eventData={eventData}
+            uploadOrupdate={uploadOrUpdate}
+            eventId={eventId}
+          />
         ) : null}
         {eventMangement.length > 0 ? (
           <div>
@@ -117,9 +139,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
           text-center pt-[0.7rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] 
           "
               >
-                <button className=""
-                 onClick={() => uploadEventHandler(true)}
-                 >
+                <button className="" onClick={() => uploadEventHandler(true)}>
                   <span>
                     <FontAwesomeIcon icon={faCalendarPlus} />
                   </span>{" "}
@@ -132,20 +152,20 @@ const EventManagementBoard = ({ hideSideBar }) => {
          overflow-y-scroll no-scrollbar h-[57vh] md:h-[63vh] lg:h-[68vh] 
         "
             >
-              {eventMangement.map((data,index) => {
-                const {  title, date, time, image } = data;
-                const  _id = index;
+              {eventMangementList.map((data) => {
+                const { id, eventName, startDate, endDate, eventImageUrl } =
+                  data;
                 return (
                   <>
                     <div
-                      key={_id}
+                      key={id}
                       className="w-[80%]  rounded-lg relative
                     shadow-lg my-[1rem] md:ml-[5.5vw] md:mt-[6vh] lg:mt-0 lg:ml-0
                     "
                     >
                       <div className="relative">
                         <img
-                          src={image}
+                          src={eventImageUrl}
                           alt="Event Image"
                           className="w-full lg:h-[30vh]  rounded-t-md"
                         />
@@ -156,26 +176,26 @@ const EventManagementBoard = ({ hideSideBar }) => {
                     py-[2vh] px-4 mb-7
                 "
                       >
-                        <h3>Event: {title}</h3>
-                        <h3>Time: {time}</h3>
-                        <h3 className="pb-5">Date: {date}</h3>
+                        <h3>Event: {eventName}</h3>
+                        <h3>Time: {endDate}</h3>
+                        <h3 className="pb-5">Date: {startDate}</h3>
                       </div>
                       <div className="flex gap-5 pb-5 pl-5 relative bottom-0">
                         <p
                           className=" text-[#90150D] font-bold cursor-pointer 
                           hover:scale-[1.05] transition-all duration-150 delay-75 
                           ease-in-out"
-                          id={_id}
-                          // onClick={()=>editEvent(_id)}
+                          id={id}
+                          onClick={() => editEvent(id)}
                         >
                           {" "}
                           <FontAwesomeIcon icon={faPenToSquare} /> Edit
                         </p>
-                        <p 
+                        <p
                           className=" text-[rgb(0,0,128)] font-bold cursor-pointer hover:scale-[1.05]
                            transition-all duration-150 delay-75 ease-in-out"
-                          //  onClick={()=>deleteEvent(_id)}
-                           >
+                           onClick={()=>deleteEvent(id)}
+                        >
                           {" "}
                           <FontAwesomeIcon icon={faTrash} /> Delete
                         </p>

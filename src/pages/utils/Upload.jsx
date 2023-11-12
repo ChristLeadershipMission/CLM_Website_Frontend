@@ -40,9 +40,11 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
       console.log("Public URL:", imageUrl);
       if (imageUrl) {
         setEventDataUpdate({ ...eventDataUpdate, eventImageUrl: imageUrl });
-        toast('Photo uploaded successfully');
-      }else{
-        toast('Please wait a bit... If No Image is displayed. Please try again');
+        toast("Photo uploaded successfully");
+      } else {
+        toast(
+          "Please wait a bit... If No Image is displayed. Please try again"
+        );
       }
     }
     // if (imageUrl.length > 0) {
@@ -59,12 +61,10 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
       // console.log(reader.result);
       // setEventDataUpdate({ ...eventDataUpdate, eventImageUrl: reader.result });
     };
-    console.log(eventDataUpdate);
   };
 
   const request = async () => {
     try {
-      console.log(eventDataUpdate);
       if (
         eventDataUpdate.eventImageUrl &&
         eventDataUpdate.eventName &&
@@ -72,30 +72,62 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
         eventDataUpdate.startDate
       ) {
         console.log("got here");
-        const data = {
+        // const data = {
+        //   eventName: eventDataUpdate.eventName,
+        //   content: "",
+        //   startDate: eventDataUpdate.startDate,
+        //   endDate: eventDataUpdate.endDate,
+        //   eventImageUrl: eventDataUpdate.eventImageUrl,
+        //   eventVideoUrl: "",
+        // };
+
+        const data = uploadOrUpdateButtonRef.current.innerText === "Upload"
+        ?
+        {
           eventName: eventDataUpdate.eventName,
           content: "",
           startDate: eventDataUpdate.startDate,
           endDate: eventDataUpdate.endDate,
           eventImageUrl: eventDataUpdate.eventImageUrl,
           eventVideoUrl: "",
+        }
+        :
+        {
+          endDate: eventDataUpdate.endDate,
+          eventImageurl:
+            eventDataUpdate.eventImageUrl,
+          eventName: eventDataUpdate.eventName,
+          eventVideoUrl: "string",
+          flier: "string",
+          id: eventDataUpdate.id,
+          startDate: eventDataUpdate.startDate,
+          theme: "string",
         };
-        const token = JSON.parse(sessionStorage.getItem("userData")).access_token;
+        console.log("data", data);
+        const token = JSON.parse(
+          sessionStorage.getItem("userData")
+        ).access_token;
+        console.log(token);
         const url =
           uploadOrUpdateButtonRef.current.innerText === "Upload"
             ? "https://clm-website.onrender.com/clmWebsite/api/v1/event/eventCreation"
-            : `https://clm-website.onrender.com/clmWebsite/api/v1/event/eventCreation/${eventId}`;
-        const response = await axios.post(
-          url, 
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          }
-          );
-        setEventDataUpdate({ teventName: "", startDate: "", endDate: "" });
+            : "https://clm-website.onrender.com/clmWebsite/api/v1/event/eventUpdate";
+        const response =  uploadOrUpdateButtonRef.current.innerText === "Upload"
+        ? 
+        await axios.post(url, data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        :
+        await axios.patch(url, data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setEventDataUpdate({ eventName: "", startDate: "", endDate: "" });
         if (response) {
+          // location.reload();
           toast("Refresh to see changes");
         }
         console.log(response);
@@ -111,6 +143,8 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
       console.log(error);
     }
   };
+
+ 
 
   const controllInput = (e) => {
     setEventDataUpdate({ ...eventDataUpdate, [e.target.name]: e.target.value });
@@ -133,9 +167,11 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
       const downloadImageUrl = await uploadImage(file);
       if (imageUrl) {
         setEventDataUpdate({ ...eventDataUpdate, eventImageUrl: imageUrl });
-        toast('Photo uploaded successfully');
-      }else{
-        toast('Please wait a bit... If No Image is displayed. Please try again');
+        toast("Photo uploaded successfully");
+      } else {
+        toast(
+          "Please wait a bit... If No Image is displayed. Please try again"
+        );
       }
     }
     // if (!imageUrl) {
