@@ -10,8 +10,8 @@ import PropTypes from "prop-types";
 // import {  useState } from "react";
 import EmptyData from "../../utils/EmptyData.jsx";
 import Upload from "../../utils/Upload";
-import { useState } from "react";
-// import axios from "axios";
+import { useEffect, useState } from "react";
+import axios from "axios";
 // import { ToastContainer, toast } from "react-toastify";
 
 
@@ -20,20 +20,31 @@ const EventManagementBoard = ({ hideSideBar }) => {
   const [upLoadEvent, setUpLoadEvent] = useState(false);
   const [eventData,setEventData] = useState(null);
   const [uploadOrUpdate, setUploadOrUpdate] = useState();
-  const [eventId, setEventId] = useState();
+  // const [eventId, setEventId] = useState();
+  const [eventMangementList, setEventManagementList] = useState();
 
-  // useEffect(()=>{
-  //   const fetchData = async()=>{
-  //     try {
-  //       const response = await axios.get("https://kingshillcity-01.onrender.com/api/v1/events");
-  //       console.log(response);
-  //       setEventManagementList(response.data.event);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   fetchData();
-  // },[]);
+
+  useEffect(()=>{
+    const fetchData = async()=>{
+      const token = JSON.parse(sessionStorage.getItem("userData")).access_token;
+      console.log(token);
+      try {
+        const response = await axios.get("https://clm-website.onrender.com/clmWebsite/api/v1/event/findAll",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+        );
+        console.log(response.data);
+        setEventManagementList(response.data);
+        console.log(eventMangementList, "event");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  },[]);
 
   const uploadEventHandler = (value) => {
     setUpLoadEvent(value);
@@ -121,8 +132,9 @@ const EventManagementBoard = ({ hideSideBar }) => {
          overflow-y-scroll no-scrollbar h-[57vh] md:h-[63vh] lg:h-[68vh] 
         "
             >
-              {eventMangement.map((data) => {
-                const { _id, title, date, time, image } = data;
+              {eventMangement.map((data,index) => {
+                const {  title, date, time, image } = data;
+                const  _id = index;
                 return (
                   <>
                     <div

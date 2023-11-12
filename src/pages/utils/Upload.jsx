@@ -9,7 +9,6 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { ToastContainer, toast } from "react-toastify";
 
 const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
-  //{ uploadEventHandler, eventData, uploadOrupdate, eventId }
   const imageRef = useRef();
   const uploadImageContainerRef = useRef(null);
   const [eventDataUpdate, setEventDataUpdate] = useState(eventData);
@@ -65,11 +64,7 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
 
   const request = async () => {
     try {
-      // console.log(eventDataUpdate.image);
-      // console.log(eventDataUpdate.title);
-      // console.log(eventDataUpdate.time);
-      // console.log(eventDataUpdate.date);
-      console.log(JSON.parse(sessionStorage.getItem("userData")).access_token);
+      console.log(eventDataUpdate);
       if (
         eventDataUpdate.eventImageUrl &&
         eventDataUpdate.eventName &&
