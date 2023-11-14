@@ -12,6 +12,8 @@ import EmptyData from "../../utils/EmptyData.jsx";
 import Upload from "../../utils/Upload";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import baseUrl from "../../utils/baseUrl.js";
+import { useNavigate } from "react-router-dom";
 // import { ToastContainer, toast } from "react-toastify";
 
 const EventManagementBoard = ({ hideSideBar }) => {
@@ -21,13 +23,17 @@ const EventManagementBoard = ({ hideSideBar }) => {
   const [uploadOrUpdate, setUploadOrUpdate] = useState();
   const [eventId, setEventId] = useState();
   const [eventMangementList, setEventManagementList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log(`${baseUrl}/event/findAll`);
+      console.log(eventMangement.length > 0);
+      console.log(eventMangement.length);
       const token = JSON.parse(sessionStorage.getItem("userData")).access_token;
       try {
         const response = await axios.get(
-          "https://clm-website.onrender.com/clmWebsite/api/v1/event/findAll",
+          `${baseUrl}/event/findAll`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -39,7 +45,10 @@ const EventManagementBoard = ({ hideSideBar }) => {
         setEventManagementList((prev) => data);
         console.log(eventMangementList, "event");
       } catch (error) {
-        console.log(error);
+        if (error.response.status === 403) {
+            //  navigate("/registration");
+        }
+        console.log(error );
       }
     };
     fetchData();
@@ -56,7 +65,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
       const token = JSON.parse(
         sessionStorage.getItem("userData")
       ).access_token;
-      const url = `https://clm-website.onrender.com/clmWebsite/api/v1/event/deleteEventById?id=${id}`;
+      const url = `${baseUrl}/event/deleteEventById?id=${id}`;
       const response = await axios.delete(url,
       {
         headers:{
@@ -118,8 +127,6 @@ const EventManagementBoard = ({ hideSideBar }) => {
             eventId={eventId}
           />
         ) : null}
-        {eventMangement.length > 0 ? (
-          <div>
             <div className="my-5 px-[4vh] lg:flex justify-between">
               <div className="flex">
                 <input
@@ -127,16 +134,16 @@ const EventManagementBoard = ({ hideSideBar }) => {
                   className=" bg-gray-300 w-[100%] lg:w-[26vw] h-[6vh] rounded-l-md outline-none pl-5"
                 />
                 <button
-                  className="bg-[#90150D] text-white h-[6vh] w-[40%] rounded-r-md
-              hover:bg-[rgb(184,13,13)] transition-all duration-150 delay-100 "
+                  className="bg-[#F66D0A] text-white h-[6vh] w-[40%] rounded-r-md
+              hover:bg-[#f62d0a] transition-all duration-150 delay-100 "
                 >
                   search
                 </button>
               </div>
               <div
-                className="fontLink bg-[#90150D] text-white h-[6vh] w-[50%] md:w-[35%] lg:w-[20%]
-          rounded-md hover:bg-[rgb(184,13,13)] transition-all duration-150 delay-100 my-[0.9rem] lg:my-0
-          text-center pt-[0.7rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] 
+                className="fontLink bg-[#F66D0A] text-white h-[6vh] w-[50%] md:w-[35%] lg:w-[20%]
+               rounded-md hover:bg-[#f62d0a] transition-all duration-150 delay-100 my-[0.9rem] lg:my-0
+               text-center pt-[0.7rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] 
           "
               >
                 <button className="" onClick={() => uploadEventHandler(true)}>
@@ -147,6 +154,8 @@ const EventManagementBoard = ({ hideSideBar }) => {
                 </button>
               </div>
             </div>
+        {eventMangementList.length > 0 ? (
+          <div>
             <div
               className="grid md:grid-cols-2 lg:grid-cols-3 lg:py-[2rem] lg:pl-[8vw] pl-[15vw] md:pl-0
          overflow-y-scroll no-scrollbar h-[57vh] md:h-[63vh] lg:h-[68vh] 

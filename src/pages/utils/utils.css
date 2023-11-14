@@ -1,0 +1,12 @@
+
+  
+  .custom-dropdown select {
+    /* border: 1px solid #ccc;
+    border-radius: 4px; */
+    overflow-y: scroll; /* Set overflow-y to scroll */
+  }
+  
+  .custom-dropdown select:focus {
+    outline: none; /* Remove the default focus style */
+  }
+  

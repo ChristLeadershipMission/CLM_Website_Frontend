@@ -8,6 +8,7 @@ import publicity from "./Images/publicity.png";
 import sanitation from "./Images/sanitation.png";
 import welfare from "./Images/welfare.png";
 import shape from "./Images/shape.svg";
+import PropTypes from 'prop-types';
 
 const DepartmentComponent = ({hideSideBar}) => {
   const data = [
@@ -127,5 +128,9 @@ const DepartmentComponent = ({hideSideBar}) => {
     </>
   );
 };
+
+DepartmentComponent.propTypes = {
+  hideSideBar: PropTypes.bool,
+}
 
 export default DepartmentComponent;

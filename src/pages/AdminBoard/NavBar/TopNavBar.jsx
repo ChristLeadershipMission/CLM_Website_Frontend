@@ -4,7 +4,7 @@
 const TopNavBar = () => {
   return (
     <>
-      <div className="w-screen h-[10vh] bg-[#043E7D] flex justify-between px-[2vw] text-white">
+      <div className="w-screen h-[10vh] bg-[#0A063E] flex justify-between px-[2vw] text-white">
         <div className="flex gap-[1vw]">
           <img
             src="src\assets\churchImglogo.png"

@@ -9,6 +9,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
+import baseUrl from "../utils/baseUrl";
 
 const SignInDesktop = ({ viewSignUp }) => {
   const viewPassword = useRef();
@@ -51,7 +52,7 @@ const SignInDesktop = ({ viewSignUp }) => {
   const postRequest = async (e) => {
     e.preventDefault();
     try {
-      const url = "https://clm-website.onrender.com/clmWebsite/api/v1/login";
+      const url = `${baseUrl}/login`;
       const data = {
         email: formInput.email,
         password: formInput.password,
@@ -198,7 +199,7 @@ const SignInDesktop = ({ viewSignUp }) => {
                 </span>
                 <span>Continue With Facebook</span>
                 </button> */}
-              <div className=" text-center pt-3 md:pt-6">
+              <div className=" text-center pt-3 md:pt-6 hidden">
                 <a
                   href=""
                   className="text-white text-sm font-normal underline relative hover:text-blue-400"

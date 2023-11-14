@@ -4,7 +4,7 @@ import SignUp from "../signUp/responsiveSignUp";
 
 
 const FormPage = () => {
-  const [navigateForms, setNavigateForms] = useState(true);
+  const [navigateForms, setNavigateForms] = useState(false);
 
   const navigateFormsPages = (value)=>{
     setNavigateForms(value)

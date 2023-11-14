@@ -2,6 +2,11 @@ import { faDashboard, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
+import dashboard from "./Images/dashboard.svg";
+import event from "./Images/event.svg";
+import file from "./Images/file.svg";
+import people from "./Images/people.svg";
+import person from "./Images/person.svg";
 
 
 
@@ -21,7 +26,7 @@ const SideBar = ({displaySideBar}) => {
     <>
       <motion.div
        className="lg:w-[20%] md:w-[60%] fixed lg:relative  h-[90vh] shadow-2xl overflow-auto 
-       font-['Roboto'] font-medium text-lg md:text-xl lg:text-lg py-10 no-scrollbar bg-white
+       font-['Arial'] font-medium text-lg md:text-xl lg:text-lg py-10 no-scrollbar bg-[#FCFCFC]
        z-[500]"
        animate={{x: closeSideBar? -250: 0}}
        ref={sideBarRef} 
@@ -40,7 +45,7 @@ const SideBar = ({displaySideBar}) => {
             />
             <h3 className="text-center mr-[3vw] py-[3vh]">Welcome Olamilekan</h3>
           </div>
-          <ul>
+          <ul className="break-all lg:text-[1rem] font-bold ">
             <li className="py-[1.2vh]">
               <span className="text-[#043E7D] pr-[2vw]">
                 <FontAwesomeIcon icon={faDashboard} />
@@ -59,7 +64,7 @@ const SideBar = ({displaySideBar}) => {
               </span>
               Campus <span className="lg:pl-[0.2vw]">Management</span>
             </li>
-            <li className="py-[1.2vh]">
+            <li className="py-[1.2vh] break-all">
               <span className="text-[#043E7D] pr-[2vw]">
                 <FontAwesomeIcon icon={faDashboard} />
               </span>

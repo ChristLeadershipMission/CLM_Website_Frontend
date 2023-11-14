@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import camera from "./image/camera.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -7,25 +7,64 @@ import axios from "axios";
 import storage from "../AdminBoard/Firebase/firebaseConfig";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { ToastContainer, toast } from "react-toastify";
+import baseUrl from "./baseUrl";
 
-const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
+const Upload = ({ uploadEventHandler, eventData, uploadOrupdate}) => {
   const imageRef = useRef();
   const uploadImageContainerRef = useRef(null);
   const [eventDataUpdate, setEventDataUpdate] = useState(eventData);
   const uploadOrUpdateButtonRef = useRef(null);
-  const [imageUrl, setImageUrl] = useState("");
+  // const [imageUrl, setImageUrl] = useState("");
+  const [campuses, setCampuses] = useState([]);
+
+
+  const campusId = (e) =>{
+    setEventDataUpdate({...eventDataUpdate,[e.target.name]: e.target.value});
+    console.log(e.target.value);
+    console.log(eventDataUpdate);
+  };
+
+  useEffect(()=>{
+    const fetchCampuses = async () => {
+      try {
+        const url = `${baseUrl}/campus/findAllCampuses`;
+      const token = JSON.parse(
+        sessionStorage.getItem("userData")
+      ).access_token;
+      const headers =  {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      };
+      const response = await axios.get(
+        url,
+       headers
+      );
+      const data = response.data;
+      setCampuses(data);
+      console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchCampuses();
+  },[]);
 
   const uploadImage = async (file) => {
     try {
       const storageRef = ref(storage, "EventImages/" + file.name); //This function allows you to create a reference to a specific location in Firebase Storage.
       await uploadBytes(storageRef, file); //This function is used to upload binary data (in this case, an image file) to a specific location in Firebase Storage.
       const downloadURL = await getDownloadURL(storageRef); //his function is used to get the download URL of a file stored in Firebase Storage.
-      if (!downloadURL) {
-        toast("Photo is uploading, please wait a few seconds...");
+      if (downloadURL) {
+        setEventDataUpdate({ ...eventDataUpdate, eventImageUrl: downloadURL });
+        imageRef.current.src = downloadURL;
+        toast("Photo uploaded successfully");
+        console.log(imageRef.current.src);
+      } else {
+        toast(
+          "Failed to upload... Please try again later"
+        );
       }
-      setImageUrl(downloadURL);
-      // setEventDataUpdate({...eventDataUpdate, image: downloadURL});
-      console.log("image url:" + imageUrl);
       // return downloadURL;
     } catch (error) {
       console.log(`An error occurred while uploading: ${error.message}`);
@@ -34,33 +73,21 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
 
   const selectImage = async (e) => {
     e.preventDefault();
+    toast("Photo is uploading..");
     const file = e.target.files[0];
     if (file) {
-      const downloadURL = await uploadImage(file);
-      console.log("Public URL:", imageUrl);
-      if (imageUrl) {
-        setEventDataUpdate({ ...eventDataUpdate, eventImageUrl: imageUrl });
-        toast("Photo uploaded successfully");
-      } else {
-        toast(
-          "Please wait a bit... If No Image is displayed. Please try again"
-        );
-      }
+      await uploadImage(file);
     }
-    // if (imageUrl.length > 0) {
-    //   toast("Photo has been successfully uploaded.");
-    //   setEventDataUpdate({ ...eventDataUpdate, eventImageUrl: imageUrl });
-    // }
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      imageRef.current.src = reader.result;
-      imageRef.current.style.width = "10vw";
-      imageRef.current.style.height = "10vh";
-      console.log(imageRef.current);
-      // console.log(reader.result);
-      // setEventDataUpdate({ ...eventDataUpdate, eventImageUrl: reader.result });
-    };
+
+    // const reader = new FileReader();
+    // reader.readAsDataURL(file);
+    // reader.onload = () => {
+    //   imageRef.current.src = reader.result;
+    //   imageRef.current.style.width = "10vw";
+    //   imageRef.current.style.height = "10vh";
+    //   console.log(imageRef.current);
+      
+    // };
   };
 
   const request = async () => {
@@ -90,6 +117,7 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
           endDate: eventDataUpdate.endDate,
           eventImageUrl: eventDataUpdate.eventImageUrl,
           eventVideoUrl: "",
+          campusId: eventDataUpdate.campusId,
         }
         :
         {
@@ -110,8 +138,8 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
         console.log(token);
         const url =
           uploadOrUpdateButtonRef.current.innerText === "Upload"
-            ? "https://clm-website.onrender.com/clmWebsite/api/v1/event/eventCreation"
-            : "https://clm-website.onrender.com/clmWebsite/api/v1/event/eventUpdate";
+            ? `${baseUrl}/event/eventCreation`
+            : `${baseUrl}/event/eventUpdate`;
         const response =  uploadOrUpdateButtonRef.current.innerText === "Upload"
         ? 
         await axios.post(url, data, {
@@ -125,12 +153,12 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setEventDataUpdate({ eventName: "", startDate: "", endDate: "" });
+        setEventDataUpdate({ eventName: "", startDate: "", endDate: "", campusId: "" });
         if (response) {
-          // location.reload();
+          location.reload();
           toast("Refresh to see changes");
         }
-        console.log(response);
+        console.log(response.data);
       } else if (!eventDataUpdate.eventImageUrl) {
         toast(
           "Please choose an image. If you have selected an image before, please choose the same picture again."
@@ -138,7 +166,6 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
       } else {
         toast("Please fill all fields");
       }
-      // console.log(eventDataUpdate);
     } catch (error) {
       console.log(error);
     }
@@ -160,35 +187,21 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
   };
   const drop = async (e) => {
     e.preventDefault();
+    toast("Photo is uploading..");
     console.log(e.target);
     console.log(e.dataTransfer.files[0]);
     const file = e.dataTransfer.files[0];
     if (file) {
-      const downloadImageUrl = await uploadImage(file);
-      if (imageUrl) {
-        setEventDataUpdate({ ...eventDataUpdate, eventImageUrl: imageUrl });
-        toast("Photo uploaded successfully");
-      } else {
-        toast(
-          "Please wait a bit... If No Image is displayed. Please try again"
-        );
-      }
+      await uploadImage(file);
     }
-    // if (!imageUrl) {
-    //   toast("Photo is uploading, please wait a few seconds...");
-    // } else {
-    //   toast("Photo has been successfully uploaded.");
-    //   setEventDataUpdate({ ...eventDataUpdate, eventImageUrl: imageUrl });
-    // }
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      imageRef.current.src = reader.result;
-      imageRef.current.style.width = "10vw";
-      imageRef.current.style.height = "10vh";
-      // console.log(imageRef.current);
-      // console.log(reader.result);
-    };
+ 
+    // const reader = new FileReader();
+    // reader.readAsDataURL(file);
+    // reader.onload = () => {
+    //   imageRef.current.src = reader.result;
+    //   imageRef.current.style.width = "10vw";
+    //   imageRef.current.style.height = "10vh";
+    // };
   };
 
   return (
@@ -208,8 +221,10 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
           className="flex justify-center items-center h-[80vh] 
            md:h-[70vh] lg:h-[80vh]"
         >
-          <div className="bg-white rounded-md p-10 w-[95%] md:w-[80%] lg:w-[50%]">
-            <div className='text-black text-2xl font-bold font-["Arial"] flex justify-between py-2'>
+          <div className="bg-white rounded-md p-10 w-[95%] md:w-[80%] lg:w-[50%] 
+           overflow-y-scroll h-[100%]">
+            <div className='text-black text-2xl font-bold font-["Arial"] flex 
+            justify-between py-2'>
               <h1>Upload new event</h1>
               <button
                 className=" bg-blue-400 text-lg p-2 rounded-md"
@@ -270,6 +285,31 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate, eventId }) => {
                     className="outline-none bg-slate-200 rounded-sm 
                  h-[6vh] w-[100%] pl-5"
                   />
+                </label>
+              </div>
+              <div className="mt-5 custom-dropdown">
+                <label htmlFor="ministerInChargeId">
+                  <h3 className="py-2">Minster in charge</h3>
+                  <select name="campusId" id="campusId"
+                   autoComplete="true" required 
+                   className="outline-none bg-slate-200 rounded-sm 
+                  h-[6vh] w-[100%] pl-5 overflow-y-scroll"
+                  onChange={campusId}
+                  >
+                    <option value="Select" disabled selected>Select Minister</option>
+                    {
+                      campuses.map((minister) =>{
+                        const {id,name} = minister;
+                        // const ministerName = firstName + ' ' + lastName;
+                        return(
+                          <option key={id} value={id}
+                          id={id}
+                          >{name}</option>
+                          
+                        )
+                      })
+                    }
+                  </select>
                 </label>
               </div>
               <label htmlFor="startDate">

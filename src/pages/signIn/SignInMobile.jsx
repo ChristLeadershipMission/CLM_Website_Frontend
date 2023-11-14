@@ -153,7 +153,7 @@ const SignInMobile = ({ viewSignUp }) => {
                 </span>
                 <span>Continue With Facebook</span>
                 </button> */}
-              <div className=" text-center pt-3 md:pt-6">
+              <div className=" text-center pt-3 md:pt-6 hidden">
                 <a
                   href=""
                   className="text-white text-sm font-normal md:text-black
