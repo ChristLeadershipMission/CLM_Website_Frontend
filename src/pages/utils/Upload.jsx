@@ -91,6 +91,7 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate}) => {
   };
 
   const request = async () => {
+    console.log(eventDataUpdate);
     try {
       if (
         eventDataUpdate.eventImageUrl &&
@@ -122,7 +123,7 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate}) => {
         :
         {
           endDate: eventDataUpdate.endDate,
-          eventImageurl:
+          eventImageUrl:
             eventDataUpdate.eventImageUrl,
           eventName: eventDataUpdate.eventName,
           eventVideoUrl: "string",
@@ -130,6 +131,7 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate}) => {
           id: eventDataUpdate.id,
           startDate: eventDataUpdate.startDate,
           theme: "string",
+          campusId: eventDataUpdate.campusId,
         };
         console.log("data", data);
         const token = JSON.parse(
@@ -155,7 +157,7 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate}) => {
         });
         setEventDataUpdate({ eventName: "", startDate: "", endDate: "", campusId: "" });
         if (response) {
-          location.reload();
+          // location.reload();
           toast("Refresh to see changes");
         }
         console.log(response.data);
@@ -289,14 +291,14 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate}) => {
               </div>
               <div className="mt-5 custom-dropdown">
                 <label htmlFor="ministerInChargeId">
-                  <h3 className="py-2">Minster in charge</h3>
+                  <h3 className="py-2">Campus</h3>
                   <select name="campusId" id="campusId"
                    autoComplete="true" required 
                    className="outline-none bg-slate-200 rounded-sm 
                   h-[6vh] w-[100%] pl-5 overflow-y-scroll"
                   onChange={campusId}
                   >
-                    <option value="Select" disabled selected>Select Minister</option>
+                    <option value="Select" disabled selected>Select Campus</option>
                     {
                       campuses.map((minister) =>{
                         const {id,name} = minister;

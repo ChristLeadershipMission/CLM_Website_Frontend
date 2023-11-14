@@ -12,12 +12,12 @@ import baseUrl from "./baseUrl";
 
 
 const UploadEvent = ({
-  uploadSermonHandler,
-  campusData,
+  uploadCampusHandler,
+  campusDataList,
   uploadOrupdate,
   campusId,
 }) => {
-  const [campusDataUpdate, setCampusDataUpdate] = useState(campusData);
+  const [campusDataUpdate, setCampusDataUpdate] = useState(campusDataList[0]);
   // const [campusData, setCampusData] = useState(campusData);
   const uploadOrUpdateButtonRef = useRef(null);
   const uploadImageContainerRef = useRef(null);
@@ -25,7 +25,7 @@ const UploadEvent = ({
   // const [imageUrl, setImageUrl] = useState("");
   const [ministers, setministers] = useState([]);
   const [campusAddress, setCampusAddress] = useState({});
- 
+ console.log(campusId);
 
 const Address = (e) =>{
   setCampusAddress({...campusAddress,[e.target.name]: e.target.value});
@@ -51,7 +51,7 @@ const ministerId = (e) =>{
         campusDataUpdate.address.country &&
         campusDataUpdate.email &&
         campusDataUpdate.logo &&
-        campusDataUpdate.ministerId 
+        campusDataUpdate.ministerInChargeId 
       ) {
         const token = JSON.parse(
           sessionStorage.getItem("userData")
@@ -64,10 +64,15 @@ const ministerId = (e) =>{
         const url =
           uploadOrUpdateButtonRef.current.innerText === "Upload"
             ? `${baseUrl}/campus/createCampus`
-            : `https://kingshillcity-01.onrender.co/api/v1/sermons/${SermonId}`;
-        const response = await axios.post(url, campusDataUpdate, headers);
-        setCampusDataUpdate({ name: "", email: "", logo: "", ministerId: "",  address: {} });
+            : `${baseUrl}/campus/updateCampus/${campusId}`;
+        const response = uploadOrUpdateButtonRef.current.innerText === "Upload" ?
+         await axios.post(url, campusDataUpdate, headers) :
+         await axios.patch(url, campusDataUpdate, headers);
+        setCampusDataUpdate({ name: "", email: "", logo: "", ministerInChargeId: "",  address: {} });
         if (response.status === 201) {
+           location.reload();
+        }
+        if (response.status === 200) {
            location.reload();
         }
         if (response) {
@@ -198,7 +203,7 @@ const ministerId = (e) =>{
           icon={faXmark}
           className="text-2xl md:text-[2rem] m-10 absolute 
                 text-white hover:cursor-pointer"
-          onClick={() => uploadSermonHandler(false)}
+          onClick={() => uploadCampusHandler(false)}
         />
         <div
           className="flex justify-center items-center h-[80vh] 
@@ -263,7 +268,7 @@ const ministerId = (e) =>{
                     type="text"
                     id="link"
                     required
-                    // value={sermonDataUpdate.link}
+                    value={campusDataUpdate.name}
                     placeholder="OAU"
                     name="name"
                     onChange={controllInput}
@@ -303,7 +308,7 @@ const ministerId = (e) =>{
                   type="text"
                   id="state"
                   required
-                  // value={sermonDataUpdate.date}
+                  value={campusDataUpdate.address.state}
                   placeholder={"OGUN State"}
                   name="state"
                   onChange={Address}
@@ -317,7 +322,7 @@ const ministerId = (e) =>{
                   type="text"
                   id="country"
                   required
-                  // value={sermonDataUpdate.date}
+                  value={campusDataUpdate.address.country}
                   placeholder={"Nigeria"}
                   name="country"
                   onChange={Address}
@@ -331,7 +336,7 @@ const ministerId = (e) =>{
                   type="text"
                   id="email"
                   required
-                  // value={sermonDataUpdate.date}
+                  value={campusDataUpdate.email}
                   placeholder={"campus@gmail.com"}
                   name="email"
                   onChange={controllInput}
@@ -349,10 +354,10 @@ const ministerId = (e) =>{
 //   };
 
 UploadEvent.propTypes = {
-  campusData: PropTypes.object,
-  uploadSermonHandler: PropTypes.func,
+  campusDataList: PropTypes.object,
+  uploadCampusHandler: PropTypes.func,
   uploadOrupdate: PropTypes.string,
-  sermonId: PropTypes.number,
+  campusId: PropTypes.number,
 };
 
 export default UploadEvent;

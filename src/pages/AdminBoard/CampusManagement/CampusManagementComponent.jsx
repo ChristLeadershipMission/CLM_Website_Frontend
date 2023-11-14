@@ -1,13 +1,3 @@
-import laspotech from "./Images/laspotech-2 1.png";
-import lasu from "./Images/lasu 1.png";
-import Light from "./Images/Light.png";
-import MAPOLY from "./Images/Moshood-Abiola-Polytechnic-MAPOLY 1.png";
-import oau from "./Images/oau.png";
-import OAUSTECH from "./Images/OAUSTECH 1.png";
-import oou from "./Images/oou.png";
-import Recite from "./Images/Recite.png";
-import TASUED from "./Images/TASUED-LOGO1 1.png";
-import UniLagos from "./Images/UniLagos 1.png";
 import shape from "./Images/shape.svg";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,62 +10,10 @@ import ShowMoreCampusInfo from "../../utils/showMoreCampusInfo";
 import { useNavigate } from "react-router-dom";
 
 const CampusManagementComponent = ({ hideSideBar }) => {
-  const data = [
-    {
-      id: 1,
-      school: "OWUTECH Campus",
-      image: Light,
-    },
-    {
-      id: 2,
-      school: "TASUED Campus",
-      image: TASUED,
-    },
-    {
-      id: 3,
-      school: "OAUSTECH Campus",
-      image: OAUSTECH,
-    },
-    {
-      id: 4,
-      school: "MAPOLY Campus",
-      image: MAPOLY,
-    },
-    {
-      id: 5,
-      school: "OAU Campus",
-      image: oau,
-    },
-    {
-      id: 6,
-      school: "OOU Campus",
-      image: oou,
-    },
-    {
-      id: 7,
-      school: "LASU Campus",
-      image: lasu,
-    },
-    {
-      id: 8,
-      school: "LASPOTECH Campus",
-      image: laspotech,
-    },
-    {
-      id: 9,
-      school: "UNILAG Campus",
-      image: UniLagos,
-    },
-    {
-      id: 10,
-      school: "UNI-IBADAN Campus",
-      image: Recite,
-    },
-  ];
   const [upLoadCampusBool, setUpLoadCampusBool] = useState(false);
   const [campusData, setCampusData] = useState([]);
   const [uploadOrUpdate, setUploadOrUpdate] = useState();
-  const [eventId, setEventId] = useState();
+  const [campusId, setCampusId] = useState();
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [showMoreInfoData, setShowMoreInfoData] = useState([]);
   const [uploadCampusBool2, setUpLoadCampusBool2] = useState(false);
@@ -88,9 +26,10 @@ const CampusManagementComponent = ({ hideSideBar }) => {
     setShowMoreInfo(true);
   };
 
-  const uploadSermonHandler = (value) => {
+  const uploadCampusHandler = (value) => {
     setUpLoadCampusBool(value);
-    setCampusData([[
+    setUpLoadCampusBool2(value);
+    setCampusDataList([
       {
           "id": "",
           "name": "",
@@ -117,7 +56,8 @@ const CampusManagementComponent = ({ hideSideBar }) => {
           },
           "logo": ""
       }
-  ]]);
+  ]);
+  console.log(campusDataList[0]);
     setUploadOrUpdate("Upload");
   };
 
@@ -146,16 +86,40 @@ const CampusManagementComponent = ({ hideSideBar }) => {
   }, []);
   
   
-  const editEvent = (id) => {
+  const editCampus = (id) => {
     const newData = campusData.filter((campus) => campus.id === id);
     // updateEvent(newData);
-    // console.log(newData);
-    setCampusDataList(newData[0]);
+    console.log(newData[0]);
+    setCampusDataList(newData);
     setUpLoadCampusBool2(true);
     setUploadOrUpdate("Update");
-    setEventId(id);
+    setCampusId(id);
     // console.log(eventData , "Na legit");
     // console.log("click on edit event");
+  };
+
+  const deleteCampus = async(id)=>{
+    try {
+      const token = JSON.parse(
+        sessionStorage.getItem("userData")
+      ).access_token;
+      const url = `${baseUrl}/campus/delete/${id}`;
+      const response = await axios.delete(url,
+      {
+        headers:{
+          Authorization: `Bearer ${token}`,
+        }
+      }
+      );
+      if (response.status === 200) {
+        location.reload();
+      }
+      console.log(response)
+    //  toast("Event has been deleted successfully. Please refresh to see changes");
+    } catch (error) {
+      console.log(error);
+      // toast("An error occurred while deleting, please try again");
+    }
   };
   return (
     <>
@@ -180,17 +144,23 @@ const CampusManagementComponent = ({ hideSideBar }) => {
           </h1>
         </div>
         {
-          uploadCampusBool2 ? <UploadEvent uploadOrupdate={uploadOrUpdate} /> : null
+          uploadCampusBool2 ?
+           <UploadEvent 
+           uploadCampusHandler={uploadCampusHandler}
+           uploadOrupdate={uploadOrUpdate}
+           campusDataList={campusDataList}
+           campusId={campusId}
+           /> : null
         }
         {showMoreInfo ? (
           <ShowMoreCampusInfo showMoreInfoData={showMoreInfoData} />
         ) : null}
         {upLoadCampusBool ? (
           <UploadEvent
-            uploadSermonHandler={uploadSermonHandler}
-            campusData={campusData}
+            uploadCampusHandler={uploadCampusHandler}
+            campusDataList={campusDataList}
             uploadOrupdate={uploadOrUpdate}
-            campusId={eventId}
+            campusId={campusId}
           />
         ) : null}
         <div className="my-5 px-[4vh] lg:flex justify-between">
@@ -216,7 +186,7 @@ const CampusManagementComponent = ({ hideSideBar }) => {
           text-center pt-[0.7rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] 
           "
           >
-            <button className="" onClick={() => uploadSermonHandler(true)}>
+            <button className="" onClick={() => uploadCampusHandler(true)}>
               <span>
                 <FontAwesomeIcon icon={faCalendarPlus} />
               </span>{" "}
@@ -274,7 +244,7 @@ const CampusManagementComponent = ({ hideSideBar }) => {
                           hover:scale-[1.05] transition-all duration-150 delay-75 
                           ease-in-out"
                           id={id}
-                          onClick={() => editEvent(id)}
+                          onClick={() => editCampus(id)}
                         >
                           {" "}
                           <FontAwesomeIcon icon={faPenToSquare} /> Edit
@@ -282,7 +252,7 @@ const CampusManagementComponent = ({ hideSideBar }) => {
                         <p
                           className=" text-[rgb(0,0,128)] font-bold cursor-pointer hover:scale-[1.05]
                            transition-all duration-150 delay-75 ease-in-out"
-                           onClick={()=>deleteEvent(id)}
+                           onClick={()=>deleteCampus(id)}
                         >
                           {" "}
                           <FontAwesomeIcon icon={faTrash} /> Delete
