@@ -110,7 +110,7 @@ const SignInDesktop = ({ viewSignUp }) => {
               }
              `}
             >
-              Welcome back! Please sign to your account
+              Welcome back! Please sign in to your account
             </p>
           </div>
           <div>
@@ -206,7 +206,7 @@ const SignInDesktop = ({ viewSignUp }) => {
                   onClick={signInControl}
                 >
                   {" "}
-                  Don't have an account? Sign Up.
+                  Don  &apos; &lsquo; &#39; &rsquo; t have an account? Sign Up.
                 </a>
               </div>
             </form>

@@ -1,13 +1,53 @@
-import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
+// import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useRef, useState } from "react";
+import  { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import baseUrl from "../utils/baseUrl";
+import axios from "axios";
+import PropTypes from "prop-types";
+import { ToastContainer, toast } from "react-toastify";
 
 const SignInMobile = ({ viewSignUp }) => {
   const viewPassword = useRef();
   const [hideOrShowPassword, setHideOrShowPassword] = useState(true);
   const [goToSignUp, setGoToSignUp] = useState(false);
+  const [formInput, setFormInput] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+
+  const FormInputHandler = (e) => {
+    setFormInput({ ...formInput, [e.target.name]: e.target.value });
+    console.log(formInput);
+  };
+
+  const postRequest = async (e) => {
+    e.preventDefault();
+    try {
+      const url = `${baseUrl}/login`;
+      const data = {
+        email: formInput.email,
+        password: formInput.password,
+      };
+      const response = await axios.post(url, data);
+      if (response.status === 200) {
+        const userData = JSON.stringify(response.data);
+        console.log(userData);
+        sessionStorage.setItem("userData", userData);
+        console.log(200);
+        if (response.data) {
+          navigate('/admin');
+        }
+      }
+      console.log(response);
+    } catch (error) {
+      toast("An error occurred, Please try again");
+      console.log(error);
+    }
+  };
 
   const showPassword = () => {
     setHideOrShowPassword(!hideOrShowPassword);
@@ -42,6 +82,7 @@ const SignInMobile = ({ viewSignUp }) => {
           initial={{ x: 40, opacity: 0 }}
           transition={{ duration: 1 }}
         >
+          <ToastContainer />
           <div
             className="bg-[url('/src\assets\pictures\clmLogo.svg')] bg-cover 
           absolute top-[9rem] w-[100%] h-[50%] -ml-4 rounded-lg opacity-[.04] 
@@ -60,15 +101,16 @@ const SignInMobile = ({ viewSignUp }) => {
               className="text-center py-5 md:py-5 md:text-[1.4rem] min-[764px]:text-[#0D0A25]
                text-white md:font-semibold"
             >
-              Welcome back! Please sign to your account
+              Welcome back! Please sign in to your account
             </p>
           </div>
           <div>
-            <form action="/" method="post" className="py-[6vh] md:py-0">
+            <form onSubmit={postRequest} className="py-[6vh] md:py-0">
               <input
                 type="text"
                 placeholder="Username or Email"
                 required
+                onChange={FormInputHandler}
                 className="w-[85vw] h-[3rem] mb-10 bg-white rounded-lg 
                 md:bg-transparent ml-[3vw]
                 md:border-b-2 md:border-blue-800 md:rounded-none md:placeholder:text-2xl
@@ -80,6 +122,7 @@ const SignInMobile = ({ viewSignUp }) => {
                   type="password"
                   placeholder="Password"
                   required
+                  onChange={FormInputHandler}
                   ref={viewPassword}
                   className="w-[85vw] h-[3rem] mb-10 bg-white rounded-lg md:bg-transparent
                   md:border-b-2 md:border-blue-800 md:rounded-none md:placeholder:text-2xl ml-[3vw] 
@@ -162,7 +205,7 @@ const SignInMobile = ({ viewSignUp }) => {
                   onClick={signInControl}
                 >
                   {" "}
-                  Don't have an account? Sign Up.
+                  Don &apos; &lsquo; &#39; &rsquo; t have an account? Sign Up.
                 </a>
               </div> 
             </form>
@@ -173,4 +216,7 @@ const SignInMobile = ({ viewSignUp }) => {
   );
 };
 
+SignInMobile.propTypes = {
+  viewSignUp: PropTypes.bool,
+}
 export default SignInMobile;
