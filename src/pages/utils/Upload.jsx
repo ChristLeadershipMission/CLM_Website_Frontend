@@ -17,8 +17,13 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate}) => {
   // const [imageUrl, setImageUrl] = useState("");
   const [campuses, setCampuses] = useState([]);
 
-
   const campusId = (e) =>{
+    setEventDataUpdate({...eventDataUpdate,[e.target.name]: e.target.value});
+    console.log(e.target.value);
+    console.log(eventDataUpdate);
+  };
+
+  const selectMode = (e) =>{
     setEventDataUpdate({...eventDataUpdate,[e.target.name]: e.target.value});
     console.log(e.target.value);
     console.log(eventDataUpdate);
@@ -119,6 +124,7 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate}) => {
           eventImageUrl: eventDataUpdate.eventImageUrl,
           eventVideoUrl: "",
           campusId: eventDataUpdate.campusId,
+          mode: eventDataUpdate.mode,
         }
         :
         {
@@ -132,6 +138,7 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate}) => {
           startDate: eventDataUpdate.startDate,
           theme: "string",
           campusId: eventDataUpdate.campusId,
+          mode: eventDataUpdate.mode,
         };
         console.log("data", data);
         const token = JSON.parse(
@@ -307,6 +314,31 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate}) => {
                           <option key={id} value={id}
                           id={id}
                           >{name}</option>
+                          
+                        )
+                      })
+                    }
+                  </select>
+                </label>
+              </div>
+              <div className="mt-5 custom-dropdown">
+                <label htmlFor="mode">
+                  <h3 className="py-2">Mode</h3>
+                  <select name="mode" id="mode"
+                   autoComplete="true" required 
+                   className="outline-none bg-slate-200 rounded-sm 
+                  h-[6vh] w-[100%] pl-5 overflow-y-scroll"
+                  onChange={selectMode}
+                  >
+                    <option value="Select" disabled selected>Select Mode</option>
+                    {
+                      [{id:1, mode: "STATIC"},{id:2, mode: "DYNAMIC"}].map((event) =>{
+                        const {id,mode} = event;
+                        // const ministerName = firstName + ' ' + lastName;
+                        return(
+                          <option key={id} value={mode}
+                          id={id}
+                          >{mode}</option>
                           
                         )
                       })

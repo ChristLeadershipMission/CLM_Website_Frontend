@@ -1,5 +1,4 @@
-
-
+import clmlogo from "./Images/clmLogo.svg";
 
 const TopNavBar = () => {
   return (
@@ -7,7 +6,7 @@ const TopNavBar = () => {
       <div className="w-screen h-[10vh] bg-[#0A063E] flex justify-between px-[2vw] text-white">
         <div className="flex gap-[1vw]">
           <img
-            src="src\assets\churchImglogo.png"
+            src={clmlogo}
             alt=""
             className="lg:w-[5%] lg:h-[60%] lg:mt-[1.9vh] md:w-[4%] md:h-[60%] md:mt-[2vh] w-[20%] h-[60%] mt-[2vh]"
           />

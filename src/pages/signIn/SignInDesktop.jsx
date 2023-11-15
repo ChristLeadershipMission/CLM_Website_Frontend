@@ -26,6 +26,10 @@ const SignInDesktop = ({ viewSignUp }) => {
     console.log(formInput);
   };
 
+  const pasteLoginDetail = (e) => {
+    setFormInput({ ...formInput, [e.target.name]: e.target.value });
+  };
+
   const outerWidth = window.outerWidth;
 
   console.log(outerWidth);
@@ -110,7 +114,7 @@ const SignInDesktop = ({ viewSignUp }) => {
               }
              `}
             >
-              Welcome back! Please sign to your account
+              Welcome back! Please sign in to your account
             </p>
           </div>
           <div>
@@ -121,7 +125,7 @@ const SignInDesktop = ({ viewSignUp }) => {
                 required
                 name="email"
                 // value={formInput.email}
-                onChange={FormInputHandler}
+                onChange={FormInputHandler} onPaste={pasteLoginDetail}
                 className="w-[100%] h-[3rem] mb-4 bg-white rounded-lg lg:w-[100%]
               pl-3 placeholder:text-black placeholder:font-medium text-black relative"
               />
@@ -132,7 +136,7 @@ const SignInDesktop = ({ viewSignUp }) => {
                   required
                   name="password"
                   // value={formInput.password}
-                  onChange={FormInputHandler}
+                  onChange={FormInputHandler} onPaste={pasteLoginDetail}
                   ref={viewPassword}
                   className="w-[100%] h-[3rem] mb-4 bg-white rounded-lg lg:w-[100%]
              pl-3 placeholder:text-black placeholder:font-medium text-black font-semibold"
@@ -169,36 +173,6 @@ const SignInDesktop = ({ viewSignUp }) => {
                 {" "}
                 Sign In
               </button>
-              {/* <div className="relative">
-                <hr className="my-5" />
-                <span
-                  className="absolute -top-4 left-[8rem] text-lg bg-[#0D0A25]
-                 rounded-2xl w-[2rem] h-[2rem] text-center font-bold"
-                >
-                  or
-                </span>
-              </div>
-              <button
-                className="relative w-[100%] h-[3rem] rounded-md bg-[#D6D6D7] lg:w-[100%]
-             text-md font-bold text-black px-10 my-5 lg:my-4 text-center"
-              >
-                <span className="absolute left-8 top-5">
-                  {" "}
-                  <FontAwesomeIcon icon={faGoogle} />{" "}
-                </span>
-                <span>Continue With Google</span>
-              </button>{" "}          
-              <br />              
-              <button
-                className="relative w-[100%] h-[3rem] rounded-md bg-[#D6D6D7] lg:w-[100%]
-             text-md font-bold text-black px-10 text-center"
-              >
-                <span className="top-5">
-                  {" "}
-                  <FontAwesomeIcon icon={faFacebook} />{" "}
-                </span>
-                <span>Continue With Facebook</span>
-                </button> */}
               <div className=" text-center pt-3 md:pt-6 hidden">
                 <a
                   href=""
@@ -206,7 +180,7 @@ const SignInDesktop = ({ viewSignUp }) => {
                   onClick={signInControl}
                 >
                   {" "}
-                  Don't have an account? Sign Up.
+                  Don  &apos; &lsquo; &#39; &rsquo; t have an account? Sign Up.
                 </a>
               </div>
             </form>

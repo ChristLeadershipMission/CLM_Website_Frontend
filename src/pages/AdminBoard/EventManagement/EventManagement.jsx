@@ -46,7 +46,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
         console.log(eventMangementList, "event");
       } catch (error) {
         if (error.response.status === 403) {
-            //  navigate("/registration");
+             navigate("/login");
         }
         console.log(error );
       }
@@ -60,12 +60,28 @@ const EventManagementBoard = ({ hideSideBar }) => {
     setUploadOrUpdate("Upload");
   };
 
+  // login
+
+  
+
+  const editEvent = (id) => {
+    const newData = eventMangementList.filter((event) => event.id === id);
+    // updateEvent(newData);
+    // console.log(newData);
+    setEventData(newData[0]);
+    setUpLoadEvent(true);
+    setUploadOrUpdate("Update");
+    setEventId(id);
+    // console.log(eventData , "Na legit");
+    // console.log("click on edit event");
+  };
+
   const deleteEvent = async(id)=>{
     try {
       const token = JSON.parse(
         sessionStorage.getItem("userData")
       ).access_token;
-      const url = `${baseUrl}/event/deleteEventById?id=${id}`;
+      const url = `${baseUrl}/event/deleteEventById/?id=${id}`;
       const response = await axios.delete(url,
       {
         headers:{
@@ -82,20 +98,6 @@ const EventManagementBoard = ({ hideSideBar }) => {
       console.log(error);
       // toast("An error occurred while deleting, please try again");
     }
-  };
-
-  
-
-  const editEvent = (id) => {
-    const newData = eventMangementList.filter((event) => event.id === id);
-    // updateEvent(newData);
-    // console.log(newData);
-    setEventData(newData[0]);
-    setUpLoadEvent(true);
-    setUploadOrUpdate("Update");
-    setEventId(id);
-    // console.log(eventData , "Na legit");
-    // console.log("click on edit event");
   };
   
   return (

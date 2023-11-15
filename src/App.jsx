@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/registration" element={<FormPage />} />
+        <Route path="/login" element={<FormPage />} />
         <Route path="/" element={<HomePage />} />
         <Route element={<PrivateRoute />}>
           <Route path="/admin" element={<AdminBoard />} />

@@ -69,12 +69,13 @@ const DepartmentComponent = ({hideSideBar}) => {
         >
           <h1
             className="lg:text-2xl md:text-center lg:text-left py-[3vh] md:py-[3vh] 
-           md:text-[1.5rem] lg:pt-[2vh] md:w-[100vw]"
+           md:text-[1.5rem] lg:pt-[2vh] md:w-[100vw] md:pr-[30vw] lg:pr-0"
           > 
             Event Management
           </h1>
           <h1
-            className="lg:hidden text-[2rem] font-black pt-[2vh] pl-[20vw]"
+            className="lg:hidden text-[2rem] font-black pt-[2vh] pl-[20vw]
+            md:pr-[3vw] lg:pr-0"
             onClick={() => hideSideBar(true)}
           >
             &#9776;
