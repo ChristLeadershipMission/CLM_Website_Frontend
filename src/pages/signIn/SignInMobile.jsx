@@ -49,6 +49,10 @@ const SignInMobile = ({ viewSignUp }) => {
     }
   };
 
+  const pasteLoginDetail = (e) => {
+    setFormInput({ ...formInput, [e.target.name]: e.target.value });
+  };
+
   const showPassword = () => {
     setHideOrShowPassword(!hideOrShowPassword);
     viewPassword.current.type = "text";
@@ -108,7 +112,7 @@ const SignInMobile = ({ viewSignUp }) => {
             <form onSubmit={postRequest} className="py-[6vh] md:py-0">
               <input
                 type="text"
-                placeholder="Username or Email"
+                placeholder="Username or Email" onPaste={pasteLoginDetail}
                 required
                 name="email"
                 onChange={FormInputHandler}
@@ -123,7 +127,7 @@ const SignInMobile = ({ viewSignUp }) => {
                   type="password"
                   placeholder="Password"
                   required
-                  onChange={FormInputHandler}
+                  onChange={FormInputHandler} onPaste={pasteLoginDetail}
                   ref={viewPassword}
                   name="password"
                   className="w-[85vw] h-[3rem] mb-10 bg-white rounded-lg md:bg-transparent
