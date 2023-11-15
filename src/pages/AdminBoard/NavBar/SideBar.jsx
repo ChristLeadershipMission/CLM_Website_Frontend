@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 // import file from "./Images/file.svg";
 // import people from "./Images/people.svg";
 // import person from "./Images/person.svg";
+import avatar from "./Images/avatar.jpg";
 
 const SideBar = ({ displaySideBar }) => {
   const [closeSideBar, setcloseSideBar] = useState(false);
@@ -40,7 +41,7 @@ const SideBar = ({ displaySideBar }) => {
         <div className="px-[5vw] md:px-[4vw] lg:px-[1vw]">
           <div>
             <img
-              src="src\pages\AdminBoard\Management\images\avatar.JPG"
+              src={avatar}
               alt=""
               className=" rounded-full w-[25%] h-[25%] ml-[30vw] md:w-[35%] md:h-[35%] md:ml-[14vw] lg:w-[40%] lg:h-[40%] lg:ml-[3vw]"
             />
