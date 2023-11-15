@@ -110,6 +110,7 @@ const SignInMobile = ({ viewSignUp }) => {
                 type="text"
                 placeholder="Username or Email"
                 required
+                name="email"
                 onChange={FormInputHandler}
                 className="w-[85vw] h-[3rem] mb-10 bg-white rounded-lg 
                 md:bg-transparent ml-[3vw]
@@ -124,6 +125,7 @@ const SignInMobile = ({ viewSignUp }) => {
                   required
                   onChange={FormInputHandler}
                   ref={viewPassword}
+                  name="password"
                   className="w-[85vw] h-[3rem] mb-10 bg-white rounded-lg md:bg-transparent
                   md:border-b-2 md:border-blue-800 md:rounded-none md:placeholder:text-2xl ml-[3vw] 
                   md:mt-[2rem] md:w-[80%] md:ml-[3vw] md:outline-none md:text-2xl md:font-semibold

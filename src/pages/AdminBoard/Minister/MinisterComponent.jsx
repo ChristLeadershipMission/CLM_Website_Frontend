@@ -100,12 +100,13 @@ const MinisterComponent = ({ hideSideBar }) => {
         >
           <h1
             className="lg:text-2xl md:text-center lg:text-left py-[3vh] md:py-[3vh] 
-           md:text-[1.5rem] lg:pt-[2vh] md:w-[100vw]"
+           md:text-[1.5rem] lg:pt-[2vh] md:w-[100vw] md:pr-[30vw] lg:pr-0"
           >
             Minister Management
           </h1>
           <h1
-            className="lg:hidden text-[2rem] font-black pt-[2vh] pl-[20vw]"
+            className="lg:hidden text-[2rem] font-black pt-[2vh] pl-[20vw]
+            md:pr-[3vw] lg:pr-0"
             onClick={() => hideSideBar(true)}
           >
             &#9776;
@@ -127,13 +128,14 @@ const MinisterComponent = ({ hideSideBar }) => {
             />
             <button
               className="bg-[#F66D0A] text-white h-[6vh] w-[40%] rounded-r-md
-              hover:bg-[#f62d0a] transition-all duration-150 delay-100 "
+              hover:bg-[#f62d0a] transition-all duration-150 delay-100 text-[1.2rem]
+              md:text-[1.7rem] lg:text-[1.2rem]"
             >
               search
             </button>
           </div>
           <div
-            className="fontLink bg-[#F66D0A] text-white h-[6vh] w-[50%] md:w-[35%] lg:w-[20%]
+            className="fontLink bg-[#F66D0A] text-white h-[6vh] w-[55%] md:w-[40%] lg:w-[20%]
                rounded-md hover:bg-[#f62d0a] transition-all duration-150 delay-100 my-[0.9rem] lg:my-0
                text-center pt-[0.7rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] 
               "
@@ -166,30 +168,37 @@ const MinisterComponent = ({ hideSideBar }) => {
               <div
                 key={id}
                 className="lg:w-[100%] md:w-[90%] w-[85vw] relative py-5 md:py-5 lg:py-5
-                ring-1 rounded-md lg:h-[60vh] md:h-[32vh] md:my-3 lg:my-0 
-                h-[53vh] my-3 shadow-lg bg-[#0A063E] text-white shadow-orange-600"
+                ring-1 rounded-md lg:h-[60vh] md:h-[41vh] md:my-3 lg:my-0
+                h-[65vh] my-3 shadow-lg bg-[#0A063E] text-white shadow-orange-600"
               >
                 {/* ring-[#F76D0A] */}
                 <div className="flex justify-center">
                   <img
                     src={profilePicture ? profilePicture : avatar}
                     alt="avatar"
-                    className=" rounded-full lg:w-[70%] lg:h-[25vh]"
+                    className=" rounded-full w-[70%] md:h-[20vh] lg:w-[70%] lg:h-[25vh]
+                    h-[35vh]"
                   />
                 </div>
-                <h1 className="text-center py-5 font-bold">{Name}</h1>
-                <p className="text-center font-semibold lg:px-5 py-3">
+                <h1 
+                 className="text-center py-5 font-bold md:text-[1.3rem] lg:text-[1rem]">
+                  {Name}
+                </h1>
+                <p 
+                 className="text-center font-semibold lg:px-5 py-3 md:text-[1.1rem] lg:text-[1rem]">
                   {portfolio}
                 </p>
-                <p className="text-center">{emailAddress}</p>
+                <p className="text-center md:text-[1.1rem] lg:text-[1rem]">{emailAddress}</p>
                 <div
                   className="flex justify-center items-center gap-5
-                 pb-5 pl-5 absolute bottom-[-2vh] lg:pl-[4vw]"
+                 pb-5 absolute lg:bottom-[-2vh] lg:pl-[4vw] md:text-[1.3rem] 
+                 lg:text-[1rem] md:pl-[10vw] pl-[25vw] md:bottom-[0.5vh]
+                 bottom-[-1.5vh]"
                 >
                   <p
                     className=" text-[#e6e3e3] font-bold cursor-pointer 
-                          hover:scale-[1.05] transition-all duration-150 delay-75 
-                          ease-in-out"
+                    hover:scale-[1.05] transition-all duration-150 delay-75 
+                    ease-in-out"
                     id={id}
                     onClick={() => editMinister(id)}
                   >
