@@ -78,6 +78,14 @@ const SignInDesktop = ({ viewSignUp }) => {
         }
         console.log(response);
       } catch (error) {
+        formButtonRef.current.disabled =  false;
+       formButtonRef.current.style.backgroundColor = "#F26C0C"
+        if (error.response.status === 401) {
+          return toast("Invalid Email or Password, Please try again");
+        }
+        if (error.response.status === 403) {
+          return toast("Invalid Email or Password, Please try again");
+        }
         toast("An error occurred, Please try again");
         console.log(error);
       }
