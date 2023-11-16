@@ -29,7 +29,7 @@ const PrivateRoute = () => {
     <>
     {
         // verified? <Outlet /> : <h1>Heloee</h1>
-        verified? <Outlet /> : <Navigate to={"/registration"} />
+        verified? <Outlet /> : <Navigate to={"/login"} />
         // verified? <div>This is true</div> : <div>This is false</div>
     }
     </>
