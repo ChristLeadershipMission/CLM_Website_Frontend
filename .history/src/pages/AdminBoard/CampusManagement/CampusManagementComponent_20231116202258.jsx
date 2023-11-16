@@ -15,19 +15,18 @@ import ShowMoreCampusInfo from "../../utils/showMoreCampusInfo";
 // import ShowMoreCampusInfo from "../../../pages/utils/ShowMoreCampusInfo";
 import { useNavigate } from "react-router-dom";
 import EmptyData from "../../utils/EmptyData";
-import {FetchFromSessionStorage, SaveIntoSessionStorage} from "../../utils/sessionStorageData.jsx";
 
 const CampusManagementComponent = ({ hideSideBar }) => {
   const [upLoadCampusBool, setUpLoadCampusBool] = useState(false);
-  const [campusData, setCampusData] = useState(
-    FetchFromSessionStorage("campusData", [])
-  );
+  const [campusData, setCampusData] = useState([]);
   const [uploadOrUpdate, setUploadOrUpdate] = useState();
   const [campusId, setCampusId] = useState();
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [showMoreInfoData, setShowMoreInfoData] = useState([]);
   const [uploadCampusBool2, setUpLoadCampusBool2] = useState(false);
-  const [campusDataList, setCampusDataList] = useState([]);
+  const [campusDataList, setCampusDataList] = useState(
+    FetchFromSessionStorage("events", [])
+  );
   const navigate = useNavigate();
 
   const MoreInfo = (id) => {
@@ -84,7 +83,6 @@ const CampusManagementComponent = ({ hideSideBar }) => {
           },
         });
         const data = response.data;
-        SaveIntoSessionStorage("campusData", data);
         setCampusData(data);
       } catch (error) {
         console.log(error);

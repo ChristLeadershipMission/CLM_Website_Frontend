@@ -12,7 +12,6 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import UploadMinister from "../../utils/UploadMinister";
-import {FetchFromSessionStorage, SaveIntoSessionStorage} from "../../utils/sessionStorageData.jsx";
 import EmptyData from "../../utils/EmptyData";
 
 const MinisterComponent = ({ hideSideBar }) => {
@@ -21,9 +20,7 @@ const MinisterComponent = ({ hideSideBar }) => {
   const [uploadOrUpdate, setUploadOrUpdate] = useState();
   const [ministerId, setMinisterId] = useState(null);
 
-  const [ministers, setMinisters] = useState(
-    FetchFromSessionStorage("campusData", [])
-    );
+  const [ministers, setMinisters] = useState([]);
   useEffect(() => {
     const fetchMinisters = async () => {
       try {
@@ -37,7 +34,6 @@ const MinisterComponent = ({ hideSideBar }) => {
           },
         });
         const data = response.data;
-        SaveIntoSessionStorage("ministers", data);
         setMinisters(data);
         console.log(data);
         console.log(ministers, "ministers");

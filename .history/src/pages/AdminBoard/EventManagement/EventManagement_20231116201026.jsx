@@ -30,7 +30,6 @@ const EventManagementBoard = ({ hideSideBar }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(`${eventMangementList}events`);
       console.log(`${baseUrl}/event/findAll`);
       console.log(eventMangement.length > 0);
       console.log(eventMangement.length);
@@ -45,7 +44,8 @@ const EventManagementBoard = ({ hideSideBar }) => {
           }
         );
         const data = response.data;
-        SaveIntoSessionStorage("events", data);
+        console.log(data, "data");
+        SaveIntoSessionStorage("events", data)
         setEventManagementList(data);
         console.log(eventMangementList, "event");
       } catch (error) {

@@ -19,15 +19,15 @@ import {FetchFromSessionStorage, SaveIntoSessionStorage} from "../../utils/sessi
 
 const CampusManagementComponent = ({ hideSideBar }) => {
   const [upLoadCampusBool, setUpLoadCampusBool] = useState(false);
-  const [campusData, setCampusData] = useState(
-    FetchFromSessionStorage("campusData", [])
-  );
+  const [campusData, setCampusData] = useState([]);
   const [uploadOrUpdate, setUploadOrUpdate] = useState();
   const [campusId, setCampusId] = useState();
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [showMoreInfoData, setShowMoreInfoData] = useState([]);
   const [uploadCampusBool2, setUpLoadCampusBool2] = useState(false);
-  const [campusDataList, setCampusDataList] = useState([]);
+  const [campusDataList, setCampusDataList] = useState(
+    FetchFromSessionStorage("campusDataList", [])
+  );
   const navigate = useNavigate();
 
   const MoreInfo = (id) => {
