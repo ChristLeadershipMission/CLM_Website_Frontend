@@ -9,6 +9,7 @@ import storage from "../AdminBoard/Firebase/firebaseConfig";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "./utils.css";
 import baseUrl from "./baseUrl";
+import SubmitButton from "./SubmitButton";
 
 
 const UploadEvent = ({
@@ -337,6 +338,7 @@ const ministerId = (e) =>{
                    h-[6vh] w-[100%] pl-5"
                 />
               </label>
+              <SubmitButton request={request} />
             </form>
           </div>
         </div>

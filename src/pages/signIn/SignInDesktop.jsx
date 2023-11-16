@@ -176,7 +176,7 @@ const SignInDesktop = ({ viewSignUp }) => {
               </div>
               <button
                 type="submit"
-                className="w-[100%] h-[3rem] rounded-md bg-[#854c23] lg:w-[100%]
+                className="w-[100%] h-[3rem] rounded-md bg-[#F26C0C] lg:w-[100%]
                 text-xl font-semibold text-black relative" ref={formButtonRef}
               >
                 {/* #F26C0C */}

@@ -8,6 +8,7 @@ import storage from "../AdminBoard/Firebase/firebaseConfig";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { ToastContainer, toast } from "react-toastify";
 import baseUrl from "./baseUrl";
+import SubmitButton from "./SubmitButton";
 
 const UploadMinister = ({
   uploadMinisterHandler,
@@ -308,6 +309,7 @@ const UploadMinister = ({
                   h-[6vh] w-[100%] pl-5"
                 />
               </label>
+              <SubmitButton request={request} />
             </form>
           </div>
         </div>
