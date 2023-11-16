@@ -45,7 +45,8 @@ const EventManagementBoard = ({ hideSideBar }) => {
           }
         );
         const data = response.data;
-        SaveIntoSessionStorage("events", data);
+        console.log(data, "data");
+        SaveIntoSessionStorage("events", String.data)
         setEventManagementList(data);
         console.log(eventMangementList, "event");
       } catch (error) {

@@ -14,7 +14,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import baseUrl from "../../utils/baseUrl.js";
 import { useNavigate } from "react-router-dom";
-import {FetchFromSessionStorage, SaveIntoSessionStorage} from "../../utils/sessionStorageData.jsx";
+import {FetchFromSessionStorage} from "../../utils/sessionStorageData.jsx";
+im
 // import { ToastContainer, toast } from "react-toastify";
 
 const EventManagementBoard = ({ hideSideBar }) => {
@@ -30,7 +31,6 @@ const EventManagementBoard = ({ hideSideBar }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(`${eventMangementList}events`);
       console.log(`${baseUrl}/event/findAll`);
       console.log(eventMangement.length > 0);
       console.log(eventMangement.length);
@@ -45,7 +45,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
           }
         );
         const data = response.data;
-        SaveIntoSessionStorage("events", data);
+        console.log(data, "data");
         setEventManagementList(data);
         console.log(eventMangementList, "event");
       } catch (error) {

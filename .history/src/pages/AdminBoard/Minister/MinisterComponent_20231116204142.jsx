@@ -37,7 +37,6 @@ const MinisterComponent = ({ hideSideBar }) => {
           },
         });
         const data = response.data;
-        SaveIntoSessionStorage("ministers", data);
         setMinisters(data);
         console.log(data);
         console.log(ministers, "ministers");
