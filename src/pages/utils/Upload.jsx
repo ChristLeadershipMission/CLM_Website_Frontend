@@ -236,7 +236,7 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate}) => {
             justify-between py-2'>
               <h1>Upload new event</h1>
               <button
-                className=" bg-blue-400 text-lg p-2 rounded-md"
+                className=" bg-[#0A063E] text-lg p-2 rounded-md text-white hover:bg-[#1f2555]"
                 onClick={request}
                 ref={uploadOrUpdateButtonRef}
                 type="submit"

@@ -14,6 +14,7 @@ import baseUrl from "../../utils/baseUrl";
 import ShowMoreCampusInfo from "../../utils/showMoreCampusInfo";
 // import ShowMoreCampusInfo from "../../../pages/utils/ShowMoreCampusInfo";
 import { useNavigate } from "react-router-dom";
+import EmptyData from "../../utils/EmptyData";
 
 const CampusManagementComponent = ({ hideSideBar }) => {
   const [upLoadCampusBool, setUpLoadCampusBool] = useState(false);
@@ -198,91 +199,96 @@ const CampusManagementComponent = ({ hideSideBar }) => {
             </button>
           </div>
         </div>
-        <div
-          className="bg-[url('src\pages\AdminBoard\CampusManagement\Images\CLMLOGO.png')]
+        {campusData.length > 0 ? (
+          <div
+            className="bg-[url('src\pages\AdminBoard\CampusManagement\Images\CLMLOGO.png')]
           grid lg:grid-cols-4 lg:py-10 lg:w-[78.8vw] md:pl-[5vw] lg:px-5 lg:gap-5 justify-center
           items-center md:grid-cols-2 md:h-[67.5vh] h-[80vh]  overflow-y-auto no-scrollbar
           md:gap-0 lg:h-[67.5vh]"
-        >
-          {campusData.map((data) => {
-            const { id, name, logo } = data;
-            return (
-              <div
-                key={id}
-                className="lg:w-[100%] md:w-[90%] w-[85vw] relative py-5 md:py-5 lg:py-5
-                bg-white"
-              >
+          >
+            {campusData.map((data) => {
+              const { id, name, logo } = data;
+              return (
                 <div
-                  className="bg-[#0A063E] lg:px-5 md:px-10 rounded-t-md
-                "
+                  key={id}
+                  className="lg:w-[100%] md:w-[90%] w-[85vw] relative py-5 md:py-5 lg:py-5
+                bg-white"
                 >
-                  <div className="flex gap-5 lg:pt-7 md:pt-10 py-10 md:py-0">
-                    <h1
-                      className="text-white lg:text-[4rem] 
+                  <div
+                    className="bg-[#0A063E] lg:px-5 md:px-10 rounded-t-md
+                "
+                  >
+                    <div className="flex gap-5 lg:pt-7 md:pt-10 py-10 md:py-0">
+                      <h1
+                        className="text-white lg:text-[4rem] 
                     md:text-[4rem] font-bold text-[4rem] px-5 pt-5 md:px-0
                     md:pt-0"
-                    >
-                      CLF
-                    </h1>
-                    <img
-                      src={logo}
-                      alt=""
-                      className="w-[35vw] lg:w-[5vw] lg:h-[10vh] md:w-[15vw]
+                      >
+                        CLF
+                      </h1>
+                      <img
+                        src={logo}
+                        alt=""
+                        className="w-[35vw] lg:w-[5vw] lg:h-[10vh] md:w-[15vw]
                       lg:mt-2 md:mt-0 mt-4"
-                    />
-                  </div>
-                  <h3
-                    className="text-white text-center md:text-[1.5rem] lg:text-[1rem]
+                      />
+                    </div>
+                    <h3
+                      className="text-white text-center md:text-[1.5rem] lg:text-[1rem]
                     md:py-3 lg:py-3 font-semibold text-[1.5rem] py-3"
-                  >
-                    {name} Campus
-                  </h3>
-                </div>
-                <div
-                  className="bg-[#0A063E] shadow-md flex justify-center lg:gap-5
+                    >
+                      {name} Campus
+                    </h3>
+                  </div>
+                  <div
+                    className="bg-[#0A063E] shadow-md flex justify-center lg:gap-5
                 lg:py-3 py-3 gap-3 text-white"
-                  onClick={() => MoreInfo(id)}
-                >
-                  <span 
-                  className="font-bold cursor-pointer md:text-[1.5rem] lg:text-[1rem]
-                  text-[1.2rem]
-                  ">
-                    More info
-                  </span>
-                  <span 
-                  className=" md:text-[1.5rem] lg:text-[1rem] text-[1.2rem]"
+                    onClick={() => MoreInfo(id)}
                   >
-                    <FontAwesomeIcon icon={faArrowRight} />
-                  </span>
-                </div>
-                <div
-                  className="flex gap-5 pb-5 pl-5 relative bottom-0
+                    <span
+                      className="font-bold cursor-pointer md:text-[1.5rem] lg:text-[1rem]
+                  text-[1.2rem]
+                  "
+                    >
+                      More info
+                    </span>
+                    <span className=" md:text-[1.5rem] lg:text-[1rem] text-[1.2rem]">
+                      <FontAwesomeIcon icon={faArrowRight} />
+                    </span>
+                  </div>
+                  <div
+                    className="flex gap-5 pb-5 pl-5 relative bottom-0
                  bg-[#F66D0A] justify-center items-center lg:pt-[1vh]
                  rounded-b-md"
-                >
-                  <p
-                    className=" text-[#f3efef] font-bold cursor-pointer 
+                  >
+                    <p
+                      className=" text-[#f3efef] font-bold cursor-pointer 
                           hover:scale-[1.05] transition-all duration-150 delay-75 
                           ease-in-out"
-                    id={id}
-                    onClick={() => editCampus(id)}
-                  >
-                    {" "}
-                    <FontAwesomeIcon icon={faPenToSquare} /> Edit
-                  </p>
-                  <p
-                    className=" text-[rgb(0,0,128)] font-bold cursor-pointer hover:scale-[1.05]
+                      id={id}
+                      onClick={() => editCampus(id)}
+                    >
+                      {" "}
+                      <FontAwesomeIcon icon={faPenToSquare} /> Edit
+                    </p>
+                    <p
+                      className=" text-[rgb(0,0,128)] font-bold cursor-pointer hover:scale-[1.05]
                            transition-all duration-150 delay-75 ease-in-out"
-                    onClick={() => deleteCampus(id)}
-                  >
-                    {" "}
-                    <FontAwesomeIcon icon={faTrash} /> Delete
-                  </p>
+                      onClick={() => deleteCampus(id)}
+                    >
+                      {" "}
+                      <FontAwesomeIcon icon={faTrash} /> Delete
+                    </p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="mt-[13vh] lg:mt-[15vh]">
+            <EmptyData message={"No Campus found"} />
+          </div>
+        )}
       </div>
     </>
   );

@@ -4,18 +4,19 @@ const TopNavBar = () => {
   return (
     <>
       <div className="w-screen h-[10vh] bg-[#0A063E] flex justify-between px-[2vw] text-white">
-        <div className="flex gap-[1vw]">
+        <div className="">
           <img
             src={clmlogo}
             alt=""
-            className="lg:w-[5%] lg:h-[60%] lg:mt-[1.9vh] md:w-[4%] md:h-[60%] md:mt-[2vh] w-[20%] h-[60%] mt-[2vh]"
+            className="lg:w-[100%] lg:h-[60%] lg:mt-[1.9vh] md:w-[100%] 
+            md:h-[60%] md:mt-[2vh] w-[100%] h-[60%] mt-[2vh]"
           />
-          <h3
+          {/* <h3
             className=' lg:text-[2vw] font-bold font-["Lobster"] 
             tracking-widest lg:w-[20vw] lg:mt-[1.2vh] md:mt-[2.5vh] 
             md:tracking-widest hidden md:block'>
             CLM
-          </h3>
+          </h3> */}
         </div>
         <div className="max-[1024px]:mr-[15vw] max-[1280px]:mr-[15vw]">
         <h3 

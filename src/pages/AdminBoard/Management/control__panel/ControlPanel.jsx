@@ -1,4 +1,7 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import churchActivities from "./data";
+import PropTypes from "prop-types";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const ControlPanel = ({hideSideBar}) => {
 
@@ -20,11 +23,12 @@ const ControlPanel = ({hideSideBar}) => {
                 <div
                   key={id}
                   className="w-[80%] md:h-[25vh] lg:h-[30vh] rounded-lg 
-                      shadow-lg my-[1rem] md:ml-[5.5vw] md:mt-[6vh] lg:mt-0 lg:ml-0"
+                  shadow-lg my-[1rem] md:ml-[5.5vw] md:mt-[6vh] lg:mt-0 
+                  lg:ml-0 bg-[#F66D0A]"
                 >
                   <div
                     className="text-center flex gap-[2vw] lg:pl-[2vw] 
-                        bg-[#90150D] md:h-[20vh] lg:h-[23vh] rounded-t-lg"
+                        bg-[#0A063E] md:h-[20vh] lg:h-[23vh] rounded-t-lg"
                   >
                     <div className="text-2xl lg:w-['auto'] overflow-hidden mt-[8vh] md:ml-[1.5rem] lg:ml-0 text-white">
                       {description}
@@ -37,8 +41,12 @@ const ControlPanel = ({hideSideBar}) => {
                       />
                     </div>
                   </div>
-                  <div className="text-center text-xl font-bold pt-[1vh] pl-[1vw]">
-                    {viewMore} <span className="pl-[2vw]"> -- </span>
+                  <div 
+                   className="text-center text-xl font-bold pt-[1vh] pl-[1vw]
+                   ">
+                    {viewMore} <span className="pl-[2vw]"> 
+                    <FontAwesomeIcon icon={faArrowRight} />
+                     </span>
                   </div>
                 </div>
               </>
@@ -49,5 +57,9 @@ const ControlPanel = ({hideSideBar}) => {
     </>
   );
 };
+
+ControlPanel.propTypes = {
+  hideSideBar: PropTypes.bool,
+}
 
 export default ControlPanel;

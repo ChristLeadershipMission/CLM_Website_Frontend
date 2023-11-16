@@ -21,37 +21,6 @@ const UploadMinister = ({
   const uploadOrUpdateButtonRef = useRef(null);
   // const [imageUrl, setImageUrl] = useState("");
 
-  //   const campusId = (e) =>{
-  //     setMinisterDataUpdate({...ministerDataUpdate,[e.target.name]: e.target.value});
-  //     console.log(e.target.value);
-  //     console.log(ministerDataUpdate);
-  //   };
-
-  //   useEffect(()=>{
-  //     const fetchMinisters = async () => {
-  //       try {
-  //         const url = `${baseUrl}/campus/findAllCampuses`;
-  //       const token = JSON.parse(
-  //         sessionStorage.getItem("userData")
-  //       ).access_token;
-  //       const headers =  {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         }
-  //       };
-  //       const response = await axios.get(
-  //         url,
-  //        headers
-  //       );
-  //       const data = response.data;
-  //       setMinisters(data);
-  //       console.log(data);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     fetchMinisters();
-  //   },[]);
 
   const uploadImage = async (file) => {
     try {
@@ -236,7 +205,7 @@ const UploadMinister = ({
             >
               <h1>Upload new Minister</h1>
               <button
-                className=" bg-blue-400 text-lg p-2 rounded-md"
+                className=" bg-[#0A063E] text-lg p-2 rounded-md text-white hover:bg-[#1f2555]"
                 onClick={request}
                 ref={uploadOrUpdateButtonRef}
                 type="submit"

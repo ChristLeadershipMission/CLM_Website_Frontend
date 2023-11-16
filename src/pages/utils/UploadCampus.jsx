@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef, useState } from "react";
+import { useEffect,  useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
@@ -41,9 +41,6 @@ const ministerId = (e) =>{
 };
   const request = async () => {
     try {
-    //   console.log(sermonDataUpdate.link);
-    //   console.log(sermonDataUpdate.title);
-    //   console.log(sermonDataUpdate.date);
     console.log(campusDataUpdate)
       if (
         campusDataUpdate.name &&
@@ -114,10 +111,6 @@ const ministerId = (e) =>{
           "Failed to upload... Please try again later"
         );
       }
-      // setImageUrl(downloadURL);
-      // console.log(downloadURL, "Download");
-      // console.log("image url:" + imageUrl);
-      // return downloadURL;
     } catch (error) {
       console.log(`An error occurred while uploading: ${error.message}`);
     }
@@ -216,7 +209,7 @@ const ministerId = (e) =>{
             <div className='text-black text-2xl font-bold font-["Arial"] flex justify-between py-2'>
               <h1>Upload new Campus</h1>
               <button
-                className=" bg-blue-400 text-lg p-2 rounded-md"
+                className=" bg-[#0A063E] text-lg p-2 rounded-md text-white hover:bg-[#1f2555]"
                 onClick={request}
                 ref={uploadOrUpdateButtonRef}
                 type="submit"

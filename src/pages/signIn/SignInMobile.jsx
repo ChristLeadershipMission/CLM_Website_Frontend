@@ -18,6 +18,7 @@ const SignInMobile = ({ viewSignUp }) => {
     password: "",
   });
   const navigate = useNavigate();
+  const formButtonRef = useRef();
 
   const FormInputHandler = (e) => {
     setFormInput({ ...formInput, [e.target.name]: e.target.value });
@@ -26,28 +27,35 @@ const SignInMobile = ({ viewSignUp }) => {
 
   const postRequest = async (e) => {
     e.preventDefault();
-    try {
-      const url = `${baseUrl}/login`;
-      const data = {
-        email: formInput.email,
-        password: formInput.password,
-      };
-      const response = await axios.post(url, data);
-      if (response.status === 200) {
-        const userData = JSON.stringify(response.data);
-        console.log(userData);
-        sessionStorage.setItem("userData", userData);
-        console.log(200);
-        if (response.data) {
-          navigate('/admin');
+    if (formInput.email && formInput.password ) {
+      formButtonRef.current.disabled =  true;
+      console.log(formButtonRef.current);
+      try {
+        const url = `${baseUrl}/login`;
+        const data = {
+          email: formInput.email,
+          password: formInput.password,
+        };
+        const response = await axios.post(url, data);
+        if (response.status === 200) {
+          const userData = JSON.stringify(response.data);
+          console.log(userData);
+          sessionStorage.setItem("userData", userData);
+          console.log(200);
+          if (response.data) {
+            navigate('/admin');
+          }
         }
+        console.log(response);
+      } catch (error) {
+        toast("An error occurred, Please try again");
+        console.log(error);
+        formButtonRef.current.disabled =  false;
       }
-      console.log(response);
-    } catch (error) {
-      toast("An error occurred, Please try again");
-      console.log(error);
+    }else{
+      toast("Please fill all fields");
     }
-  };
+    }
 
   const pasteLoginDetail = (e) => {
     setFormInput({ ...formInput, [e.target.name]: e.target.value });
@@ -72,6 +80,7 @@ const SignInMobile = ({ viewSignUp }) => {
     }, 800);
   };
 
+ 
   return (
     <>
       <div 
@@ -162,7 +171,7 @@ const SignInMobile = ({ viewSignUp }) => {
                 type="submit"
                 className="w-[100%] h-[3rem] rounded-md bg-[#F26C0C] md:w-[90%]
                  md:h-[4rem] md:ml-[1.5rem] md:text-2xl md:font-bold md:mt-[2rem]
-                text-xl font-semibold text-black relative"
+                text-xl font-semibold text-black relative" ref={formButtonRef}
               >
                 {" "}
                 Sign In

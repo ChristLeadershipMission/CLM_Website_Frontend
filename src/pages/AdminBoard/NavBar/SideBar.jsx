@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 // import people from "./Images/people.svg";
 // import person from "./Images/person.svg";
 import avatar from "./Images/avatar.jpg";
+import PropTypes from "prop-types";
 
 const SideBar = ({ displaySideBar }) => {
   const [closeSideBar, setcloseSideBar] = useState(false);
@@ -104,5 +105,9 @@ const SideBar = ({ displaySideBar }) => {
     </>
   );
 };
+
+SideBar.propTypes = {
+  displaySideBar: PropTypes.bool,
+}
 
 export default SideBar;

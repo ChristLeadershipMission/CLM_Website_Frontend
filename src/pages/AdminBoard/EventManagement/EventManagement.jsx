@@ -42,7 +42,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
         );
         const data = response.data;
         console.log(data, "data");
-        setEventManagementList((prev) => data);
+        setEventManagementList(data);
         console.log(eventMangementList, "event");
       } catch (error) {
         if (error.response.status === 403) {

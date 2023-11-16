@@ -20,6 +20,8 @@ const SignInDesktop = ({ viewSignUp }) => {
     password: "",
   });
   const navigate = useNavigate();
+  const formButtonRef = useRef();
+
 
   const FormInputHandler = (e) => {
     setFormInput({ ...formInput, [e.target.name]: e.target.value });
@@ -55,28 +57,35 @@ const SignInDesktop = ({ viewSignUp }) => {
 
   const postRequest = async (e) => {
     e.preventDefault();
-    try {
-      const url = `${baseUrl}/login`;
-      const data = {
-        email: formInput.email,
-        password: formInput.password,
-      };
-      const response = await axios.post(url, data);
-      if (response.status === 200) {
-        const userData = JSON.stringify(response.data);
-        console.log(userData);
-        sessionStorage.setItem("userData", userData);
-        console.log(200);
-        if (response.data) {
-          navigate('/admin');
+    if (formInput.email && formInput.password) {
+      formButtonRef.current.disabled =  true;
+      formButtonRef.current.style.backgroundColor = "#854c23"
+      try {
+        const url = `${baseUrl}/login`;
+        const data = {
+          email: formInput.email,
+          password: formInput.password,
+        };
+        const response = await axios.post(url, data);
+        if (response.status === 200) {
+          const userData = JSON.stringify(response.data);
+          console.log(userData);
+          sessionStorage.setItem("userData", userData);
+          console.log(200);
+          if (response.data) {
+            navigate('/admin');
+          }
         }
+        console.log(response);
+      } catch (error) {
+        toast("An error occurred, Please try again");
+        console.log(error);
       }
-      console.log(response);
-    } catch (error) {
-      toast("An error occurred, Please try again");
-      console.log(error);
+    }else{
+      toast("Please fill all fields");
     }
   };
+  
 
   return (
     <>
@@ -167,9 +176,10 @@ const SignInDesktop = ({ viewSignUp }) => {
               </div>
               <button
                 type="submit"
-                className="w-[100%] h-[3rem] rounded-md bg-[#F26C0C] lg:w-[100%]
-             text-xl font-semibold text-black relative"
+                className="w-[100%] h-[3rem] rounded-md bg-[#854c23] lg:w-[100%]
+                text-xl font-semibold text-black relative" ref={formButtonRef}
               >
+                {/* #F26C0C */}
                 {" "}
                 Sign In
               </button>

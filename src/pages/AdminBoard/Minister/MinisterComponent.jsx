@@ -12,6 +12,7 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import UploadMinister from "../../utils/UploadMinister";
+import EmptyData from "../../utils/EmptyData";
 
 const MinisterComponent = ({ hideSideBar }) => {
   const [upLoadMinister, setUpLoadMinister] = useState(false);
@@ -91,7 +92,8 @@ const MinisterComponent = ({ hideSideBar }) => {
 
   return (
     <>
-      <div className="lg:h-[90vh] overflow-y-auto">
+      <div className="lg:h-[90vh] overflow-y-auto bg-cover bg-opacity-80
+      bg-[url('/src/pages/AdminBoard/Minister/Images/clmLogo.svg')] relative">
         <div
           className="bg-white shadow-lg lg:h-[10vh] lg:p-[.5rem]
           flex justify-around lg:block lg:w-[78.8vw] overflow-hidden
@@ -120,6 +122,12 @@ const MinisterComponent = ({ hideSideBar }) => {
             ministerId={ministerId}
           />
         ) : null}
+        <div className="relative">
+
+        <div 
+         className="bg-[rgba(255,255,255,0.8)] absolute w-[100%] h-[100%] top-0 left-0
+         "></div>
+         <div className="relative">
         <div className="my-5 px-[4vh] lg:flex justify-between">
           <div className="flex">
             <input
@@ -148,75 +156,84 @@ const MinisterComponent = ({ hideSideBar }) => {
             </button>
           </div>
         </div>
-        <div
-          className="bg-[url('src\pages\AdminBoard\CampusManagement\Images\CLMLOGO.png')]
+         </div>
+        {ministers.length > 0 ? (
+          <div
+            className="bg-[url('src\pages\AdminBoard\CampusManagement\Images\CLMLOGO.png')]
           grid lg:grid-cols-4 lg:py-10 lg:w-[78.8vw] md:pl-[5vw] lg:px-5 lg:gap-5 justify-center
           items-center md:grid-cols-2 md:h-[80.5vh] h-[80vh]  overflow-y-auto no-scrollbar
           md:gap-0 lg:h-[67.5vh]"
-        >
-          {ministers.map((data) => {
-            const {
-              id,
-              firstName,
-              lastName,
-              portfolio,
-              profilePicture,
-              emailAddress,
-            } = data;
-            const Name = `${firstName} ${lastName}`;
-            return (
-              <div
-                key={id}
-                className="lg:w-[100%] md:w-[90%] w-[85vw] relative py-5 md:py-5 lg:py-5
-                ring-1 rounded-md lg:h-[60vh] md:h-[41vh] md:my-3 lg:my-0
-                h-[65vh] my-3 shadow-lg bg-[#0A063E] text-white shadow-orange-600"
-              >
-                {/* ring-[#F76D0A] */}
-                <div className="flex justify-center">
-                  <img
-                    src={profilePicture ? profilePicture : avatar}
-                    alt="avatar"
-                    className=" rounded-full w-[70%] md:h-[20vh] lg:w-[70%] lg:h-[25vh]
-                    h-[35vh]"
-                  />
-                </div>
-                <h1 
-                 className="text-center py-5 font-bold md:text-[1.3rem] lg:text-[1rem]">
-                  {Name}
-                </h1>
-                <p 
-                 className="text-center font-semibold lg:px-5 py-3 md:text-[1.1rem] lg:text-[1rem]">
-                  {portfolio}
-                </p>
-                <p className="text-center md:text-[1.1rem] lg:text-[1rem]">{emailAddress}</p>
+          >
+            {ministers.map((data) => {
+              const {
+                id,
+                firstName,
+                lastName,
+                portfolio,
+                profilePicture,
+                emailAddress,
+              } = data;
+              const Name = `${firstName} ${lastName}`;
+              return (
                 <div
-                  className="flex justify-center items-center gap-5
-                 pb-5 absolute lg:bottom-[-2vh] lg:pl-[4vw] md:text-[1.3rem] 
-                 lg:text-[1rem] md:pl-[10vw] pl-[25vw] md:bottom-[0.5vh]
-                 bottom-[-1.5vh]"
+                  key={id}
+                  className="lg:w-[100%] md:w-[90%] w-[85vw] relative py-5 md:py-5 lg:py-5
+                ring-1 rounded-md lg:h-[60vh] md:h-[41vh] md:my-3 lg:my-0
+                h-[65vh] my-3 shadow-lg ring-[#F76D0A] text-black overflow-hidden"
                 >
-                  <p
-                    className=" text-[#e6e3e3] font-bold cursor-pointer 
+                  {/* ring-[#F76D0A] bg-[#0A063E] shadow-orange-600*/}
+                  <div className="flex justify-center">
+                    <img
+                      src={profilePicture ? profilePicture : avatar}
+                      alt="avatar"
+                      className=" rounded-full w-[70%] md:h-[20vh] lg:w-[70%] lg:h-[25vh]
+                    h-[35vh]"
+                    />
+                  </div>
+                  <h1 className="text-center py-5 font-bold md:text-[1.3rem] lg:text-[1rem]">
+                    {Name}
+                  </h1>
+                  <p className="text-center font-semibold lg:px-5 py-3 md:text-[1.1rem] lg:text-[1rem]">
+                    {portfolio}
+                  </p>
+                  <p className="text-center md:text-[1.1rem] lg:text-[1rem]">
+                    {emailAddress}
+                  </p>
+                  <div
+                    className="flex justify-center items-center gap-5
+                    pb-5 absolute lg:bottom-[-2vh] lg:pl-[1vw] md:text-[1.3rem] 
+                    lg:text-[1rem] md:pl-[10vw] pl-[25vw] md:bottom-[0.5vh]
+                    bottom-[-1.5vh] lg:w-[100%] bg-white"
+                  >
+                    {/* bg-[#F66D0A]  */}
+                    <p
+                      className="font-bold cursor-pointer py-1 rounded-md
                     hover:scale-[1.05] transition-all duration-150 delay-75 
-                    ease-in-out"
-                    id={id}
-                    onClick={() => editMinister(id)}
-                  >
-                    {" "}
-                    <FontAwesomeIcon icon={faPenToSquare} /> Edit
-                  </p>
-                  <p
-                    className=" text-[#e6e3e3] font-bold cursor-pointer hover:scale-[1.05]
-                           transition-all duration-150 delay-75 ease-in-out"
-                    onClick={() => deleteMinister(id)}
-                  >
-                    {" "}
-                    <FontAwesomeIcon icon={faTrash} /> Delete
-                  </p>
+                    ease-in-out bg-[#F66D0A] px-3 lg:w-[60%] text-black"
+                      id={id}
+                      onClick={() => editMinister(id)}
+                    >
+                      {" "}
+                      <FontAwesomeIcon icon={faPenToSquare} /> Edit
+                    </p>
+                    <p
+                      className=" text-[#e6e3e3] font-bold cursor-pointer hover:scale-[1.05] mr-5
+                      transition-all duration-150 delay-75 ease-in-out bg-[#F66D0A] px-3 lg:w-[80%]"
+                      onClick={() => deleteMinister(id)}
+                    >
+                      {" "}
+                      <FontAwesomeIcon icon={faTrash} /> Delete
+                    </p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+        ) : (
+          <div className="mt-[13vh] lg:mt-[15vh]">
+            <EmptyData message={"No Minister found"} />
+          </div>
+        )}
         </div>
       </div>
     </>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import camera from "./image/camera.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -18,7 +18,8 @@ const UploadGallery = ({
   const uploadImageContainerRef = useRef(null);
   const [eventDataUpdate, setEventDataUpdate] = useState(galleryData);
   const uploadOrUpdateButtonRef = useRef(null);
-  const [imageUrl, setImageUrl] = useState("");
+  // const [imageUrl, setImageUrl] = useState("");
+  console.log(galleryId);
 
 
   const uploadImage = async (file) => {
@@ -26,15 +27,16 @@ const UploadGallery = ({
       const storageRef = ref(storage, "EventImages/" + file.name); //This function allows you to create a reference to a specific location in Firebase Storage.
       await uploadBytes(storageRef, file); //This function is used to upload binary data (in this case, an image file) to a specific location in Firebase Storage.
       const downloadURL = await getDownloadURL(storageRef); //his function is used to get the download URL of a file stored in Firebase Storage.
-      console.log(downloadURL);
-      setImageUrl(prevUrl => prevUrl + downloadURL);
-      setEventDataUpdate({...eventDataUpdate, image: downloadURL});
-      if (!downloadURL) {
-        toast("Photo is uploading, please wait a few seconds...");
-      }else{
-        toast("Photo has been uploaded");
+      if (downloadURL) {
+        setEventDataUpdate({...eventDataUpdate, image: downloadURL});
+        imageRef.current.src = downloadURL;
+        toast("Photo uploaded successfully");
+        console.log(imageRef.current.src);
+      } else {
+        toast(
+          "Failed to upload... Please try again later"
+        );
       }
-      console.log("image url:" + imageUrl);
     } catch (error) {
       console.log(`An error occurred while uploading: ${error.message}`);
     }
@@ -44,32 +46,19 @@ const UploadGallery = ({
     e.preventDefault();
     const file = e.target.files[0];
     if (file) {
-      const downloadURL = await uploadImage(file);
+      await uploadImage(file);
     }
-    // if (imageUrl.length > 0) {
-    //   toast("Photo has been successfully uploaded.");
-    //   // setEventDataUpdate({ ...eventDataUpdate, image: imageUrl });
-    //   setEventDataUpdate(prevData => ({ ...prevData, image: "imageUrl" }));
-    // //   console.log(eventDataUpdate.image, "event Image")
-    // }
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      imageRef.current.src = reader.result;
-      imageRef.current.style.width = "10vw";
-      imageRef.current.style.height = "10vh";
-      // console.log(imageRef.current);
-      // console.log(reader.result);
-      // setEventDataUpdate({ ...eventDataUpdate, image: reader.result });
-    };
-    console.log(eventDataUpdate);
+    // const reader = new FileReader();
+    // reader.readAsDataURL(file);
+    // reader.onload = () => {
+    //   imageRef.current.src = reader.result;
+    //   imageRef.current.style.width = "10vw";
+    //   imageRef.current.style.height = "10vh";
+    // };
   };
 
   const request = async () => {
     try {
-      const download = await uploadImage()
-      console.log(eventDataUpdate);
-
       if (eventDataUpdate.image) {
         const url = "https://kingshillcity-01.onrender.com/api/v1/gallery";
         const response = await axios.post(url, eventDataUpdate);
@@ -85,7 +74,6 @@ const UploadGallery = ({
       } else {
         toast("Please fill all fields");
       }
-      // console.log(eventDataUpdate);
     } catch (error) {
       console.log(error);
     }
@@ -111,24 +99,15 @@ const UploadGallery = ({
     // console.log(e.dataTransfer.files[0]);
     const file = e.dataTransfer.files[0];
     if (file) {
-      const downloadImageUrl = await uploadImage(file);
+      await uploadImage(file);
     }
-    if (imageUrl.length > 0) {
-        toast("Photo has been successfully uploaded.");
-        setEventDataUpdate({ ...eventDataUpdate, image: imageUrl });
-      //   console.log(eventDataUpdate.image, "event Image")
-      }else{
-        toast("Photo is uploading, please wait a few seconds...");
-      }
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      imageRef.current.src = reader.result;
-      imageRef.current.style.width = "10vw";
-      imageRef.current.style.height = "10vh";
-      // console.log(imageRef.current);
-      // console.log(reader.result);
-    };
+    // const reader = new FileReader();
+    // reader.readAsDataURL(file);
+    // reader.onload = () => {
+    //   imageRef.current.src = reader.result;
+    //   imageRef.current.style.width = "10vw";
+    //   imageRef.current.style.height = "10vh";
+    // };
   };
 
   return (
@@ -152,7 +131,7 @@ const UploadGallery = ({
             <div className='text-black text-2xl font-bold font-["Arial"] flex justify-between py-2'>
               <h1>Upload new event</h1>
               <button
-                className=" bg-blue-400 text-lg p-2 rounded-md"
+                className=" bg-[#0A063E] text-lg p-2 rounded-md text-white hover:bg-[#1f2555]"
                 onClick={request}
                 ref={uploadOrUpdateButtonRef}
                 type="submit"
