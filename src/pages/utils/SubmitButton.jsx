@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-const SubmitButton = ({request}) => {
+const SubmitButton = ({request, uploadOrupdate}) => {
     const submitForm = () =>{
         request();
     };
@@ -11,13 +11,14 @@ const SubmitButton = ({request}) => {
       p-2 rounded-md text-white hover:bg-[#1f2555] mt-5"
       onClick={submitForm}
     >
-      Submit
+      {uploadOrupdate}
     </button>
   );
 };
 
 SubmitButton.propTypes = {
     request: PropTypes.func.isRequired,
+    uploadOrupdate: PropTypes.string,
 }
 
 export default SubmitButton;

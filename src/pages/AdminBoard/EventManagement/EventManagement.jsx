@@ -61,7 +61,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
   const uploadEventHandler = (value) => {
     setUpLoadEvent(value);
     setEventData({});
-    setUploadOrUpdate("Upload");
+    setUploadOrUpdate("Submit");
   };
 
   // login
