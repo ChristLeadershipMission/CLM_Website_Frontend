@@ -22,7 +22,7 @@ const UploadEvent = ({
   // const [campusData, setCampusData] = useState(campusData);
   const uploadOrUpdateButtonRef = useRef(null);
   const uploadImageContainerRef = useRef(null);
-  const imageRef = useRef();
+  const imageRef = useRef(null);
   // const [imageUrl, setImageUrl] = useState("");
   const [ministers, setministers] = useState([]);
   const [campusAddress, setCampusAddress] = useState({});
@@ -115,7 +115,7 @@ const ministerId = (e) =>{
         setCampusDataUpdate({ ...campusDataUpdate, logo: downloadURL });
         imageRef.current.src = downloadURL;
         toast("Photo loaded successfully");
-        console.log(downloadURL);
+        console.log(imageRef.current);
       } else {
         toast(
           "Failed to upload... Please try again later"
@@ -130,7 +130,6 @@ const ministerId = (e) =>{
     e.preventDefault();
     toast("Loading image...");
     const file = e.target.files[0];
-    console.log(file);
     if (file) {
       await uploadImage(file);
     }
@@ -195,6 +194,7 @@ const ministerId = (e) =>{
     };
     fetchMinisters();
   },[]);
+
 
   return (
     <>
