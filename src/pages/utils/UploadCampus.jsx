@@ -30,8 +30,15 @@ const UploadEvent = ({
 
 const Address = (e) =>{
   setCampusAddress({...campusAddress,[e.target.name]: e.target.value});
-  setCampusDataUpdate({...campusDataUpdate, address: campusAddress})
+  setCampusDataUpdate({
+    ...campusDataUpdate,
+    address: {
+      ...campusDataUpdate.address,
+      [e.target.name]: e.target.value
+    }
+  });  // setCampusDataUpdate({...campusDataUpdate, address: campusAddress})
   console.log(campusAddress);
+  console.log(campusDataUpdate);
 };
 
 const ministerId = (e) =>{
