@@ -207,13 +207,13 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
         <ToastContainer />
         <FontAwesomeIcon
           icon={faXmark}
-          className="text-2xl md:text-[2rem] m-10 absolute 
-          text-white hover:cursor-pointer"
+          className="text-2xl md:text-[2rem] md:m-10 absolute m-6
+          md:text-white hover:cursor-pointer z-[300] text-black"
           onClick={() => uploadEventHandler(false)}
         />
         <div
-          className="flex justify-center items-center h-[80vh] 
-           md:h-[70vh] lg:h-[80vh]"
+          className="flex justify-center items-center h-[90vh] 
+           md:h-[90vh] lg:h-[80vh]"
         >
           <div
             className="bg-white rounded-md p-10 w-[95%] md:w-[80%] lg:w-[50%] 

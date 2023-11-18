@@ -1,38 +1,19 @@
-import clmlogo from "./Images/clmLogo.svg";
+// import clmlogo from "./Images/clmlogo.png";
 
 const TopNavBar = () => {
   return (
     <>
-      <div className="w-screen h-[10vh] bg-[#0A063E] flex justify-between px-[2vw] text-white">
-        <div className="">
-          <img
-            src={clmlogo}
-            alt=""
-            className="lg:w-[100%] lg:h-[60%] lg:mt-[1.9vh] md:w-[100%] 
-            md:h-[60%] md:mt-[2vh] w-[100%] h-[60%] mt-[2vh]"
-          />
-          {/* <h3
-            className=' lg:text-[2vw] font-bold font-["Lobster"] 
-            tracking-widest lg:w-[20vw] lg:mt-[1.2vh] md:mt-[2.5vh] 
-            md:tracking-widest hidden md:block'>
-            CLM
-          </h3> */}
-        </div>
-        <div className="max-[1024px]:mr-[15vw] max-[1280px]:mr-[15vw]">
+      <div 
+       className="w-screen lg:h-[10vh] bg-[#0A063E] flex 
+       justify-center lg:px-[2vw] text-white h-[5vh]">
+        {/* <div className="lg:ml-[15vw] md:ml-[15vw] ml-[5vw]">
+        </div> */}
         <h3 
           className=' lg:text-[3vh] lg:mt-[3vh] 
-          font-bold font-["Arial"] lg:w-[25vw] md:mt-[3vh] 
-          w-[50vw] mt-[3.2vh] text-[2.3vh] md:text-[2.5vh]'>
-            Dashboard Management
+          font-bold font-["Arial"] lg:w-[25vw] text-center 
+          w-[50vw] mt-[1vh] text-[2.3vh] md:text-[2.5vh]'>
+            Admin Dashboard
           </h3>
-        </div>
-        <div>
-          <img
-            src="src\components\AdminBoard\Management\images\profileIcon.svg"
-            alt=""
-            className="mt-[2vh]"
-          />
-        </div>
       </div>
     </>
   );
