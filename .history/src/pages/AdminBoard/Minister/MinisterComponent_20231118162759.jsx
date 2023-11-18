@@ -24,7 +24,7 @@ const MinisterComponent = ({ hideSideBar }) => {
   const navigate = useNavigate();
 
   const [ministers, setMinisters] = useState(
-    FetchFromSessionStorage("ministers", [])
+    FetchFromSessionStorage("ministerData", [])
     );
   useEffect(() => {
     const fetchMinisters = async () => {
@@ -39,7 +39,7 @@ const MinisterComponent = ({ hideSideBar }) => {
           },
         });
         const data = response.data;
-        SaveIntoSessionStorage("ministers", data);
+        SaveIntoSessionStorage("ministerData", data);
         setMinisters(data);
         console.log(data);
         console.log(ministers, "ministers");

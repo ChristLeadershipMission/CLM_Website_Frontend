@@ -110,6 +110,7 @@ const ministerId = (e) =>{
       const storageRef = ref(storage, "EventImages/" + file.name); //This function allows you to create a reference to a specific location in Firebase Storage.
       await uploadBytes(storageRef, file); //This function is used to upload binary data (in this case, an image file) to a specific location in Firebase Storage.
       const downloadURL = await getDownloadURL(storageRef); //his function is used to get the download URL of a file stored in Firebase Storage.
+
       if (downloadURL) {
         setCampusDataUpdate({ ...campusDataUpdate, logo: downloadURL });
         imageRef.current.src = downloadURL;
