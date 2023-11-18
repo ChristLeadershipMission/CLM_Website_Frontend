@@ -15,7 +15,7 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
   const uploadImageContainerRef = useRef(null);
   const [eventDataUpdate, setEventDataUpdate] = useState(eventData);
   const uploadOrUpdateButtonRef = useRef(null);
-  // const [imageUrl, setImageUrl] = useState("");
+  // const [imageUrl, setImageUrl] = useState("");  
   const [campuses, setCampuses] = useState([]);
 
   const campusId = (e) => {
@@ -60,13 +60,12 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
       const downloadURL = await getDownloadURL(storageRef); //his function is used to get the download URL of a file stored in Firebase Storage.
       if (downloadURL) {
         setEventDataUpdate({ ...eventDataUpdate, eventImageUrl: downloadURL });
-        imageRef.current.src = downloadURL;
-        toast("Photo uploaded successfully");
-        console.log(imageRef.current.src);
+        // imageRef.current.src = downloadURL;
+        // toast("Photo uploaded successfully");
+        console.log(downloadURL);
       } else {
-        toast("Failed to upload... Please try again later");
+        // toast("Failed to upload... Please try again later");
       }
-      // return downloadURL;
     } catch (error) {
       console.log(`An error occurred while uploading: ${error.message}`);
     }
@@ -74,21 +73,19 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
 
   const selectImage = async (e) => {
     e.preventDefault();
-    toast("Photo is uploading..");
     const file = e.target.files[0];
+    console.log(file);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      imageRef.current.src = reader.result;
+      imageRef.current.style.width = "10vw";
+      imageRef.current.style.height = "10vh";
+
+    };
     if (file) {
       await uploadImage(file);
     }
-
-    // const reader = new FileReader();
-    // reader.readAsDataURL(file);
-    // reader.onload = () => {
-    //   imageRef.current.src = reader.result;
-    //   imageRef.current.style.width = "10vw";
-    //   imageRef.current.style.height = "10vh";
-    //   console.log(imageRef.current);
-
-    // };
   };
 
   const request = async () => {
@@ -101,17 +98,8 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
         eventDataUpdate.startDate
       ) {
         console.log("got here");
-        // const data = {
-        //   eventName: eventDataUpdate.eventName,
-        //   content: "",
-        //   startDate: eventDataUpdate.startDate,
-        //   endDate: eventDataUpdate.endDate,
-        //   eventImageUrl: eventDataUpdate.eventImageUrl,
-        //   eventVideoUrl: "",
-        // };
-
         const data =
-          uploadOrUpdateButtonRef.current.innerText === "Upload"
+          uploadOrUpdateButtonRef.current.innerText === "Submit"
             ? {
                 eventName: eventDataUpdate.eventName,
                 content: "",
@@ -140,11 +128,11 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
         ).access_token;
         console.log(token);
         const url =
-          uploadOrUpdateButtonRef.current.innerText === "Upload"
+          uploadOrUpdateButtonRef.current.innerText === "Submit"
             ? `${baseUrl}/event/eventCreation`
             : `${baseUrl}/event/eventUpdate`;
         const response =
-          uploadOrUpdateButtonRef.current.innerText === "Upload"
+          uploadOrUpdateButtonRef.current.innerText === "Submit"
             ? await axios.post(url, data, {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -162,13 +150,13 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
           campusId: "",
         });
         if (response) {
-          // location.reload();
+          location.reload();
           toast("Refresh to see changes");
         }
         console.log(response.data);
       } else if (!eventDataUpdate.eventImageUrl) {
         toast(
-          "Please choose an image. If you have selected an image before, please choose the same picture again."
+          "Image failed to upload.."
         );
       } else {
         toast("Please fill all fields");
@@ -192,21 +180,18 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
   };
   const drop = async (e) => {
     e.preventDefault();
-    toast("Photo is uploading..");
-    console.log(e.target);
-    console.log(e.dataTransfer.files[0]);
     const file = e.dataTransfer.files[0];
     if (file) {
       await uploadImage(file);
     }
 
-    // const reader = new FileReader();
-    // reader.readAsDataURL(file);
-    // reader.onload = () => {
-    //   imageRef.current.src = reader.result;
-    //   imageRef.current.style.width = "10vw";
-    //   imageRef.current.style.height = "10vh";
-    // };
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      imageRef.current.src = reader.result;
+      imageRef.current.style.width = "10vw";
+      imageRef.current.style.height = "10vh";
+    };
   };
 
   return (
@@ -387,7 +372,7 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
               >
                 Submit
               </button> */}
-              <SubmitButton request={request} />
+              <SubmitButton request={request} uploadOrupdate={uploadOrupdate} />
             </form>
           </div>
         </div>
