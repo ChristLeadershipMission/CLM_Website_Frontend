@@ -68,7 +68,7 @@ const CampusManagementComponent = ({ hideSideBar }) => {
       },
     ]);
     console.log(campusDataList[0]);
-    setUploadOrUpdate("Upload");
+    setUploadOrUpdate("Submit");
   };
 
   useEffect(() => {

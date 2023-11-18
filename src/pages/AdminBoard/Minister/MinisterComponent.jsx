@@ -14,12 +14,14 @@ import {
 import UploadMinister from "../../utils/UploadMinister";
 import {FetchFromSessionStorage, SaveIntoSessionStorage} from "../../utils/sessionStorageData.jsx";
 import EmptyData from "../../utils/EmptyData";
+import { useNavigate } from "react-router-dom";
 
 const MinisterComponent = ({ hideSideBar }) => {
   const [upLoadMinister, setUpLoadMinister] = useState(false);
   const [ministerData, setMinisterData] = useState(null);
   const [uploadOrUpdate, setUploadOrUpdate] = useState();
   const [ministerId, setMinisterId] = useState(null);
+  const navigate = useNavigate();
 
   const [ministers, setMinisters] = useState(
     FetchFromSessionStorage("campusData", [])
@@ -43,6 +45,9 @@ const MinisterComponent = ({ hideSideBar }) => {
         console.log(ministers, "ministers");
       } catch (error) {
         console.log(error);
+        if (error.response.status === 403) {
+          navigate("/login");
+     }
       }
     };
     fetchMinisters();
@@ -59,7 +64,7 @@ const MinisterComponent = ({ hideSideBar }) => {
       createdAt: null,
       portfolio: "",
     });
-    setUploadOrUpdate("Upload");
+    setUploadOrUpdate("Submit");
   };
 
   const editMinister = (id) => {
@@ -182,8 +187,8 @@ const MinisterComponent = ({ hideSideBar }) => {
                 <div
                   key={id}
                   className="lg:w-[100%] md:w-[90%] w-[85vw] relative py-5 md:py-5 lg:py-5
-                ring-1 rounded-md lg:h-[60vh] md:h-[41vh] md:my-3 lg:my-0
-                h-[65vh] my-3 shadow-lg ring-[#F76D0A] text-black overflow-hidden"
+                ring-1 rounded-md lg:h-[60vh] md:h-[41vh] md:my-3 lg:my-0 shadow-black
+                h-[65vh] my-3 shadow-md ring-[#F76D0A] text-black overflow-hidden"
                 >
                   {/* ring-[#F76D0A] bg-[#0A063E] shadow-orange-600*/}
                   <div className="flex justify-center">
@@ -197,7 +202,7 @@ const MinisterComponent = ({ hideSideBar }) => {
                   <h1 className="text-center py-5 font-bold md:text-[1.3rem] lg:text-[1rem]">
                     {Name}
                   </h1>
-                  <p className="text-center font-semibold lg:px-5 py-3 md:text-[1.1rem] lg:text-[1rem]">
+                  <p className="text-center font-semibold lg:px-5 py-1 md:text-[1.1rem] lg:text-[1rem]">
                     {portfolio}
                   </p>
                   <p className="text-center md:text-[1.1rem] lg:text-[1rem]">
@@ -205,9 +210,9 @@ const MinisterComponent = ({ hideSideBar }) => {
                   </p>
                   <div
                     className="flex justify-center items-center gap-5
-                    pb-5 absolute lg:bottom-[-2vh] lg:pl-[1vw] md:text-[1.3rem] 
+                    pb-5 absolute lg:bottom-[-2vh] lg:pl-[2vw] md:text-[1.3rem] 
                     lg:text-[1rem] md:pl-[10vw] pl-[25vw] md:bottom-[0.5vh]
-                    bottom-[-1.5vh] lg:w-[100%] bg-white"
+                    bottom-[-1.5vh] lg:w-[100%] bg-white py-2"
                   >
                     {/* bg-[#F66D0A]  */}
                     <p
@@ -221,8 +226,9 @@ const MinisterComponent = ({ hideSideBar }) => {
                       <FontAwesomeIcon icon={faPenToSquare} /> Edit
                     </p>
                     <p
-                      className=" text-[#e6e3e3] font-bold cursor-pointer hover:scale-[1.05] mr-5
-                      transition-all duration-150 delay-75 ease-in-out bg-[#F66D0A] px-3 lg:w-[80%]"
+                      className="font-bold cursor-pointer hover:scale-[1.05] mr-5
+                      transition-all duration-150 delay-75 ease-in-out bg-[#F66D0A] px-3 lg:w-[70%]
+                      py-1 text-black rounded-md"
                       onClick={() => deleteMinister(id)}
                     >
                       {" "}
@@ -234,7 +240,7 @@ const MinisterComponent = ({ hideSideBar }) => {
             })}
           </div>
         ) : (
-          <div className="mt-[13vh] lg:mt-[15vh]">
+          <div className="mt-[13vh] lg:mt-[15vh] relative">
             <EmptyData message={"No Minister found"} />
           </div>
         )}

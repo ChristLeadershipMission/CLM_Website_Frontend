@@ -23,7 +23,9 @@ const Department = () => {
   return (
     <>
       <div className="">
-        <TopNavBar />
+        <div className=" relative z-[300]">
+          <TopNavBar />
+        </div>
         <div className="flex">
           {displaySideBarforSmallScreen && (
             <SideBar displaySideBar={displaySideBarHandle} Bg="event" />

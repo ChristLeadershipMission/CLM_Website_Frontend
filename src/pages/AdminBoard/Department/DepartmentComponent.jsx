@@ -1,91 +1,94 @@
-import choir from "./Images/choir.png";
-import drama from "./Images/drama.png";
-import media from "./Images/media.png";
-import organizing from "./Images/organizing.png";
-import prayer from "./Images/prayer.png";
-import protocol from "./Images/protocol.png";
-import publicity from "./Images/publicity.png";
-import sanitation from "./Images/sanitation.png";
-import welfare from "./Images/welfare.png";
 import shape from "./Images/shape.svg";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarPlus } from "@fortawesome/free-solid-svg-icons";
+import data from "./dapartment";
+// import { useState } from "react";
+const DepartmentComponent = ({ hideSideBar }) => {
 
-const DepartmentComponent = ({hideSideBar}) => {
-  const data = [
-    {
-      id: 1,
-      department: "Choir",
-      image: choir,
-    },
-    {
-      id: 2,
-      department: "Media",
-      image: media,
-    },
-    {
-      id: 3,
-      department: "Drama",
-      image: drama,
-    },
-    {
-      id: 4,
-      department: "Protocol",
-      image: protocol,
-    },
-    {
-      id: 5,
-      department: "Sanitation",
-      image: sanitation,
-    },
-    {
-      id: 6,
-      department: "Organizing",
-      image: organizing,
-    },
-    {
-      id: 7,
-      department: "Prayer",
-      image: prayer,
-    },
-    {
-      id: 8,
-      department: "Welfare",
-      image: welfare,
-    },
-    {
-      id: 8,
-      department: "Publicity",
-      image: publicity,
-    },
-  ];
+  // const [uploadDepartment, setUpLoadDepartment] = useState();
+  // const [departmentData, setDepartmentData] = useState();
+  // const [uploadOrUpdate, setUploadOrUpdate] = useState();
+
+  // const uploadDepartmentHandler = (value) => {
+  //   setUpLoadDepartment(value);
+  //   setDepartmentData({
+  //     firstName: "",
+  //     lastName: "",
+  //     phoneNumber: "",
+  //     emailAddress: "",
+  //     profilePicture: null,
+  //     createdAt: null,
+  //     portfolio: "",
+  //   });
+  //   setUploadOrUpdate("Submit");
+  // };
+
   return (
     <>
       <div className="lg:h-[90vh] overflow-y-auto">
-      <div
-          className="bg-white shadow-lg lg:h-[10vh] lg:p-[.5rem]
+        <div className=" relative z-[300] bg-black">
+          <div
+            className="bg-white shadow-lg lg:h-[10vh] lg:p-[.5rem]
           flex justify-around lg:block lg:w-[78.8vw] overflow-hidden
           w-[100vw]
           "
-        >
-          <h1
-            className="lg:text-2xl md:text-center lg:text-left py-[3vh] md:py-[3vh] 
-           md:text-[1.5rem] lg:pt-[2vh] md:w-[100vw] md:pr-[30vw] lg:pr-0"
-          > 
-            Event Management
-          </h1>
-          <h1
-            className="lg:hidden text-[2rem] font-black pt-[2vh] pl-[20vw]
-            md:pr-[3vw] lg:pr-0"
-            onClick={() => hideSideBar(true)}
           >
-            &#9776;
-          </h1>
+            <h1
+              className="lg:text-2xl md:text-center lg:text-left py-[3vh] md:py-[3vh] 
+           md:text-[1.5rem] lg:pt-[2vh] md:w-[100vw] md:pr-[30vw] lg:pr-0"
+            >
+              Event Management
+            </h1>
+            <h1
+              className="lg:hidden text-[2rem] font-black pt-[2vh] pl-[20vw]
+            md:pr-[3vw] lg:pr-0"
+              onClick={() => hideSideBar(true)}
+            >
+              &#9776;
+            </h1>
+          </div>
+        </div>
+        <div className="relative z-[500]">
+          <div className="my-5 px-[4vh] lg:flex justify-between">
+            <div className="flex shadow-sm shadow-black rounded-r-md">
+              <input
+                type="text"
+                className=" bg-white w-[100%] lg:w-[26vw] h-[6vh] rounded-l-md outline-none pl-5"
+              />
+              <button
+                className="bg-[#F66D0A] text-white h-[6vh] w-[40%] rounded-r-md
+              hover:bg-[#f62d0a] transition-all duration-150 delay-100 text-[1.2rem]
+              md:text-[1.7rem] lg:text-[1.2rem]"
+              >
+                search
+              </button>
+            </div>
+            <div
+              className="fontLink bg-[#F66D0A] text-white h-[6vh] w-[55%] md:w-[40%] lg:w-[20%]
+               rounded-md hover:bg-[#f62d0a] transition-all duration-150 delay-100 my-[0.9rem] lg:my-0
+               text-center pt-[0.7rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] 
+              "
+            >
+              <button
+                className=""
+                // onClick={() => uploadDepartmentHandler(true)}
+              >
+                <span>
+                  <FontAwesomeIcon icon={faCalendarPlus} />
+                </span>{" "}
+                &nbsp; Add new Minster
+              </button>
+            </div>
+          </div>
         </div>
         <div
-          className="bg-[url('src\pages\AdminBoard\CampusManagement\Images\CLMLOGO.png')]
+          className="bg-[url('/src/pages/AdminBoard/Department/Images/clmLogo.svg')] bg-cover
          grid lg:grid-cols-4 lg:py-10 lg:w-[78.8vw] md:pl-[2vw] lg:px-5 lg:gap-5 justify-center
-         items-center md:grid-cols-2 md:h-[80.5vh] h-[80vh]  overflow-y-auto no-scrollbar"
+         items-center md:grid-cols-2 md:h-[80.5vh] h-[80vh]  overflow-y-auto no-scrollbar relative
+         lg:h-[67vh]"
         >
+          <div className="bg-[rgba(217,217,217,0.8)] fixed w-[99vw] h-[10000vh] top-0 left-0"></div>
           {data.map((data) => {
             const { id, department, image } = data;
             return (
@@ -93,7 +96,8 @@ const DepartmentComponent = ({hideSideBar}) => {
                 <div
                   className="bg-[#0A063E] lg:px-5 w-[80vw] relative
                   lg:h-[20vh] md:h-[20vh] overflow-hidden md:mx-[1.5vw]
-                  md:w-[90%] lg:w-[100%] lg:mx-0 h-[20vh]"
+                  md:w-[90%] lg:w-[100%] lg:mx-0 h-[20vh] 
+                  "
                   // style={{
                   //   backgroundImage: `url(${image})`,
                   //   height: "auto",
@@ -109,9 +113,13 @@ const DepartmentComponent = ({hideSideBar}) => {
                     lg:mt-2 absolute top-[-1vh] left-0"
                   />
                   <div className="lg:pt-5 mt-10 md:pt-10 relative">
-                    <h1 className="text-[#F76D0A] lg:text-[2.5rem] text-[2rem] md:text-[3rem] text-center font-bold">{department}</h1>
+                    <h1 className="text-[#F76D0A] lg:text-[2.5rem] text-[2rem] md:text-[3rem] text-center font-bold">
+                      {department}
+                    </h1>
                   </div>
-                  <h3 className="text-white text-center lg:py-3 font-semibold">DEPARTMENT</h3>
+                  <h3 className="text-white text-center lg:py-3 font-semibold">
+                    DEPARTMENT
+                  </h3>
                 </div>
                 <div
                   className="bg-white shadow-md flex justify-center lg:gap-5
@@ -132,6 +140,6 @@ const DepartmentComponent = ({hideSideBar}) => {
 
 DepartmentComponent.propTypes = {
   hideSideBar: PropTypes.bool,
-}
+};
 
 export default DepartmentComponent;
