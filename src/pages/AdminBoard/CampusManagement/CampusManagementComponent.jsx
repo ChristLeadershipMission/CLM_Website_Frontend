@@ -26,7 +26,6 @@ const CampusManagementComponent = ({ hideSideBar }) => {
   const [campusId, setCampusId] = useState();
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [showMoreInfoData, setShowMoreInfoData] = useState([]);
-  const [uploadCampusBool2, setUpLoadCampusBool2] = useState(false);
   const [campusDataList, setCampusDataList] = useState([]);
   const navigate = useNavigate();
 
@@ -38,7 +37,6 @@ const CampusManagementComponent = ({ hideSideBar }) => {
 
   const uploadCampusHandler = (value) => {
     setUpLoadCampusBool(value);
-    setUpLoadCampusBool2(value);
     setCampusDataList([
       {
         id: "",
@@ -102,7 +100,7 @@ const CampusManagementComponent = ({ hideSideBar }) => {
     // updateEvent(newData);
     console.log(newData[0]);
     setCampusDataList(newData);
-    setUpLoadCampusBool2(true);
+    setUpLoadCampusBool(true);
     setUploadOrUpdate("Update");
     setCampusId(id);
     // console.log(eventData , "Na legit");
@@ -151,14 +149,6 @@ const CampusManagementComponent = ({ hideSideBar }) => {
             &#9776;
           </h1>
         </div>
-        {uploadCampusBool2 ? (
-          <UploadEvent
-            uploadCampusHandler={uploadCampusHandler}
-            uploadOrupdate={uploadOrUpdate}
-            campusDataList={campusDataList}
-            campusId={campusId}
-          />
-        ) : null}
         {showMoreInfo ? (
           <ShowMoreCampusInfo showMoreInfoData={showMoreInfoData} />
         ) : null}
