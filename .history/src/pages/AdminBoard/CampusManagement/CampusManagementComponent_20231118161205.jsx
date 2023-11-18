@@ -84,7 +84,6 @@ const CampusManagementComponent = ({ hideSideBar }) => {
           },
         });
         const data = response.data;
-        console.log(("campusData", data));
         SaveIntoSessionStorage("campusData", data);
         setCampusData(data);
       } catch (error) {

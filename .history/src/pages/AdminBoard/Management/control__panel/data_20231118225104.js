@@ -19,13 +19,13 @@ const churchActivities = [
     },
     {
         id:3,
-        description: "No of Campuses",
+        description: "No of Sermons",
         viewMore: "More Info",
         image: analytic,
     },
     {
         id:4,
-        description: "No of Deparments",
+        description: "No of Admin",
         viewMore: "More Info",
         image: analytic2,
     },

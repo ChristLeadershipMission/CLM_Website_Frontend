@@ -31,7 +31,6 @@ const ControlPanel = ({hideSideBar}) => {
       >
         <div className="text-2xl lg:w-['auto'] overflow-hidden mt-[3vh] md:ml-[1.5rem] lg:ml-0 text-white">
           <div className="text-4xl font-bold">{100}</div>
-          <br></br>
           {description}
         </div>
         <div>

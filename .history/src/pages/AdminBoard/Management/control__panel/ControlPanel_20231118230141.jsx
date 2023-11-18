@@ -17,7 +17,7 @@ const ControlPanel = ({hideSideBar}) => {
         </div>
         <div className="grid md:grid-cols-2 lg:py-[2rem] lg:pl-[8rem] ml-[15vw] md:ml-0">
         {churchActivities.map((data) => {
-  const { id, description, viewMore, image } = data;
+  const { id, number, description, viewMore, image } = data;
   return (
     <div
       key={id}
@@ -29,9 +29,8 @@ const ControlPanel = ({hideSideBar}) => {
         className="text-center flex gap-[2vw] lg:pl-[2vw] 
                         bg-[#0A063E] md:h-[20vh] lg:h-[23vh] rounded-t-lg"
       >
-        <div className="text-2xl lg:w-['auto'] overflow-hidden mt-[3vh] md:ml-[1.5rem] lg:ml-0 text-white">
-          <div className="text-4xl font-bold">{100}</div>
-          <br></br>
+        <div className="text-4xl font-bold pt-[3vh]">{100}</div>
+        <div className="text-2xl lg:w-['auto'] overflow-hidden mt-[1vh] md:ml-[1.5rem] lg:ml-0 text-white">
           {description}
         </div>
         <div>
