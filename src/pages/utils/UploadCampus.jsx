@@ -26,7 +26,7 @@ const UploadEvent = ({
   // const [imageUrl, setImageUrl] = useState("");
   const [ministers, setministers] = useState([]);
   const [campusAddress, setCampusAddress] = useState({});
- console.log(campusId);
+//  console.log(campusId);
 
 const Address = (e) =>{
   setCampusAddress({...campusAddress,[e.target.name]: e.target.value});
@@ -60,28 +60,37 @@ const ministerId = (e) =>{
           }
         };
         const url =
-          uploadOrUpdateButtonRef.current.innerText === "Upload"
+          uploadOrUpdateButtonRef.current.innerText === "Submit"
             ? `${baseUrl}/campus/createCampus`
             : `${baseUrl}/campus/updateCampus/${campusId}`;
-        const response = uploadOrUpdateButtonRef.current.innerText === "Upload" ?
+        const response = uploadOrUpdateButtonRef.current.innerText === "Submit" ?
          await axios.post(url, campusDataUpdate, headers) :
          await axios.patch(url, campusDataUpdate, headers);
         setCampusDataUpdate({ name: "", email: "", logo: "", ministerInChargeId: "",  address: {} });
         if (response.status === 201) {
-           location.reload();
+          //  location.reload();
         }
         if (response.status === 200) {
-           location.reload();
+          //  location.reload();
         }
         if (response) {
           toast("Please Refresh to see changes");
         }
         console.log(response);
-      }else {
+      }else if(!campusDataUpdate.logo){
+        return toast(
+          "No Image Found"
+        );
+      }
+      else {
         toast("Please fill all fields");
       }
       // console.log(eventDataUpdate);
     } catch (error) {
+      if (error.response.status === 400) {
+        toast("Campus already exists");
+        return location.reload();
+      }
       console.log(error);
     }
   };
@@ -101,12 +110,12 @@ const ministerId = (e) =>{
       const storageRef = ref(storage, "EventImages/" + file.name); //This function allows you to create a reference to a specific location in Firebase Storage.
       await uploadBytes(storageRef, file); //This function is used to upload binary data (in this case, an image file) to a specific location in Firebase Storage.
       const downloadURL = await getDownloadURL(storageRef); //his function is used to get the download URL of a file stored in Firebase Storage.
+
       if (downloadURL) {
         setCampusDataUpdate({ ...campusDataUpdate, logo: downloadURL });
         imageRef.current.src = downloadURL;
-        console.log(imageRef.current.src, "Image updated");
-        console.log(campusDataUpdate);
-        toast("Photo uploaded successfully");
+        toast("Photo loaded successfully");
+        console.log(downloadURL);
       } else {
         toast(
           "Failed to upload... Please try again later"
@@ -119,11 +128,13 @@ const ministerId = (e) =>{
 
   const selectImage = async (e) => {
     e.preventDefault();
-    toast("Photo is uploading...")
+    toast("Loading image...");
     const file = e.target.files[0];
+    console.log(file);
     if (file) {
-       await uploadImage(file);
+      await uploadImage(file);
     }
+
     // const reader = new FileReader();
     // reader.readAsDataURL(file);
     // reader.onload = () => {
@@ -145,11 +156,10 @@ const ministerId = (e) =>{
   };
   const drop = async (e) => {
     e.preventDefault();
-    console.log(e.dataTransfer.files[0]);
+    toast("Loading image...");
     const file = e.dataTransfer.files[0];
-    toast("Photo is uploading...")
     if (file) {
-       await uploadImage(file);
+      await uploadImage(file);
     }
     // const reader = new FileReader();
     // reader.readAsDataURL(file);
@@ -338,7 +348,7 @@ const ministerId = (e) =>{
                    h-[6vh] w-[100%] pl-5"
                 />
               </label>
-              <SubmitButton request={request} />
+              <SubmitButton request={request} uploadOrupdate={uploadOrupdate} />
             </form>
           </div>
         </div>

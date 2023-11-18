@@ -81,11 +81,12 @@ const EventManagementBoard = ({ hideSideBar }) => {
   };
 
   const deleteEvent = async(id)=>{
+    console.log(id);
     try {
       const token = JSON.parse(
         sessionStorage.getItem("userData")
       ).access_token;
-      const url = `${baseUrl}/event/deleteEventById/?id=${id}`;
+      const url = `${baseUrl}/event/deleteEventById?id=${id}`;
       const response = await axios.delete(url,
       {
         headers:{
@@ -93,6 +94,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
         }
       }
       );
+      console.log(response, "response");
       if (response.status === 200) {
         location.reload();
       }
