@@ -23,12 +23,13 @@ const SideBar = ({ displaySideBar }) => {
     }, 400);
   };
 
+
   return (
     <>
       <motion.div
-        className="lg:w-[20%] md:w-[60%] fixed lg:relative  h-[90vh] shadow-2xl overflow-auto 
+        className="lg:w-[20%] md:w-[60%] fixed lg:relative  lg:h-[90vh] shadow-2xl overflow-auto 
        font-['Arial'] font-medium text-lg md:text-xl lg:text-lg py-10 no-scrollbar bg-[#FCFCFC]
-       z-[500]"
+       z-[500] h-[100vh]"
         animate={{ x: closeSideBar ? -250 : 0 }}
         ref={sideBarRef}
       >
@@ -67,7 +68,7 @@ const SideBar = ({ displaySideBar }) => {
                 Event <span className="lg:ml-[0.1rem]"> Management</span>
               </Link>
             </li>
-            <li className="py-[1.2vh]">
+            <li className="py-[1.2vh]" >
               <Link to={"/admin/campus"}>
                 <span className="text-[#043E7D] pr-[2vw]">
                   <FontAwesomeIcon icon={faDashboard} />

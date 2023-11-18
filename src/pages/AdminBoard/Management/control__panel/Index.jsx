@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 
 const DashBoard = () => {
 
-  const [width, setWidth] = useState(window.outerWidth);
+  // const [width, setWidth] = useState(window.outerWidth);
+  const width = window.outerWidth;
 
   const [displaySideBarforSmallScreen, setDisplaySideBarforSmallScreen] = useState(false);
 

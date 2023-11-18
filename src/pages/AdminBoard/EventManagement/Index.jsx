@@ -29,8 +29,6 @@ const EventManagement = () => {
         <div className="flex">
           {displaySideBarforSmallScreen && (
               <SideBar displaySideBar={displaySideBarHandle} Bg="event" />
-            // <div className="z-[400] bg-black">
-            // </div>
           )}
           <EventManagementBoard hideSideBar={displaySideBarHandle} />
         </div>

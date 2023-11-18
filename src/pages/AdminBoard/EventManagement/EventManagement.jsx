@@ -112,16 +112,17 @@ const EventManagementBoard = ({ hideSideBar }) => {
         {/* <ToastContainer/> */}
         <div
           className="bg-white shadow-lg lg:h-[10vh] lg:p-[.5rem]
-          flex justify-around lg:block"
+          flex justify-around lg:block md:h-[8vh] h-[7vh]"
         >
           <h1
-            className="lg:text-2xl md:text-center lg:text-left py-[3vh] md:py-[3vh] 
+            className="lg:text-2xl md:text-center lg:text-left py-[2vh] md:py-[3vh] 
            md:text-[1.5rem] lg:pt-[2vh]"
           >
             Event Management
           </h1>
           <h1
-            className="lg:hidden text-[2rem] font-black pt-[2vh] pl-[20vw]"
+            className="lg:hidden lg:text-[2rem] font-black md:pt-[2vh] pl-[20vw]
+            md:text-[1.8rem] text-[1.2rem] pt-[1vh]"
             onClick={() => hideSideBar(true)}
           >
             &#9776;
@@ -139,19 +140,20 @@ const EventManagementBoard = ({ hideSideBar }) => {
               <div className="flex">
                 <input
                   type="text"
-                  className=" bg-gray-300 w-[100%] lg:w-[26vw] h-[6vh] rounded-l-md outline-none pl-5"
+                  className=" bg-gray-300 w-[100%] lg:w-[26vw] md:h-[6vh] 
+                  rounded-l-md outline-none pl-5 h-[5vh]"
                 />
                 <button
-                  className="bg-[#F66D0A] text-white h-[6vh] w-[40%] rounded-r-md
-              hover:bg-[#f62d0a] transition-all duration-150 delay-100 "
+                  className="bg-[#F66D0A] text-white md:h-[6vh] w-[40%] rounded-r-md
+                hover:bg-[#f62d0a] transition-all duration-150 delay-100 h-[5vh]"
                 >
                   search
                 </button>
               </div>
               <div
-                className="fontLink bg-[#F66D0A] text-white h-[6vh] w-[50%] md:w-[35%] lg:w-[20%]
+                className="fontLink bg-[#F66D0A] text-white md:h-[6vh] w-[50%] md:w-[35%] lg:w-[20%]
                rounded-md hover:bg-[#f62d0a] transition-all duration-150 delay-100 my-[0.9rem] lg:my-0
-               text-center pt-[0.7rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] 
+               text-center pt-[0.4rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] h-[5vh]
           "
               >
                 <button className="" onClick={() => uploadEventHandler(true)}>
@@ -163,11 +165,11 @@ const EventManagementBoard = ({ hideSideBar }) => {
               </div>
             </div>
         {eventMangementList.length > 0 ? (
-          <div>
+          <div className="">
             <div
               className="grid md:grid-cols-2 lg:grid-cols-3 lg:py-[2rem] lg:pl-[8vw] pl-[15vw] md:pl-0
-         overflow-y-scroll no-scrollbar h-[57vh] md:h-[63vh] lg:h-[68vh] 
-        "
+              overflow-y-scroll no-scrollbar h-[80vh] md:h-[70vh] lg:h-[68vh]
+              "
             >
               {eventMangementList.map((data) => {
                 const { id, eventName, startDate, endDate, eventImageUrl } =
@@ -184,18 +186,18 @@ const EventManagementBoard = ({ hideSideBar }) => {
                         <img
                           src={eventImageUrl}
                           alt="Event Image"
-                          className="w-full lg:h-[30vh]  rounded-t-md"
+                          className="w-full lg:h-[30vh] md:h-[25vh] h-[30vh]  rounded-t-md"
                         />
                         {/* <span className="absolute top-3 right-5 text-2xl text-black bg-[#D3AE6E]"><FontAwesomeIcon icon={faEllipsisVertical} /></span> */}
                       </div>
                       <div
                         className="text-center fontLink font-bold
-                    py-[2vh] px-4 mb-7
-                "
+                        py-[2vh] px-4
+                        "
                       >
-                        <h3>Event: {eventName}</h3>
-                        <h3>Time: {endDate}</h3>
-                        <h3 className="pb-5">Date: {startDate}</h3>
+                        <h3 className="pb-2">Event: {eventName}</h3> 
+                        <h3 className="pb-2">From: {startDate}</h3>
+                        <h3 className="pb-2">To: {endDate}</h3>
                       </div>
                       <div className="flex gap-5 pb-5 pl-5 relative bottom-0">
                         <p
