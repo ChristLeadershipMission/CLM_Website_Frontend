@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 const SubmitButton = ({request, uploadOrupdate}) => {
-    const submitForm = () =>{
+    const submitForm = (e) =>{
+      e.preventDefault();
         request();
     };
 

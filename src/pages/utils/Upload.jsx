@@ -60,11 +60,11 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
       const downloadURL = await getDownloadURL(storageRef); //his function is used to get the download URL of a file stored in Firebase Storage.
       if (downloadURL) {
         setEventDataUpdate({ ...eventDataUpdate, eventImageUrl: downloadURL });
-        // imageRef.current.src = downloadURL;
-        // toast("Photo uploaded successfully");
+        imageRef.current.src = downloadURL;
+        toast("Photo loaded successfully");
         console.log(downloadURL);
       } else {
-        // toast("Failed to upload... Please try again later");
+        toast("Failed to load... Please try again later");
       }
     } catch (error) {
       console.log(`An error occurred while uploading: ${error.message}`);
@@ -73,19 +73,20 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
 
   const selectImage = async (e) => {
     e.preventDefault();
+    toast("Loading image...");
     const file = e.target.files[0];
     console.log(file);
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      imageRef.current.src = reader.result;
-      imageRef.current.style.width = "10vw";
-      imageRef.current.style.height = "10vh";
-
-    };
     if (file) {
       await uploadImage(file);
     }
+
+     // const reader = new FileReader();
+    // reader.readAsDataURL(file);
+    // reader.onload = () => {
+    //   imageRef.current.src = reader.result;
+    //   imageRef.current.style.width = "10vw";
+    //   imageRef.current.style.height = "10vh";
+    // };
   };
 
   const request = async () => {
@@ -95,7 +96,9 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
         eventDataUpdate.eventImageUrl &&
         eventDataUpdate.eventName &&
         eventDataUpdate.endDate &&
-        eventDataUpdate.startDate
+        eventDataUpdate.startDate &&
+        eventDataUpdate.mode &&
+        eventDataUpdate.campusId
       ) {
         console.log("got here");
         const data =
@@ -155,8 +158,8 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
         }
         console.log(response.data);
       } else if (!eventDataUpdate.eventImageUrl) {
-        toast(
-          "Image failed to upload.."
+        return toast(
+          "No Image Found"
         );
       } else {
         toast("Please fill all fields");
@@ -180,18 +183,19 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
   };
   const drop = async (e) => {
     e.preventDefault();
+    toast("Loading image...");
     const file = e.dataTransfer.files[0];
     if (file) {
       await uploadImage(file);
     }
 
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      imageRef.current.src = reader.result;
-      imageRef.current.style.width = "10vw";
-      imageRef.current.style.height = "10vh";
-    };
+    // const reader = new FileReader();
+    // reader.readAsDataURL(file);
+    // reader.onload = () => {
+    //   imageRef.current.src = reader.result;
+    //   imageRef.current.style.width = "10vw";
+    //   imageRef.current.style.height = "10vh";
+    // };
   };
 
   return (

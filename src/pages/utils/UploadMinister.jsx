@@ -48,7 +48,7 @@ const UploadMinister = ({
 
   const selectImage = async (e) => {
     e.preventDefault();
-    toast("Photo is uploading..");
+    toast("Loading image...");
     const file = e.target.files[0];
     if (file) {
       await uploadImage(file);
@@ -64,6 +64,33 @@ const UploadMinister = ({
 
     // };
   };
+
+  const dragOver = (e) => {
+    e.preventDefault();
+    uploadImageContainerRef.current.style.backgroundColor =
+      "rgba(114,203,255,0.2)";
+  };
+  const dragLeave = (e) => {
+    e.preventDefault();
+    uploadImageContainerRef.current.style.backgroundColor = "";
+  };
+  const drop = async (e) => {
+    e.preventDefault();
+    toast("Loading image...");
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      await uploadImage(file);
+    }
+
+    // const reader = new FileReader();
+    // reader.readAsDataURL(file);
+    // reader.onload = () => {
+    //   imageRef.current.src = reader.result;
+    //   imageRef.current.style.width = "10vw";
+    //   imageRef.current.style.height = "10vh";
+    // };
+  };
+
 
   const request = async () => {
     console.log(ministerDataUpdate);
@@ -91,11 +118,11 @@ const UploadMinister = ({
         ).access_token;
         console.log(token);
         const url =
-          uploadOrUpdateButtonRef.current.innerText === "Upload"
+          uploadOrUpdateButtonRef.current.innerText === "Submit"
             ? `${baseUrl}/minister/createMinister`
             : `${baseUrl}/minister/updateMinister/${ministerId}`;
         const response =
-          uploadOrUpdateButtonRef.current.innerText === "Upload"
+          uploadOrUpdateButtonRef.current.innerText === "Submit"
             ? await axios.post(url, data, {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -126,8 +153,8 @@ const UploadMinister = ({
         }
         console.log(response.data);
       } else if (!ministerDataUpdate.eventImageUrl) {
-        toast(
-          "Please choose an image. If you have selected an image before, please choose the same picture again."
+        return toast(
+          "No Image Found"
         );
       } else {
         toast("Please fill all fields");
@@ -144,34 +171,7 @@ const UploadMinister = ({
     });
     console.log(ministerDataUpdate);
   };
-  const dragOver = (e) => {
-    e.preventDefault();
-    uploadImageContainerRef.current.style.backgroundColor =
-      "rgba(114,203,255,0.2)";
-  };
-  const dragLeave = (e) => {
-    e.preventDefault();
-    uploadImageContainerRef.current.style.backgroundColor = "";
-  };
-  const drop = async (e) => {
-    e.preventDefault();
-    toast("Photo is uploading..");
-    // console.log(e.target);
-    // console.log(e.dataTransfer.files[0]);
-    const file = e.dataTransfer.files[0];
-    if (file) {
-      await uploadImage(file);
-    }
-
-    // const reader = new FileReader();
-    // reader.readAsDataURL(file);
-    // reader.onload = () => {
-    //   imageRef.current.src = reader.result;
-    //   imageRef.current.style.width = "10vw";
-    //   imageRef.current.style.height = "10vh";
-    // };
-  };
-
+  
   //   firstName : "Minstrel Tope"
   //   lastName : ""
   //   phoneNumber : "12d34544f3d42"
@@ -309,7 +309,7 @@ const UploadMinister = ({
                   h-[6vh] w-[100%] pl-5"
                 />
               </label>
-              <SubmitButton request={request} />
+              <SubmitButton request={request}  uploadOrupdate={uploadOrupdate}/>
             </form>
           </div>
         </div>
