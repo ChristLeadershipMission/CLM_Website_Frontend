@@ -35,26 +35,27 @@ const DepartmentComponent = ({ hideSideBar }) => {
           "
           >
             <h1
-              className="lg:text-2xl md:text-center lg:text-left py-[3vh] md:py-[3vh] 
-           md:text-[1.5rem] lg:pt-[2vh] md:w-[100vw] md:pr-[30vw] lg:pr-0"
+              className="lg:text-2xl md:text-center lg:text-left py-[2vh] md:py-[3vh] 
+              md:text-[1.5rem] lg:pt-[2vh]"
             >
-              Event Management
+              Department Management
             </h1>
             <h1
-              className="lg:hidden text-[2rem] font-black pt-[2vh] pl-[20vw]
-            md:pr-[3vw] lg:pr-0"
+              className="lg:hidden lg:text-[2rem] font-black pt-[2vh] pl-[20vw]
+            md:pr-[3vw] lg:pr-0 md:text-[1.8rem] text-[1.2rem]"
               onClick={() => hideSideBar(true)}
             >
               &#9776;
             </h1>
           </div>
         </div>
-        <div className="relative z-[500]">
+        <div className="relative z-[300]">
           <div className="my-5 px-[4vh] lg:flex justify-between">
-            <div className="flex shadow-sm shadow-black rounded-r-md">
+            <div className="flex rounded-r-md">
               <input
                 type="text"
-                className=" bg-white w-[100%] lg:w-[26vw] h-[6vh] rounded-l-md outline-none pl-5"
+                className=" bg-gray-300 w-[100%] lg:w-[26vw] h-[6vh] 
+                rounded-l-md outline-none pl-5"
               />
               <button
                 className="bg-[#F66D0A] text-white h-[6vh] w-[40%] rounded-r-md
@@ -83,12 +84,12 @@ const DepartmentComponent = ({ hideSideBar }) => {
           </div>
         </div>
         <div
-          className="bg-[url('/src/pages/AdminBoard/Department/Images/clmLogo.svg')] bg-cover
+          className="bg-[url('/src/pages/AdminBoard/Department/Images/clmLogo.svg')] bg-center
          grid lg:grid-cols-4 lg:py-10 lg:w-[78.8vw] md:pl-[2vw] lg:px-5 lg:gap-5 justify-center
          items-center md:grid-cols-2 md:h-[80.5vh] h-[80vh]  overflow-y-auto no-scrollbar relative
-         lg:h-[67vh]"
+         lg:h-[67vh] bg-no-repeat bg-contain"
         >
-          <div className="bg-[rgba(217,217,217,0.8)] fixed w-[99vw] h-[10000vh] top-0 left-0"></div>
+          <div className="bg-[rgba(255,255,255,0.9)] fixed w-[99vw] h-[10000vh] top-0 left-0"></div>
           {data.map((data) => {
             const { id, department, image } = data;
             return (
