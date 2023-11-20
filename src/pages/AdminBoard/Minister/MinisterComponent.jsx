@@ -18,6 +18,7 @@ import {
 } from "../../utils/sessionStorageData.jsx";
 import EmptyData from "../../utils/EmptyData";
 import { useNavigate } from "react-router-dom";
+import DecisionButtonMinister from "../../utils/DecisionButtonMinister.jsx";
 
 const MinisterComponent = ({ hideSideBar }) => {
   const [upLoadMinister, setUpLoadMinister] = useState(false);
@@ -225,13 +226,13 @@ const MinisterComponent = ({ hideSideBar }) => {
                     <p className="text-center md:text-[1.1rem] lg:text-[1rem]">
                       {emailAddress}
                     </p>
-                    <div
+                    <DecisionButtonMinister id={id} editMinister={editMinister} deleteMinister={deleteMinister} />
+                    {/* <div
                       className="flex justify-center items-center gap-5
                     pb-5 absolute lg:bottom-[-2vh] lg:pl-[2vw] md:text-[1.3rem] 
                     lg:text-[1rem] md:pl-[10vw] pl-[25vw] md:bottom-[0.5vh]
                     bottom-[-1.5vh] lg:w-[100%] bg-white py-2"
                     >
-                      {/* bg-[#F66D0A]  */}
                       <p
                         className="font-bold cursor-pointer py-1 rounded-md
                     hover:scale-[1.05] transition-all duration-150 delay-75 
@@ -251,7 +252,7 @@ const MinisterComponent = ({ hideSideBar }) => {
                         {" "}
                         <FontAwesomeIcon icon={faTrash} /> Delete
                       </p>
-                    </div>
+                    </div> */}
                   </div>
                 );
               })}

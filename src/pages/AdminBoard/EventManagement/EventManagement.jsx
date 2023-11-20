@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./event.css";
 import {
   faCalendarPlus,
-  faPenToSquare,
-  faTrash,
+  // faPenToSquare,
+  // faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 // import {  useState } from "react";
@@ -18,6 +18,7 @@ import {
   FetchFromSessionStorage,
   SaveIntoSessionStorage,
 } from "../../utils/sessionStorageData.jsx";
+import DecisionButtonEvent from "../../utils/DecisionButtonEvent.jsx";
 // import { ToastContainer, toast } from "react-toastify";
 
 const EventManagementBoard = ({ hideSideBar }) => {
@@ -248,7 +249,8 @@ const EventManagementBoard = ({ hideSideBar }) => {
                         <h3 className="pb-2">From: {startDate}</h3>
                         <h3 className="pb-2">To: {endDate}</h3>
                       </div>
-                      <div className="flex gap-5 pb-5 pl-5 relative bottom-0">
+                      <DecisionButtonEvent id={id} editEvent={editEvent} deleteEvent={deleteEvent} />
+                      {/* <div className="flex gap-5 pb-5 pl-5 relative bottom-0">
                         <p
                           className=" text-[#90150D] font-bold cursor-pointer 
                           hover:scale-[1.05] transition-all duration-150 delay-75 
@@ -267,7 +269,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
                           {" "}
                           <FontAwesomeIcon icon={faTrash} /> Delete
                         </p>
-                      </div>
+                      </div> */}
                     </div>
                   </>
                 );

@@ -78,7 +78,7 @@ const ministerId = (e) =>{
           //  location.reload();
         }
         if (response.status === 200) {
-          //  location.reload();
+           location.reload();
         }
         if (response) {
           toast("Please Refresh to see changes");
@@ -206,18 +206,18 @@ const ministerId = (e) =>{
     <>
       <div
         className="fixed lg:w-[85vw] w-[100vw] h-[100vh] 
-               lg:h-[80vh] bg-[rgba(0,0,0,0.5)] z-50"
+        lg:h-[80vh] bg-[rgba(0,0,0,0.5)] z-[400] "
       >
         <ToastContainer />
         <FontAwesomeIcon
           icon={faXmark}
-          className="text-2xl md:text-[2rem] m-10 absolute 
-                text-white hover:cursor-pointer"
+          className="text-2xl md:text-[2rem] md:m-10 absolute 
+        md:text-white hover:cursor-pointer text-black m-6"
           onClick={() => uploadCampusHandler(false)}
         />
         <div
-          className="flex justify-center items-center h-[80vh] 
-          md:h-[70vh] lg:h-[80vh]"
+          className="flex justify-center items-center h-[90vh] 
+          md:h-[90vh] lg:h-[80vh]"
         >
           <div 
            className="bg-white rounded-md p-10 w-[95%] md:w-[80%] lg:w-[50%]

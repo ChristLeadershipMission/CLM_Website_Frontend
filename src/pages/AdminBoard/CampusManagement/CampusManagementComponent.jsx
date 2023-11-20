@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
   faCalendarPlus,
-  faPenToSquare,
-  faTrash,
+  // faPenToSquare,
+  // faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import UploadEvent from "../../utils/UploadCampus";
@@ -19,6 +19,7 @@ import {
   FetchFromSessionStorage,
   SaveIntoSessionStorage,
 } from "../../utils/sessionStorageData.jsx";
+import DecisionButtonCampus from "../../utils/DecisionButtonCampus.jsx";
 
 const CampusManagementComponent = ({ hideSideBar }) => {
   const [upLoadCampusBool, setUpLoadCampusBool] = useState(false);
@@ -266,7 +267,11 @@ const CampusManagementComponent = ({ hideSideBar }) => {
                       <FontAwesomeIcon icon={faArrowRight} />
                     </span>
                   </div>
-                  <div
+                  <div className="">
+                    <DecisionButtonCampus id={id} editCampus={editCampus} 
+                    deleteCampus={deleteCampus} />
+                  </div>
+                  {/* <div
                     className="flex gap-5 pb-5 pl-5 relative bottom-0
                  bg-[#F66D0A] justify-center items-center lg:pt-[1vh]
                  rounded-b-md"
@@ -289,7 +294,7 @@ const CampusManagementComponent = ({ hideSideBar }) => {
                       {" "}
                       <FontAwesomeIcon icon={faTrash} /> Delete
                     </p>
-                  </div>
+                  </div> */}
                 </div>
               );
             })}
