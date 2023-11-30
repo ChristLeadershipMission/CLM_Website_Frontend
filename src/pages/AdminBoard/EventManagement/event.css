@@ -3,4 +3,8 @@
 
 .fontLink {
     font-family: "Montserrat", sans-serif;
+  };
+  body{
+    height: 100vh;
+    viewport-fit: cover;
   }

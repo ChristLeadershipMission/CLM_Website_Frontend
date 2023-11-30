@@ -5,11 +5,12 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
+import "./NavBar.css";
 
 const NavBar = () => {
   const [showMobileNavBar, setShowMobileNavBar] = useState();
 
-  const outerWidth = window.outerWidth;
+  // const outerWidth = window.outerWidth;
 
   const toggleMobileNavBar = () => {
     setShowMobileNavBar(!showMobileNavBar);
@@ -17,7 +18,7 @@ const NavBar = () => {
   };
   return (
     <>
-      <div className="relative z-[800]">
+      <div className=" z-[800] relative">
         <div
           className={`lg:hidden flex justify-between px-[4vw] py-[1vh] ${
             showMobileNavBar ? "hidden" : "block"
@@ -34,12 +35,23 @@ const NavBar = () => {
         <div
           className={`bg-white lg:flex lg:justify-between 
         lg:px-[2rem] lg:py-[2rem] h-screen lg:h-[5vh]
-        fixed lg:w-screen w-[80%] ml-[30vw] lg:ml-0
+         lg:w-screen w-[80%] ml-[30vw] lg:ml-0
          ${
           !showMobileNavBar ? "hidden" : "block" 
         }`}
         >
-          <div>
+          <motion.div
+          initial={{
+            opacity: 0,
+          }}
+          whileInView={{
+            opacity: 1,
+            transition:{
+              duration: 1,
+              delay: 0.2,
+            }
+          }}
+          >
             <Link to={"/"}>
               <img
                 src={clmLogo}
@@ -47,7 +59,7 @@ const NavBar = () => {
                 className="lg:w-[2.5rem] lg:mt-[-1.5rem] hidden lg:block"
               />
             </Link>
-          </div>
+          </motion.div>
           <div>
             <span 
             className="absolute right-[15vw] top-[2vw] font-black lg:hidden cursor-pointer
@@ -56,53 +68,64 @@ const NavBar = () => {
             >
               <FontAwesomeIcon icon={faXmark}  className="text-black text-[1.5rem]"/>
             </span>
-            <ul
+            <motion.ul
               className='lg:flex lg:gap-[3rem] lg:text-xl 
-                lg:font-semibold font-["Arial"] lg:mr-[20vw] text-center 
+                lg:font-semibold font-["Arial"] lg:mr-[10vw] text-center 
                 text-[5vw] mt-[18vh] lg:mt-[-2vh] w-[89%] lg:w-auto 
                 '
+              initial={{
+                opacity: 0,
+              }}
+              whileInView={{
+                opacity: 1,
+                transition:{
+                  duration: 1,
+                  delay: 0.3,
+                  bounce: 1
+                }
+              }}
             >
               <Link to={"/"}>
                 {" "}
-                <li>Home</li>{" "}
+                <li className=" relative">Home</li>{" "}
               </Link>
               <hr className="by-blue-900 ring-[0.01rem] ring-blue-900
                   mb-[5vh] lg:hidden" />
               <Link to={"/about"}>
                 {" "}
-                <li>About us</li>{" "}
+                <li className=" relative">About us</li>{" "}
               </Link>
               <hr className="by-blue-900 ring-[0.01rem] ring-blue-900
                   mb-[5vh] lg:hidden" />
               <Link to={"/giving"}>
                 {" "}
-                <li>Online Giving</li>{" "}
+                <li className=" relative">Online Giving</li>{" "}
               </Link>
               <hr className="by-blue-900 ring-[0.01rem] ring-blue-900
                   mb-[5vh] lg:hidden" />
               <Link to={"/Events"}>
                 {" "}
-                <li>Events</li>{" "}
+                <li className=" relative">Events</li>{" "}
               </Link>
               <Link to={"/Campus"}>
               <hr className="by-blue-900 ring-[0.01rem] ring-blue-900
                   mb-[5vh] lg:hidden" />
                 {" "}
-                <li>Campus</li>{" "}
+                <li className=" relative">Campus</li>{" "}
               </Link>
               <hr className="by-blue-900 ring-[0.01rem] ring-blue-900
                   mb-[5vh] lg:hidden" />
               <Link to={"/Quick Links"}>
                 {" "}
-                <li>Quick Links</li>{" "}
+                <li className=" relative">Quick Links</li>{" "}
               </Link>
               <hr className="by-blue-900 ring-[0.01rem] ring-blue-900
                   mb-[5vh] lg:hidden" />
               <Link to={"/admin"}>
                 {" "}
-                <li>Admin</li>{" "}
+                <li className=" relative">Admin</li>{" "}
               </Link>
-            </ul>
+            </motion.ul>
           </div>
         </div>
       </div>
