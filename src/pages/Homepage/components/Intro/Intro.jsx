@@ -3,7 +3,7 @@ import welcome from '../../../../../src/assets/pictures/welcomeChurch.svg'
 const Intro = () => {
   return (
     <>
-    <div>
+    <div className=' sticky top-0 h-[100vh]'>
         <img src={welcome} alt=""/>
     </div>
     </>

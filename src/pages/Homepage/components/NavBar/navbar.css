@@ -1,0 +1,24 @@
+body{
+    margin:  0;
+    padding: 0;
+    box-sizing: border-box;
+}
+li{
+    transition: all .2s ease-in-out;
+    opacity: 1;
+}
+li::before{
+    content: '';
+    width: 0%;
+    height: .1rem;
+    position: absolute;
+    background-color: #F66D0A;
+    bottom: -0.1rem;
+    transition: 1s .2s cubic-bezier(0.4, 0, 0.19, 1.43);
+}
+li:hover{
+    scale: 1.05;
+}
+li:hover::before{
+   width: 100%;
+}
