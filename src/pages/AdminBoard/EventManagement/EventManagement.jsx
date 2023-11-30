@@ -3,18 +3,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./event.css";
 import {
   faCalendarPlus,
-  faPenToSquare,
-  faTrash,
+  // faPenToSquare,
+  // faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 // import {  useState } from "react";
 import EmptyData from "../../utils/EmptyData.jsx";
 import Upload from "../../utils/Upload";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import baseUrl from "../../utils/baseUrl.js";
 import { useNavigate } from "react-router-dom";
-import {FetchFromSessionStorage, SaveIntoSessionStorage} from "../../utils/sessionStorageData.jsx";
+import {
+  FetchFromSessionStorage,
+  SaveIntoSessionStorage,
+} from "../../utils/sessionStorageData.jsx";
+import DecisionButtonEvent from "../../utils/DecisionButtonEvent.jsx";
 // import { ToastContainer, toast } from "react-toastify";
 
 const EventManagementBoard = ({ hideSideBar }) => {
@@ -28,6 +32,8 @@ const EventManagementBoard = ({ hideSideBar }) => {
   );
   const navigate = useNavigate();
 
+  console.log(window.outerHeight, "Outer width");
+
   useEffect(() => {
     const fetchData = async () => {
       console.log(`${eventMangementList}events`);
@@ -36,27 +42,59 @@ const EventManagementBoard = ({ hideSideBar }) => {
       console.log(eventMangement.length);
       const token = JSON.parse(sessionStorage.getItem("userData")).access_token;
       try {
-        const response = await axios.get(
-          `${baseUrl}/event/findAll`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${baseUrl}/event/findAll`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const data = response.data;
         SaveIntoSessionStorage("events", data);
         setEventManagementList(data);
         console.log(eventMangementList, "event");
       } catch (error) {
         if (error.response.status === 403) {
-             navigate("/login");
+          navigate("/login");
         }
-        console.log(error );
+        console.log(error);
       }
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const handleInputFocus = () => {
+      document.body.style.overflow = "hidden";
+    };
+
+    const handleInputBlur = () => {
+      document.body.style.overflow = "auto";
+    };
+
+    document.addEventListener("focusin", handleInputFocus);
+    document.addEventListener("focusout", handleInputBlur);
+
+    return () => {
+      document.removeEventListener("focusin", handleInputFocus);
+      document.removeEventListener("focusout", handleInputBlur);
+    };
+  }, []); // Run only once on mount
+
+  const handleInputFocus = () => {
+    window.addEventListener("resize", () => {
+      const windowHeight = window.innerHeight;
+      const { height } = window.visualViewport;
+      console.log(windowHeight, "windowHeight");
+      console.log(height, "height");
+      console.log(window.innerHeight, "resize");
+      // document.documentElement.style.position = "fixed";
+      // document.documentElement.style.backgroundColor = "blue";
+    });
+    // containerRef.current.style.height = "400px"
+    // var viewportMeta = document.querySelector('meta[name="viewport"]');
+    // viewportMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, height=10';
+    // console.log(viewportMeta, "view");
+    console.log(document.documentElement);
+  };
 
   const uploadEventHandler = (value) => {
     setUpLoadEvent(value);
@@ -65,8 +103,6 @@ const EventManagementBoard = ({ hideSideBar }) => {
   };
 
   // login
-
-  
 
   const editEvent = (id) => {
     const newData = eventMangementList.filter((event) => event.id === id);
@@ -80,54 +116,64 @@ const EventManagementBoard = ({ hideSideBar }) => {
     // console.log("click on edit event");
   };
 
-  const deleteEvent = async(id)=>{
+  const deleteEvent = async (id) => {
     console.log(id);
     try {
-      const token = JSON.parse(
-        sessionStorage.getItem("userData")
-      ).access_token;
+      const token = JSON.parse(sessionStorage.getItem("userData")).access_token;
       const url = `${baseUrl}/event/deleteEventById?id=${id}`;
-      const response = await axios.delete(url,
-      {
-        headers:{
+      const response = await axios.delete(url, {
+        headers: {
           Authorization: `Bearer ${token}`,
-        }
-      }
-      );
+        },
+      });
       console.log(response, "response");
       if (response.status === 200) {
         location.reload();
       }
-      console.log(response)
-    //  toast("Event has been deleted successfully. Please refresh to see changes");
+      console.log(response);
+      //  toast("Event has been deleted successfully. Please refresh to see changes");
     } catch (error) {
       console.log(error);
       // toast("An error occurred while deleting, please try again");
     }
   };
-  
+
+  const containerRef = useRef();
+
   return (
     <>
-      <div className="w-[100%]  lg:w-[82%] h-[90vh] relative">
+      <div
+        className="w-[100%]  lg:w-[82%] h-[90vh] relative 
+       bg-[url('/src/pages/AdminBoard/Minister/Images/clmLogo.svg')] 
+       bg-no-repeat bg-contain bg-center"
+        ref={containerRef}
+      >
         {/* <ToastContainer/> */}
-        <div
-          className="bg-white shadow-lg lg:h-[10vh] lg:p-[.5rem]
+        <div className=" relative z-[300]">
+          <div
+            className="bg-white shadow-lg lg:h-[10vh] lg:p-[.5rem]
           flex justify-around lg:block md:h-[8vh] h-[7vh]"
-        >
-          <h1
-            className="lg:text-2xl md:text-center lg:text-left py-[2vh] md:py-[3vh] 
+          >
+            <h1
+              className="lg:text-2xl md:text-center lg:text-left py-[2vh] md:py-[3vh] 
            md:text-[1.5rem] lg:pt-[2vh]"
-          >
-            Event Management
-          </h1>
-          <h1
-            className="lg:hidden lg:text-[2rem] font-black md:pt-[2vh] pl-[20vw]
+            >
+              Event Management
+            </h1>
+            <h1
+              className="lg:hidden   font-black md:pt-[2vh] pl-[20vw]
             md:text-[1.8rem] text-[1.2rem] pt-[1vh]"
-            onClick={() => hideSideBar(true)}
-          >
-            &#9776;
-          </h1>
+              onClick={() => hideSideBar(true)}
+            >
+              &#9776;
+            </h1>
+          </div>
         </div>
+        <div
+          className="bg-[rgba(255,255,255,0.95)] absolute w-[100%] 
+         h-[100%] top-0 left-0
+         "
+        ></div>
         {upLoadEvent ? (
           <Upload
             uploadEventHandler={uploadEventHandler}
@@ -136,34 +182,38 @@ const EventManagementBoard = ({ hideSideBar }) => {
             eventId={eventId}
           />
         ) : null}
-            <div className="my-5 px-[4vh] lg:flex justify-between">
-              <div className="flex">
-                <input
-                  type="text"
-                  className=" bg-gray-300 w-[100%] lg:w-[26vw] md:h-[6vh] 
-                  rounded-l-md outline-none pl-5 h-[5vh]"
-                />
-                <button
-                  className="bg-[#F66D0A] text-white md:h-[6vh] w-[40%] rounded-r-md
+        <div className=" relative z-[300]">
+          <div className="my-5 px-[4vh] lg:flex justify-between">
+            <div className="flex">
+              <input
+                type="text"
+                className=" bg-gray-300 w-[100%] lg:w-[26vw] md:h-[6vh] 
+                  rounded-l-md outline-none pl-5 h-[5vh]
+                  "
+                onFocus={handleInputFocus}
+              />
+              <button
+                className="bg-[#F66D0A] text-white md:h-[6vh] w-[40%] rounded-r-md
                 hover:bg-[#f62d0a] transition-all duration-150 delay-100 h-[5vh]"
-                >
-                  search
-                </button>
-              </div>
-              <div
-                className="fontLink bg-[#F66D0A] text-white md:h-[6vh] w-[50%] md:w-[35%] lg:w-[20%]
+              >
+                search
+              </button>
+            </div>
+            <div
+              className="fontLink bg-[#F66D0A] text-white md:h-[6vh] w-[50%] md:w-[35%] lg:w-[20%]
                rounded-md hover:bg-[#f62d0a] transition-all duration-150 delay-100 my-[0.9rem] lg:my-0
                text-center pt-[0.4rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] h-[5vh]
           "
-              >
-                <button className="" onClick={() => uploadEventHandler(true)}>
-                  <span>
-                    <FontAwesomeIcon icon={faCalendarPlus} />
-                  </span>{" "}
-                  &nbsp; Add new event
-                </button>
-              </div>
+            >
+              <button className="" onClick={() => uploadEventHandler(true)}>
+                <span>
+                  <FontAwesomeIcon icon={faCalendarPlus} />
+                </span>{" "}
+                &nbsp; Add new event
+              </button>
             </div>
+          </div>
+        </div>
         {eventMangementList.length > 0 ? (
           <div className="">
             <div
@@ -195,11 +245,12 @@ const EventManagementBoard = ({ hideSideBar }) => {
                         py-[2vh] px-4
                         "
                       >
-                        <h3 className="pb-2">Event: {eventName}</h3> 
+                        <h3 className="pb-2">Event: {eventName}</h3>
                         <h3 className="pb-2">From: {startDate}</h3>
                         <h3 className="pb-2">To: {endDate}</h3>
                       </div>
-                      <div className="flex gap-5 pb-5 pl-5 relative bottom-0">
+                      <DecisionButtonEvent id={id} editEvent={editEvent} deleteEvent={deleteEvent} />
+                      {/* <div className="flex gap-5 pb-5 pl-5 relative bottom-0">
                         <p
                           className=" text-[#90150D] font-bold cursor-pointer 
                           hover:scale-[1.05] transition-all duration-150 delay-75 
@@ -213,12 +264,12 @@ const EventManagementBoard = ({ hideSideBar }) => {
                         <p
                           className=" text-[rgb(0,0,128)] font-bold cursor-pointer hover:scale-[1.05]
                            transition-all duration-150 delay-75 ease-in-out"
-                           onClick={()=>deleteEvent(id)}
+                          onClick={() => deleteEvent(id)}
                         >
                           {" "}
                           <FontAwesomeIcon icon={faTrash} /> Delete
                         </p>
-                      </div>
+                      </div> */}
                     </div>
                   </>
                 );

@@ -202,7 +202,7 @@ const Upload = ({ uploadEventHandler, eventData, uploadOrupdate }) => {
     <>
       <div
         className="fixed lg:w-[85vw] w-[100vw] h-[100vh] 
-         lg:h-[80vh] bg-[rgba(0,0,0,0.5)] z-50"
+         lg:h-[80vh] bg-[rgba(0,0,0,0.5)] z-[400]"
       >
         <ToastContainer />
         <FontAwesomeIcon

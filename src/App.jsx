@@ -1,7 +1,7 @@
 // import { useState } from 'react'
-import FormPage from "../src/pages/Form page/Index";
+import FormPage from "../src/pages/Formpage/Index";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/Home page/components/Index/Index";
+import HomePage from "./pages/Homepage/components/Index/Index";
 import AdminBoard from "./pages/AdminBoard/AdminBoard_Route/Admin";
 import SignupConfirmation from "./pages/signupConfirmation/Index";
 import EventManagement from "./pages/AdminBoard/EventManagement/Index";

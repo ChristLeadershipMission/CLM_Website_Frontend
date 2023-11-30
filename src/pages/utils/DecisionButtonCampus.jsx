@@ -1,0 +1,47 @@
+import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PropTypes from 'prop-types';
+
+const DecisionButtonCampus = ({id, editCampus, deleteCampus}) => {
+  return (
+    <div
+      className="flex justify-center items-center
+      md:text-[1.3rem] lg:text-[1rem] gap-[10vw]
+      lg:w-[100%] py-4 w-[100%] border-b-4 md:gap-[7vw]
+      rounded-b-md bg-[rgb(255,255,255)] lg:gap-[1vw]
+      lg:px-4
+      "
+    >
+      {/* bg-[#F66D0A]  */}
+      <p
+        className="font-bold cursor-pointer py-1 rounded-md
+        hover:scale-[1.05] transition-all duration-150 delay-75 
+        ease-in-out bg-[#F66D0A] px-3 lg:w-[60%] text-black
+        order-2
+        "
+        id={id}
+        onClick={() => editCampus(id)}
+      >
+        {" "}
+        <FontAwesomeIcon icon={faPenToSquare} /> Edit
+      </p>
+      <p
+        className="font-bold cursor-pointer hover:scale-[1.05] mr-5
+                      transition-all duration-150 delay-75 ease-in-out bg-[#F66D0A] px-3 lg:w-[70%]
+                      py-1 text-black rounded-md"
+        onClick={() => deleteCampus(id)}
+      >
+        {" "}
+        <FontAwesomeIcon icon={faTrash} /> Delete
+      </p>
+    </div>
+  );
+};
+
+DecisionButtonCampus.propTypes = {
+  id: PropTypes.number,
+  editCampus: PropTypes.func.isRequired,
+  deleteCampus: PropTypes.func.isRequired,
+};
+
+export default DecisionButtonCampus;

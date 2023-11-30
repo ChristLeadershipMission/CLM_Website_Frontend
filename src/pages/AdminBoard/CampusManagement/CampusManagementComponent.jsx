@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
   faCalendarPlus,
-  faPenToSquare,
-  faTrash,
+  // faPenToSquare,
+  // faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import UploadEvent from "../../utils/UploadCampus";
@@ -15,7 +15,11 @@ import ShowMoreCampusInfo from "../../utils/showMoreCampusInfo";
 // import ShowMoreCampusInfo from "../../../pages/utils/ShowMoreCampusInfo";
 import { useNavigate } from "react-router-dom";
 import EmptyData from "../../utils/EmptyData";
-import {FetchFromSessionStorage, SaveIntoSessionStorage} from "../../utils/sessionStorageData.jsx";
+import {
+  FetchFromSessionStorage,
+  SaveIntoSessionStorage,
+} from "../../utils/sessionStorageData.jsx";
+import DecisionButtonCampus from "../../utils/DecisionButtonCampus.jsx";
 
 const CampusManagementComponent = ({ hideSideBar }) => {
   const [upLoadCampusBool, setUpLoadCampusBool] = useState(false);
@@ -127,27 +131,38 @@ const CampusManagementComponent = ({ hideSideBar }) => {
   };
   return (
     <>
-      <div className="lg:h-[90vh] overflow-y-auto">
-        <div
-          className="bg-white shadow-lg lg:h-[10vh] lg:p-[.5rem]
+      <div
+        className="lg:h-[90vh] overflow-y-auto bg-no-repeat bg-contain
+       bg-[url('/src/pages/AdminBoard/Minister/Images/clmLogo.svg')]
+       bg-center"
+      >
+        <div className=" relative z-[300]">
+          <div
+            className="bg-white shadow-lg lg:h-[10vh] lg:p-[.5rem]
           flex justify-around lg:block lg:w-[78.8vw] overflow-hidden
-          w-[100vw]
+          w-[100vw] md:h-[8vh] h-[7vh] 
           "
-        >
-          <h1
-            className="lg:text-2xl md:text-center lg:text-left py-[3vh] md:py-[3vh] 
-           md:text-[1.5rem] lg:pt-[2vh] md:w-[100vw] md:pr-[30vw] lg:pr-0"
           >
-            Campus Management
-          </h1>
-          <h1
-            className="lg:hidden text-[2rem] font-black pt-[2vh] pl-[20vw]
-            md:pr-[3vw]"
-            onClick={() => hideSideBar(true)}
-          >
-            &#9776;
-          </h1>
+            <h1
+              className="lg:text-2xl md:text-center lg:text-left py-[2vh] md:py-[3vh] 
+            md:text-[1.5rem] lg:pt-[2vh]"
+            >
+              Campus Management
+            </h1>
+            <h1
+              className="lg:hidden font-black md:pt-[2vh] pl-[20vw] pt-[1vh]
+            md:pr-[3vw] lg:text-[2rem] md:text-[1.8rem] text-[1.2rem]"
+              onClick={() => hideSideBar(true)}
+            >
+              &#9776;
+            </h1>
+          </div>
         </div>
+        <div
+          className="bg-[rgba(255,255,255,0.93)] absolute w-[100%] 
+         h-[100%] top-0 left-0
+         "
+        ></div>
         {showMoreInfo ? (
           <ShowMoreCampusInfo showMoreInfoData={showMoreInfoData} />
         ) : null}
@@ -159,38 +174,40 @@ const CampusManagementComponent = ({ hideSideBar }) => {
             campusId={campusId}
           />
         ) : null}
-        <div className="my-5 px-[4vh] lg:flex justify-between">
-          <div className="flex">
-            <form
-              className="flex"
-              // onSubmit={searchCampus}
-            >
-              <input
-                type="text"
-                className=" bg-gray-300 w-[100%] md:w-[60vw] lg:w-[26vw] h-[6vh] 
+        <div className=" relative z-[300]">
+          <div className="my-5 px-[4vh] lg:flex justify-between">
+            <div className="lg:flex">
+              <form
+                className="flex"
+                // onSubmit={searchCampus}
+              >
+                <input
+                  type="text"
+                  className=" bg-gray-300 w-[100%] md:w-[60vw] lg:w-[26vw] h-[6vh] 
                 rounded-l-md outline-none pl-5"
-              />
-              <button
-                className="bg-[#F66D0A] text-white h-[6vh] w-[40%] rounded-r-md
+                />
+                <button
+                  className="bg-[#F66D0A] text-white h-[6vh] w-[40%] rounded-r-md
               hover:bg-[#f62d0a] transition-all duration-150 delay-100 md:text-[2rem]
               lg:text-[1.3rem] text-[1.2rem]"
-              >
-                search
-              </button>
-            </form>
-          </div>
-          <div
-            className="fontLink bg-[#F66D0A] text-white h-[6vh] w-[60%] md:w-[45%] lg:w-[20%]
+                >
+                  search
+                </button>
+              </form>
+            </div>
+            <div
+              className="fontLink bg-[#F66D0A] text-white h-[6vh] w-[60%] md:w-[45%] lg:w-[20%]
           rounded-md hover:bg-[#f62d0a] transition-all duration-150 delay-100 my-[0.9rem] lg:my-0
           text-center pt-[0.7rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem]
           "
-          >
-            <button className="" onClick={() => uploadCampusHandler(true)}>
-              <span>
-                <FontAwesomeIcon icon={faCalendarPlus} />
-              </span>{" "}
-              &nbsp; Add new Campus
-            </button>
+            >
+              <button className="" onClick={() => uploadCampusHandler(true)}>
+                <span>
+                  <FontAwesomeIcon icon={faCalendarPlus} />
+                </span>{" "}
+                &nbsp; Add new Campus
+              </button>
+            </div>
           </div>
         </div>
         {campusData.length > 0 ? (
@@ -250,7 +267,11 @@ const CampusManagementComponent = ({ hideSideBar }) => {
                       <FontAwesomeIcon icon={faArrowRight} />
                     </span>
                   </div>
-                  <div
+                  <div className="">
+                    <DecisionButtonCampus id={id} editCampus={editCampus} 
+                    deleteCampus={deleteCampus} />
+                  </div>
+                  {/* <div
                     className="flex gap-5 pb-5 pl-5 relative bottom-0
                  bg-[#F66D0A] justify-center items-center lg:pt-[1vh]
                  rounded-b-md"
@@ -273,7 +294,7 @@ const CampusManagementComponent = ({ hideSideBar }) => {
                       {" "}
                       <FontAwesomeIcon icon={faTrash} /> Delete
                     </p>
-                  </div>
+                  </div> */}
                 </div>
               );
             })}

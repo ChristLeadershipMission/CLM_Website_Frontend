@@ -1,9 +1,11 @@
-import React from "react";
 
 const Footer = () => {
   return (
     <>
-      <div className="bg-[#0C0B1A]  text-white py-[4vh] px-[4vw]">
+      <div 
+      className="bg-[#0C0B1A]  text-white py-[4vh] px-[4vw]
+      z-[800] relative
+      ">
         <div className="grid lg:grid-cols-3">
           <div className="text-center pb-[4vh]">
             <h1 className="font-black">Sunday Service</h1>
