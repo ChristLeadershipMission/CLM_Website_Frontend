@@ -8,5 +8,10 @@ export default {
     extend: {},
   },
   plugins: [],
+  variants: {
+    extend: {
+      gridTemplateColumns: ['responsive', 'hover', 'focus'],
+    },
+  },
 }
 

@@ -2,8 +2,44 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import churchActivities from "./data";
 import PropTypes from "prop-types";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
+import { SaveIntoSessionStorage, FetchFromSessionStorage } from "../../../utils/sessionStorageData";
+import axios from "axios";
+import baseUrl from "../../../utils/baseUrl";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 const ControlPanel = ({ hideSideBar }) => {
+
+  const[dashboardStatistics, setDashboardStatistics] = useState(
+    FetchFromSessionStorage("dashboardStatistics", {})
+  );
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = JSON.parse(sessionStorage.getItem("userData")).access_token;
+      try {
+        const response = await axios.get(
+          `${baseUrl}/dashboard/getAdminDashboardStatistics`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const data = response.data; 
+        SaveIntoSessionStorage("dashboardStatistics", data);
+        setDashboardStatistics(data);
+        console.log(dashboardStatistics, "dashboardStatistics");
+      } catch (error) {
+        if (error.response.status === 403) {
+             navigate("/login");
+        }
+        console.log(error );
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <div className="  lg:w-[82%] h-[90vh] ">
@@ -18,7 +54,7 @@ const ControlPanel = ({ hideSideBar }) => {
             &#9776;
           </h1>
         </div>
-        <div className="grid md:grid-cols-2 lg:py-[2rem] lg:pl-[8rem] ml-[15vw] md:ml-0">
+        <div className="grid sm:w-[100%] grid-cols-2 grid-cols-2 lg:py-[2rem] lg:pl-[8rem] ml-[10vw] md:ml-0">
           {churchActivities.map((data) => {
             const { id, description, viewMore, image } = data;
             return (
@@ -33,7 +69,12 @@ const ControlPanel = ({ hideSideBar }) => {
                         bg-[#0A063E] md:h-[20vh] lg:h-[23vh] rounded-t-lg"
                 >
                   <div className="text-2xl lg:w-['auto'] overflow-hidden mt-[3vh] md:ml-[1.5rem] lg:ml-0 text-white">
-                    <div className="text-4xl font-bold">{100}</div>
+                    <div className="text-4xl font-bold">{
+                      id == 1? dashboardStatistics.numberOfUpcomingEvents:
+                      id == 2? dashboardStatistics.numberOfMinisters:
+                      id == 3? dashboardStatistics.numberOfCampuses:
+                      id == 4? dashboardStatistics.numberOfDepartments:0
+                    }</div>
                     <br></br>
                     {description}
                   </div>

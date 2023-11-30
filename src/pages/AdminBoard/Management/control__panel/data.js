@@ -25,7 +25,7 @@ const churchActivities = [
     },
     {
         id:4,
-        description: "No of Deparments",
+        description: "No of Departments",
         viewMore: "More Info",
         image: analytic2,
     },
