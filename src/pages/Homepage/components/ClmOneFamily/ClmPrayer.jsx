@@ -44,7 +44,9 @@ const ClmPrayer = () => {
             CLM, <span className="text-[#F66D0A]">One Family</span>
           </motion.h1>
           <motion.h3
-            className="font-bold pt-[1rem] mx-[2rem]"
+            className="font-bold pt-[1rem] mx-[2rem]
+            lg:text-[1rem] text-[1rem] md:text-[1.5rem]
+            "
             initial={{ y: 30 }}
             whileInView={{
               y: 0,
@@ -103,6 +105,7 @@ const ClmPrayer = () => {
             </motion.h1>
             <motion.p
               className="text-center font-bold px-[2rem] pb-[2rem] lg:pb-0
+              lg:text-[1rem] text-[1rem] md:text-[1.5rem]
              "
               initial={{
                 y: 30,

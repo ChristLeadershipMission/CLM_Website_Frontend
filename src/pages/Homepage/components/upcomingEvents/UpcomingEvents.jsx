@@ -3,14 +3,18 @@ import "./UpcomingEvents.css";
 const UpcomingEvents = () => {
   return (
     <>
-      <div
-        className="relative bg-white z-[800] shadow"
-      >
-        <h1 className="text-center py-[6vh] lg:text-2xl lg:py-[8vh] 
-        font-black text-xl">
+      <div className="relative bg-white z-[800] shadow">
+        <h1
+          className="text-center py-[6vh] lg:text-2xl lg:py-[8vh] 
+        font-black text-xl"
+        >
           UPCOMING SPECIAL PROGRAM
         </h1>
-        <div className="grid grid-cols-3 gap-[2vw] px-10 pb-10">
+        <div
+          className="grid lg:grid-cols-3 gap-[2vw] px-10 pb-10
+        md:grid-cols-2
+        "
+        >
           {data.map((event) => {
             const { title, image, id, venue, time, startDate, endDate } = event;
             return (
@@ -18,19 +22,21 @@ const UpcomingEvents = () => {
                 key={id}
                 className="transistion-all delay-150 hover:-translate-y-1 
                 hover:scale-[1.04] ease-in-out duration-150 ring ring-[#F66D0A]
-                rounded-b-2xl cursor-pointer"
+                rounded-b-2xl cursor-pointer mb-10"
               >
                 <img src={image} alt="" />
-                <h3 className="font-black lg:text-[1.5rem] text-center lg:py-[3vh] font-['Arial']">
-                  {title}
-                </h3>
-                <p className="text-center pb-[3vh] lg:px-[3vw] font-bold">
-                  Date:
-                  {startDate === endDate
-                    ? startDate
-                    : { startDate } - { endDate }}
-                  | Kick off Time: {time} | Venue: {venue}
-                </p>
+                <div className="p-5">
+                  <h3 className="font-black lg:text-[1.5rem] text-center lg:py-[3vh] font-['Arial']">
+                    {title}
+                  </h3>
+                  <p className="text-center pb-[3vh] lg:px-[3vw] font-bold">
+                    Date:
+                    {startDate === endDate
+                      ? startDate
+                      : { startDate } - { endDate }}
+                    | Kick off Time: {time} | Venue: {venue}
+                  </p>
+                </div>
               </div>
             );
           })}

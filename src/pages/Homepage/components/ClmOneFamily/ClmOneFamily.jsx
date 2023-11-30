@@ -10,7 +10,7 @@ const ClmOneFamily = () => {
     <>
       <motion.div
         className="sticky top-0 bg-white z-[800] shadow-2xl
-      shadow-black h-[150vh]"
+      shadow-black lg:h-[150vh] h-[100vh] md:h-[140vh]"
         initial={{
           y: 0,
           transition: {
@@ -29,7 +29,7 @@ const ClmOneFamily = () => {
       >
         <div className='text-center py-[2rem] lg:pt-[4rem] lg:mb-[2rem] font-["Arial"]'>
           <motion.h1
-            className="font-black lg:text-[2rem] text-[1.5rem] md:text-[2rem]
+            className="font-black lg:text-[2rem] text-[1.5rem] md:text-[2.5rem]
            "
             initial={{ opacity: 0 }}
             whileInView={{
@@ -46,7 +46,9 @@ const ClmOneFamily = () => {
             CLM, <span className="text-[#F66D0A]">One Family</span>
           </motion.h1>
           <motion.h3
-            className="font-bold pt-[1rem] mx-[2rem]"
+            className="font-bold pt-[1rem] mx-[2rem]
+            lg:text-[1rem] text-[1rem] md:text-[1.5rem]
+            "
             initial={{ y: 30 }}
             whileInView={{
               y: 0,
@@ -86,10 +88,12 @@ const ClmOneFamily = () => {
                top-0 left-0"
             />
           </motion.div>
-          <div className="lg:pt-[4rem] pt-[2rem]">
+          <div 
+          className="lg:pt-[4rem] pt-[18rem] md:pt-[55vh]
+          ">
             <motion.h1
               className="text-center lg:pb-[2rem] pb-[1rem] font-black 
-            lg:text-[2rem] text-[1.5rem] md:text-[2rem]"
+            lg:text-[2rem] text-[1.5rem] md:text-[2.5rem]"
               initial={{
                 x: 25,
               }}
@@ -106,7 +110,9 @@ const ClmOneFamily = () => {
               <span className="text-[#F66D0A]">THE WORD.</span>
             </motion.h1>
             <motion.p
-              className="text-center font-bold px-[2rem] pb-[2rem] lg:pb-0"
+              className="text-center font-bold px-[2rem] pb-[2rem] lg:pb-0
+              lg:text-[1rem] text-[1rem] md:text-[1.5rem]
+              "
               initial={{
                 y: 30,
                 opacity: 0,
