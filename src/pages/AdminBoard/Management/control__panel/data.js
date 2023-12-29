@@ -7,25 +7,25 @@ import analytic2 from "../images/analytic2.svg";
 const churchActivities = [
     {
         id:1,
-        description: "No of Visitors",
+        description: "No of Upcoming Events",
         viewMore: "More Info",
         image: user,
     },
     {
         id:2,
-        description: "No of Upcoming Events",
+        description: "No of Ministers",
         viewMore: "More Info",
         image: event,
     },
     {
         id:3,
-        description: "No of Sermons",
+        description: "No of Campuses",
         viewMore: "More Info",
         image: analytic,
     },
     {
         id:4,
-        description: "No of Admin",
+        description: "No of Departments",
         viewMore: "More Info",
         image: analytic2,
     },

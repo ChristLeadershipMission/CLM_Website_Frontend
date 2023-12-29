@@ -214,7 +214,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
             </div>
           </div>
         </div>
-        {eventMangementList.length > 0 ? (
+        {eventMangementList.length > 0 ?(
           <div className="">
             <div
               className="grid md:grid-cols-2 lg:grid-cols-3 lg:py-[2rem] lg:pl-[8vw] pl-[15vw] md:pl-0
