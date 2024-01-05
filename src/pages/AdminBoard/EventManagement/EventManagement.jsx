@@ -80,20 +80,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
   }, []); // Run only once on mount
 
   const handleInputFocus = () => {
-    window.addEventListener("resize", () => {
-      const windowHeight = window.innerHeight;
-      const { height } = window.visualViewport;
-      console.log(windowHeight, "windowHeight");
-      console.log(height, "height");
-      console.log(window.innerHeight, "resize");
-      // document.documentElement.style.position = "fixed";
-      // document.documentElement.style.backgroundColor = "blue";
-    });
-    // containerRef.current.style.height = "400px"
-    // var viewportMeta = document.querySelector('meta[name="viewport"]');
-    // viewportMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, height=10';
-    // console.log(viewportMeta, "view");
-    console.log(document.documentElement);
+    // alert("Enter")
   };
 
   const uploadEventHandler = (value) => {
@@ -188,7 +175,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
               <input
                 type="text"
                 className=" bg-gray-300 w-[100%] lg:w-[26vw] md:h-[6vh] 
-                  rounded-l-md outline-none pl-5 h-[5vh]
+                  rounded-l-md outline-none pl-5 h-[5vh] box-border
                   "
                 onFocus={handleInputFocus}
               />
