@@ -8,3 +8,8 @@
     height: 100vh;
     viewport-fit: cover;
   }
+  input{
+    box-sizing: border-box;
+    background-color: burlywood;
+    color: blue;
+  }

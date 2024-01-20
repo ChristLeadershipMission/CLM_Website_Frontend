@@ -36,7 +36,7 @@ const UpcomingEvents = () => {
 
   return (
     <>
-      <div className="relative bg-white z-[800] shadow">
+      <div className="relative bg-white z-[800] shadow h-auto">
         <h1
           className="text-center py-[6vh] lg:text-2xl lg:py-[8vh] 
         font-black text-xl"
@@ -64,7 +64,7 @@ const UpcomingEvents = () => {
               hover:scale-[1.04] ease-in-out duration-150 ring ring-[#F66D0A]
               rounded-b-2xl cursor-pointer mb-10"
             >
-              <img src={eventImageUrl} alt="" />
+              <img src={eventImageUrl} alt="" className="lg:w-[100%] lg:h-[55vh]" />
               <div className="p-5">
                 <h3 className="font-black lg:text-[1.5rem] text-center lg:py-[3vh] font-['Arial']">
                   {eventName}
