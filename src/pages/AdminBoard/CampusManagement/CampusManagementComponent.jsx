@@ -135,18 +135,18 @@ const CampusManagementComponent = ({ hideSideBar }) => {
       <div
         className="lg:h-[90vh] overflow-y-auto bg-no-repeat bg-contain
        bg-[url('/src/pages/AdminBoard/Minister/Images/clmLogo.svg')]
-       bg-center"
+       bg-center relative h-[95vh]"
       >
         <div className=" relative z-[300]">
           <div
             className="bg-white shadow-lg lg:h-[10vh] lg:p-[.5rem]
-          flex justify-around lg:block lg:w-[78.8vw] overflow-hidden
-          w-[100vw] md:h-[8vh] h-[7vh] 
+           flex justify-around lg:block lg:w-[80vw] overflow-hidden
+           w-[100vw] md:h-[8vh] h-[7vh] 
           "
           >
             <h1
               className="lg:text-2xl md:text-center lg:text-left py-[2vh] md:py-[3vh] 
-            md:text-[1.5rem] lg:pt-[2vh]"
+               md:text-[1.5rem] lg:pt-[2vh]"
             >
               Campus Management
             </h1>
@@ -160,8 +160,8 @@ const CampusManagementComponent = ({ hideSideBar }) => {
           </div>
         </div>
         <div
-          className="bg-[rgba(255,255,255,0.93)] absolute w-[100%] 
-         h-[100%] top-0 left-0
+          className="bg-[rgba(217,217,217,0.93)] absolute w-[100%] 
+          h-[100%] top-0 left-0
          "
         ></div>
         {showMoreInfo ? (
@@ -175,7 +175,7 @@ const CampusManagementComponent = ({ hideSideBar }) => {
             campusId={campusId}
           />
         ) : null}
-        <div className=" relative z-[300]">
+        {/* <div className=" relative z-[300]">
           <div className="my-5 px-[4vh] lg:flex justify-between">
             <div className="lg:flex">
               <form
@@ -184,13 +184,13 @@ const CampusManagementComponent = ({ hideSideBar }) => {
               >
                 <input
                   type="text"
-                  className=" bg-gray-300 w-[100%] md:w-[60vw] lg:w-[26vw] h-[6vh] 
-                rounded-l-md outline-none pl-5"
+                  className="w-[100%] md:w-[60vw] lg:w-[26vw] h-[6vh] 
+                rounded-l-md outline-none pl-5 ring-red-500 ring-2 bg-white"
                 />
                 <button
                   className="bg-[#F66D0A] text-white h-[6vh] w-[40%] rounded-r-md
               hover:bg-[#f62d0a] transition-all duration-150 delay-100 md:text-[2rem]
-              lg:text-[1.3rem] text-[1.2rem]"
+              lg:text-[1.3rem] text-[1.2rem] ring-red-500 ring-2"
                 >
                   search
                 </button>
@@ -210,27 +210,27 @@ const CampusManagementComponent = ({ hideSideBar }) => {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
         {campusData.length > 0 ? (
           <div
             className="bg-[url('src\pages\AdminBoard\CampusManagement\Images\CLMLOGO.png')]
-          grid lg:grid-cols-4 lg:py-10 lg:w-[78.8vw] md:pl-[5vw] lg:px-5 lg:gap-5 justify-center
-          items-center md:grid-cols-2 md:h-[67.5vh] h-[80vh]  overflow-y-auto no-scrollbar
-          md:gap-0 lg:h-[67.5vh]"
+            grid lg:grid-cols-4 lg:py-10 lg:w-[78.8vw] md:pl-[5vw] lg:px-5 lg:gap-5 justify-center
+            items-center md:grid-cols-2 md:h-[67.5vh] h-[80vh]  overflow-y-auto no-scrollbar
+            md:gap-0 lg:h-[67.5vh]"
           >
             {campusData.map((data) => {
               const { id, name, logo } = data;
               return (
                 <div
                   key={id}
-                  className="lg:w-[100%] md:w-[90%] w-[85vw] relative py-5 md:py-5 lg:py-5
-                bg-white"
+                  className="lg:w-[100%] md:w-[90%] w-[85vw] relative
+                  "
                 >
                   <div
                     className="bg-[#0A063E] lg:px-5 md:px-10 rounded-t-md
                 "
                   >
-                    <div className="flex gap-5 lg:pt-7 md:pt-10 py-10 md:py-0">
+                    <div className="flex gap-5  md:pt-10 py-10 ">
                       <h1
                         className="text-white lg:text-[4rem] 
                     md:text-[4rem] font-bold text-[4rem] px-5 pt-5 md:px-0
@@ -254,7 +254,7 @@ const CampusManagementComponent = ({ hideSideBar }) => {
                   </div>
                   <div
                     className="bg-[#0A063E] shadow-md flex justify-center lg:gap-5
-                lg:py-3 py-3 gap-3 text-white"
+                   lg:py-3 py-3 gap-3 text-black rounded-b-md bg-[rgba(246,237,10,1)]"
                     onClick={() => MoreInfo(id)}
                   >
                     <span
@@ -268,34 +268,11 @@ const CampusManagementComponent = ({ hideSideBar }) => {
                       <FontAwesomeIcon icon={faArrowRight} />
                     </span>
                   </div>
-                  <div className="">
+                  <div className="hidden">
                     <DecisionButtonCampus id={id} editCampus={editCampus} 
                     deleteCampus={deleteCampus} />
                   </div>
-                  {/* <div
-                    className="flex gap-5 pb-5 pl-5 relative bottom-0
-                 bg-[#F66D0A] justify-center items-center lg:pt-[1vh]
-                 rounded-b-md"
-                  >
-                    <p
-                      className=" text-[#f3efef] font-bold cursor-pointer 
-                          hover:scale-[1.05] transition-all duration-150 delay-75 
-                          ease-in-out"
-                      id={id}
-                      onClick={() => editCampus(id)}
-                    >
-                      {" "}
-                      <FontAwesomeIcon icon={faPenToSquare} /> Edit
-                    </p>
-                    <p
-                      className=" text-[rgb(0,0,128)] font-bold cursor-pointer hover:scale-[1.05]
-                           transition-all duration-150 delay-75 ease-in-out"
-                      onClick={() => deleteCampus(id)}
-                    >
-                      {" "}
-                      <FontAwesomeIcon icon={faTrash} /> Delete
-                    </p>
-                  </div> */}
+                
                 </div>
               );
             })}

@@ -9,7 +9,7 @@ const DecisionButtonEvent = ({id, editEvent, deleteEvent }) => {
           className="flex justify-center items-center
           md:text-[1.3rem] lg:text-[1rem] gap-[10vw]
           lg:w-[100%] py-4 w-[100%] border-b-4 md:gap-[7vw]
-          rounded-b-md bg-[rgb(255,255,255)] lg:gap-[1vw]
+          rounded-b-md bg-transparent lg:gap-[1vw]
           lg:px-4
           "
         >

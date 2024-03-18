@@ -130,7 +130,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
   return (
     <>
       <div
-        className="w-[100%]  lg:w-[82%] h-[90vh] relative 
+        className="w-[100%]  lg:w-[80%] h-[100vh] lg:h-[90vh] relative 
        bg-[url('/src/pages/AdminBoard/Minister/Images/clmLogo.svg')] 
        bg-no-repeat bg-contain bg-center"
         ref={containerRef}
@@ -156,9 +156,10 @@ const EventManagementBoard = ({ hideSideBar }) => {
             </h1>
           </div>
         </div>
+
         <div
-          className="bg-[rgba(255,255,255,0.95)] absolute w-[100%] 
-         h-[100%] top-0 left-0
+          className="bg-[rgba(217,217,217,0.93)] absolute w-[100%] 
+         top-0 left-0 h-[100vh] md:h-[100vh] lg:h-[98vh]
          "
         ></div>
         {upLoadEvent ? (
@@ -174,14 +175,17 @@ const EventManagementBoard = ({ hideSideBar }) => {
             <div className="flex">
               <input
                 type="text"
-                className=" bg-gray-300 w-[100%] lg:w-[26vw] md:h-[6vh] 
-                  rounded-l-md outline-none pl-5 h-[5vh] box-border
+                className=" bg-white w-[100%] lg:w-[26vw] md:h-[6vh] 
+                  rounded-l-md outline-none pl-5 h-[5vh] box-border ring-red-500
+                  ring-2
                   "
                 onFocus={handleInputFocus}
               />
               <button
                 className="bg-[#F66D0A] text-white md:h-[6vh] w-[40%] rounded-r-md
-                hover:bg-[#f62d0a] transition-all duration-150 delay-100 h-[5vh]"
+                hover:bg-[#f62d0a] transition-all duration-150 delay-100 h-[5vh]
+                ring-red-500 ring-2
+                "
               >
                 search
               </button>
@@ -201,11 +205,12 @@ const EventManagementBoard = ({ hideSideBar }) => {
             </div>
           </div>
         </div>
-        {eventMangementList.length > 0 ?(
-          <div className="">
+        {
+          eventMangementList.length > 0 ?(
+          <div className="h-[100vh] overflow-y-scroll pb-[15rem]">
             <div
               className="grid md:grid-cols-2 lg:grid-cols-3 lg:py-[2rem] lg:pl-[8vw] pl-[15vw] md:pl-0
-              overflow-y-scroll no-scrollbar h-[80vh] md:h-[70vh] lg:h-[68vh]
+              no-scrollbar 
               "
             >
               {eventMangementList.map((data) => {
@@ -216,8 +221,9 @@ const EventManagementBoard = ({ hideSideBar }) => {
                     <div
                       key={id}
                       className="w-[80%]  rounded-lg relative
-                    shadow-lg my-[1rem] md:ml-[5.5vw] md:mt-[6vh] lg:mt-0 lg:ml-0
-                    "
+                      shadow-lg my-[1rem] md:ml-[5.5vw] md:mt-[6vh] lg:mt-0 lg:ml-0
+                    ring-red-500 ring-2 h-auto 
+                      "
                     >
                       <div className="relative">
                         <img
@@ -228,35 +234,15 @@ const EventManagementBoard = ({ hideSideBar }) => {
                         {/* <span className="absolute top-3 right-5 text-2xl text-black bg-[#D3AE6E]"><FontAwesomeIcon icon={faEllipsisVertical} /></span> */}
                       </div>
                       <div
-                        className="text-center fontLink font-bold
-                        py-[2vh] px-4
+                        className="text-center fontLink font-black
+                        py-[2vh] px-4 leading-[0.9rem]
                         "
                       >
-                        <h3 className="pb-2">Event: {eventName}</h3>
-                        <h3 className="pb-2">From: {startDate}</h3>
-                        <h3 className="pb-2">To: {endDate}</h3>
+                        <h3 className="pb-2 font-black font-[Arial]">Event: {eventName}</h3>
+                        <h3 className="pb-2 font-black font-[Arial]">From: {startDate}</h3>
+                        <h3 className="pb-2 font-black font-[Arial]">To: {endDate}</h3>
                       </div>
                       <DecisionButtonEvent id={id} editEvent={editEvent} deleteEvent={deleteEvent} />
-                      {/* <div className="flex gap-5 pb-5 pl-5 relative bottom-0">
-                        <p
-                          className=" text-[#90150D] font-bold cursor-pointer 
-                          hover:scale-[1.05] transition-all duration-150 delay-75 
-                          ease-in-out"
-                          id={id}
-                          onClick={() => editEvent(id)}
-                        >
-                          {" "}
-                          <FontAwesomeIcon icon={faPenToSquare} /> Edit
-                        </p>
-                        <p
-                          className=" text-[rgb(0,0,128)] font-bold cursor-pointer hover:scale-[1.05]
-                           transition-all duration-150 delay-75 ease-in-out"
-                          onClick={() => deleteEvent(id)}
-                        >
-                          {" "}
-                          <FontAwesomeIcon icon={faTrash} /> Delete
-                        </p>
-                      </div> */}
                     </div>
                   </>
                 );
