@@ -169,7 +169,7 @@ const MinisterComponent = ({ hideSideBar }) => {
                 </button>
               </div>
               <div
-                className="fontLink bg-[#F66D0A] text-white h-[6vh] w-[55%] md:w-[40%] lg:w-[20%]
+                className="fontLink bg-[#F66D0A] text-white h-[6vh] w-[65%] md:w-[40%] lg:w-[20%]
                rounded-md hover:bg-[#f62d0a] transition-all duration-150 delay-100 my-[0.9rem] lg:my-0
                text-center pt-[0.7rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] 
               "
@@ -208,7 +208,7 @@ const MinisterComponent = ({ hideSideBar }) => {
                     key={id}
                     className="lg:w-[100%] md:w-[90%] w-[85vw] relative py-5 md:py-5 lg:py-5
                 ring-1 rounded-md lg:h-[60vh] md:h-[41vh] md:my-3 lg:my-0 shadow-black
-                h-[65vh] my-3 shadow-md ring-[#F76D0A] text-black overflow-hidden"
+                h-[55vh] my-3 shadow-md ring-[#F76D0A] text-black overflow-hidden"
                   >
                     {/* ring-[#F76D0A] bg-[#0A063E] shadow-orange-600*/}
                     <div className="flex justify-center">
@@ -216,7 +216,7 @@ const MinisterComponent = ({ hideSideBar }) => {
                         src={profilePicture ? profilePicture : avatar}
                         alt="avatar"
                         className=" rounded-full w-[70%] md:h-[20vh] lg:w-[70%] lg:h-[25vh]
-                    h-[35vh]"
+                        h-[35%]"
                       />
                     </div>
                     <h1 className="text-center py-5 font-bold md:text-[1.3rem] lg:text-[1rem]">

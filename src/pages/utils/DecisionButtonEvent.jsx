@@ -18,7 +18,7 @@ const DecisionButtonEvent = ({id, editEvent, deleteEvent }) => {
             className="font-bold cursor-pointer py-1 rounded-md
             hover:scale-[1.05] transition-all duration-150 delay-75 
             ease-in-out bg-[#F66D0A] px-3 lg:w-[60%] text-black
-            order-2
+            order-2 md:w-[32%] w-[32%] text-center
             "
             id={id}
             onClick={() => editEvent(id)}
@@ -28,8 +28,8 @@ const DecisionButtonEvent = ({id, editEvent, deleteEvent }) => {
           </p>
           <p
             className="font-bold cursor-pointer hover:scale-[1.05] mr-5
-                          transition-all duration-150 delay-75 ease-in-out bg-[#F66D0A] px-3 lg:w-[70%]
-                          py-1 text-black rounded-md"
+            transition-all duration-150 delay-75 ease-in-out bg-[#F66D0A] px-3 lg:w-[70%]
+            py-1 text-black rounded-md md:w-[32%] w-[32%] text-center"
             onClick={() => deleteEvent(id)}
           >
             {" "}
