@@ -216,14 +216,14 @@ const CampusManagementComponent = ({ hideSideBar }) => {
             className="bg-[url('src\pages\AdminBoard\CampusManagement\Images\CLMLOGO.png')]
             grid lg:grid-cols-4 lg:py-10 lg:w-[78.8vw] md:pl-[5vw] lg:px-5 lg:gap-5 justify-center
             items-center md:grid-cols-2 md:h-[67.5vh] h-[80vh]  overflow-y-auto no-scrollbar
-            md:gap-0 lg:h-[67.5vh]"
+            md:gap-0 lg:h-[67.5vh] mt-[2rem] relative md:top-[-18vh] lg:top-[-10vh]"
           >
             {campusData.map((data) => {
-              const { id, name, logo } = data;
+              const { id, name, logo, buttonColour } = data;
               return (
                 <div
                   key={id}
-                  className="lg:w-[100%] md:w-[90%] w-[85vw] relative
+                  className="lg:w-[100%] md:w-[90%] w-[85vw] relative pb-10
                   "
                 >
                   <div
@@ -253,8 +253,8 @@ const CampusManagementComponent = ({ hideSideBar }) => {
                     </h3>
                   </div>
                   <div
-                    className="bg-[#0A063E] shadow-md flex justify-center lg:gap-5
-                   lg:py-3 py-3 gap-3 text-black rounded-b-md bg-[rgba(246,237,10,1)]"
+                    className={`shadow-md flex justify-center lg:gap-5
+                   lg:py-3 py-3 gap-3 text-black rounded-b-md bg-[${buttonColour}]`}
                     onClick={() => MoreInfo(id)}
                   >
                     <span

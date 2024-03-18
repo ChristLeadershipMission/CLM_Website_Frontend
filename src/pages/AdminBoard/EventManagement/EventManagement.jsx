@@ -191,7 +191,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
               </button>
             </div>
             <div
-              className="fontLink bg-[#F66D0A] text-white md:h-[6vh] w-[50%] md:w-[35%] lg:w-[20%]
+              className="fontLink bg-[#F66D0A] text-white md:h-[6vh] w-[65%] md:w-[35%] lg:w-[20%]
                rounded-md hover:bg-[#f62d0a] transition-all duration-150 delay-100 my-[0.9rem] lg:my-0
                text-center pt-[0.4rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] h-[5vh]
           "
@@ -209,7 +209,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
           eventMangementList.length > 0 ?(
           <div className="h-[100vh] overflow-y-scroll pb-[15rem]">
             <div
-              className="grid md:grid-cols-2 lg:grid-cols-3 lg:py-[2rem] lg:pl-[8vw] pl-[15vw] md:pl-0
+              className="grid md:grid-cols-2 lg:grid-cols-3 lg:py-[2rem] lg:pl-[8vw] pl-[10vw] md:pl-0
               no-scrollbar 
               "
             >
@@ -220,7 +220,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
                   <>
                     <div
                       key={id}
-                      className="w-[80%]  rounded-lg relative
+                      className="w-[90%]  rounded-lg relative
                       shadow-lg my-[1rem] md:ml-[5.5vw] md:mt-[6vh] lg:mt-0 lg:ml-0
                     ring-red-500 ring-2 h-auto 
                       "
@@ -229,7 +229,7 @@ const EventManagementBoard = ({ hideSideBar }) => {
                         <img
                           src={eventImageUrl}
                           alt="Event Image"
-                          className="w-full lg:h-[30vh] md:h-[25vh] h-[30vh]  rounded-t-md"
+                          className="w-full lg:h-[30vh] md:h-[25vh] h-[30vh] rounded-t-md"
                         />
                         {/* <span className="absolute top-3 right-5 text-2xl text-black bg-[#D3AE6E]"><FontAwesomeIcon icon={faEllipsisVertical} /></span> */}
                       </div>
