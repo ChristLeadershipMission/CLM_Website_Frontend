@@ -9,7 +9,7 @@ const DecisionButtonMinister = ({ id, editMinister, deleteMinister }) => {
       className="flex justify-center items-center gap-5
       pb-5 absolute lg:bottom-[-2vh] lg:pl-[0vw] md:text-[1.3rem] 
       lg:text-[1rem] md:pl-[10vw] pl-[25vw] md:bottom-[0.5vh]
-      bottom-[-1.5vh] lg:w-[100%] bg-white py-2 lg:gap-1"
+      bottom-[-1.5vh] lg:w-[100%]  py-2 lg:gap-1"
     >
       {/* bg-[#F66D0A]  */}
       <p

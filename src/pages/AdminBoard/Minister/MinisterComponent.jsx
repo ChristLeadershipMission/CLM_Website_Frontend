@@ -134,7 +134,7 @@ const MinisterComponent = ({ hideSideBar }) => {
           </div>
         </div>
         <div
-          className="bg-[rgba(255,255,255,0.95)] absolute w-[100%] 
+          className="bg-[rgba(217,217,217,0.93)] absolute w-[100%] 
          h-[100%] top-0 left-0
          "
         ></div>
@@ -156,12 +156,14 @@ const MinisterComponent = ({ hideSideBar }) => {
               <div className="flex">
                 <input
                   type="text"
-                  className=" bg-gray-300 w-[100%] lg:w-[26vw] h-[6vh] rounded-l-md outline-none pl-5"
+                  className=" bg-white w-[100%] lg:w-[26vw] h-[6vh] rounded-l-md outline-none pl-5
+                  ring-red-500 ring-2
+                  "
                 />
                 <button
                   className="bg-[#F66D0A] text-white h-[6vh] w-[40%] rounded-r-md
-              hover:bg-[#f62d0a] transition-all duration-150 delay-100 text-[1.2rem]
-              md:text-[1.7rem] lg:text-[1.2rem]"
+                hover:bg-[#f62d0a] transition-all duration-150 delay-100 text-[1.2rem]
+                md:text-[1.7rem] lg:text-[1.2rem] ring-red-500 ring-2"
                 >
                   search
                 </button>
