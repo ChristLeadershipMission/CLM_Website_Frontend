@@ -219,7 +219,7 @@ const CampusManagementComponent = ({ hideSideBar }) => {
             md:gap-0 lg:h-[67.5vh] mt-[2rem] relative md:top-[-18vh] lg:top-[-10vh]"
           >
             {campusData.map((data) => {
-              const { id, name, logo } = data;
+              const { id, name, logo, buttonColour } = data;
               return (
                 <div
                   key={id}
@@ -253,8 +253,8 @@ const CampusManagementComponent = ({ hideSideBar }) => {
                     </h3>
                   </div>
                   <div
-                    className="bg-[#0A063E] shadow-md flex justify-center lg:gap-5
-                   lg:py-3 py-3 gap-3 text-black rounded-b-md bg-[rgba(246,237,10,1)]"
+                    className={`shadow-md flex justify-center lg:gap-5
+                   lg:py-3 py-3 gap-3 text-black rounded-b-md bg-[${buttonColour}]`}
                     onClick={() => MoreInfo(id)}
                   >
                     <span
