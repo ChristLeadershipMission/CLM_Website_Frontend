@@ -9,6 +9,7 @@ import CampusManagement from "./pages/AdminBoard/CampusManagement/Index";
 import Department from "./pages/AdminBoard/Department/Index";
 import Minister from "./pages/AdminBoard/Minister/Index";
 import PrivateRoute from "./pages/PrivateRoute/PrivateRoute";
+import AboutUsPage from "./pages/AboutUsPage/Components/Index/Index";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<FormPage />} />
         <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutUsPage />} />
         <Route element={<PrivateRoute />}>
           <Route path="/admin" element={<AdminBoard />} />
           <Route path="/admin/event" element={<EventManagement />} />

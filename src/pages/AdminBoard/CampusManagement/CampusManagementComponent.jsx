@@ -175,7 +175,7 @@ const CampusManagementComponent = ({ hideSideBar }) => {
             campusId={campusId}
           />
         ) : null}
-        {/* <div className=" relative z-[300]">
+        <div className=" relative z-[300]">
           <div className="my-5 px-[4vh] lg:flex justify-between">
             <div className="lg:flex">
               <form
@@ -198,9 +198,9 @@ const CampusManagementComponent = ({ hideSideBar }) => {
             </div>
             <div
               className="fontLink bg-[#F66D0A] text-white h-[6vh] w-[60%] md:w-[45%] lg:w-[20%]
-          rounded-md hover:bg-[#f62d0a] transition-all duration-150 delay-100 my-[0.9rem] lg:my-0
-          text-center pt-[0.7rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem]
-          "
+              rounded-md hover:bg-[#f62d0a] transition-all duration-150 delay-100 my-[0.9rem] lg:my-0
+              text-center pt-[0.7rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] hidden
+              "
             >
               <button className="" onClick={() => uploadCampusHandler(true)}>
                 <span>
@@ -210,7 +210,7 @@ const CampusManagementComponent = ({ hideSideBar }) => {
               </button>
             </div>
           </div>
-        </div> */}
+        </div>
         {campusData.length > 0 ? (
           <div
             className="bg-[url('src\pages\AdminBoard\CampusManagement\Images\CLMLOGO.png')]

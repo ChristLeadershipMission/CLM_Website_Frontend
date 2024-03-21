@@ -8,8 +8,6 @@ import baseUrl from "../../utils/baseUrl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalendarPlus,
-  faPenToSquare,
-  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import UploadMinister from "../../utils/UploadMinister";
 import {
@@ -103,6 +101,8 @@ const MinisterComponent = ({ hideSideBar }) => {
     }
   };
 
+  const height = window.outerHeight;
+  console.log(height);
   return (
     <>
       <div
@@ -120,7 +120,7 @@ const MinisterComponent = ({ hideSideBar }) => {
           >
             <h1
               className="lg:text-2xl md:text-center lg:text-left py-[2vh] md:py-[3vh] 
-            md:text-[1.5rem] lg:pt-[2vh]"
+              md:text-[1.5rem] lg:pt-[2vh]"
             >
               Minister Management
             </h1>
@@ -206,9 +206,10 @@ const MinisterComponent = ({ hideSideBar }) => {
                 return (
                   <div
                     key={id}
-                    className="lg:w-[100%] md:w-[90%] w-[85vw] relative py-5 md:py-5 lg:py-5
-                ring-1 rounded-md lg:h-[60vh] md:h-[41vh] md:my-3 lg:my-0 shadow-black
-                h-[55vh] my-3 shadow-md ring-[#F76D0A] text-black overflow-hidden"
+                    className={`lg:w-[100%] md:w-[90%] w-[85vw] relative py-5 md:py-5 lg:py-5
+                    ring-1 rounded-md lg:h-[60vh] md:h-[41vh] md:my-3 lg:my-0 shadow-black
+                    ${ height >= 880 && height <= 952 ? "h-[55vh]" : "h-[65vh]" }
+                    my-3 shadow-md ring-[#F76D0A] text-black overflow-hidden`}
                   >
                     {/* ring-[#F76D0A] bg-[#0A063E] shadow-orange-600*/}
                     <div className="flex justify-center">
@@ -219,42 +220,20 @@ const MinisterComponent = ({ hideSideBar }) => {
                         h-[35%]"
                       />
                     </div>
-                    <h1 className="text-center py-5 font-bold md:text-[1.3rem] lg:text-[1rem]">
+                    <h1 
+                      className="text-center pt-5 font-bold md:text-[1.5rem] 
+                      lg:text-[1.5rem] font-['Arial'] text-[1.7rem]">
                       {Name}
                     </h1>
-                    <p className="text-center font-semibold lg:px-5 py-1 md:text-[1.1rem] lg:text-[1rem]">
+                    <p 
+                     className="text-center font-normal lg:px-5 py-1 md:text-[1.3rem] 
+                     lg:text-[1rem] font-['Arial']">
                       {portfolio}
                     </p>
-                    <p className="text-center md:text-[1.1rem] lg:text-[1rem]">
+                    <p className="text-center md:text-[1.3rem] lg:text-[1rem]">
                       {emailAddress}
                     </p>
                     <DecisionButtonMinister id={id} editMinister={editMinister} deleteMinister={deleteMinister} />
-                    {/* <div
-                      className="flex justify-center items-center gap-5
-                    pb-5 absolute lg:bottom-[-2vh] lg:pl-[2vw] md:text-[1.3rem] 
-                    lg:text-[1rem] md:pl-[10vw] pl-[25vw] md:bottom-[0.5vh]
-                    bottom-[-1.5vh] lg:w-[100%] bg-white py-2"
-                    >
-                      <p
-                        className="font-bold cursor-pointer py-1 rounded-md
-                    hover:scale-[1.05] transition-all duration-150 delay-75 
-                    ease-in-out bg-[#F66D0A] px-3 lg:w-[60%] text-black"
-                        id={id}
-                        onClick={() => editMinister(id)}
-                      >
-                        {" "}
-                        <FontAwesomeIcon icon={faPenToSquare} /> Edit
-                      </p>
-                      <p
-                        className="font-bold cursor-pointer hover:scale-[1.05] mr-5
-                      transition-all duration-150 delay-75 ease-in-out bg-[#F66D0A] px-3 lg:w-[70%]
-                      py-1 text-black rounded-md"
-                        onClick={() => deleteMinister(id)}
-                      >
-                        {" "}
-                        <FontAwesomeIcon icon={faTrash} /> Delete
-                      </p>
-                    </div> */}
                   </div>
                 );
               })}

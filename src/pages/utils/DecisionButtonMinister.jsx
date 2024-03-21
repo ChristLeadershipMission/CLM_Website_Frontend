@@ -27,7 +27,7 @@ const DecisionButtonMinister = ({ id, editMinister, deleteMinister }) => {
       <p
         className="font-bold cursor-pointer hover:scale-[1.05] mr-5
         transition-all duration-150 delay-75 ease-in-out bg-[#F66D0A] px-3 
-        lg:w-[40%] py-1 text-black rounded-md text-center md:w-[32%] w-[30%]"
+        lg:w-[40%] py-1 text-black rounded-md text-center md:w-[32%] w-[30%] hidden"
         onClick={() => deleteMinister(id)}
       >
         {" "}

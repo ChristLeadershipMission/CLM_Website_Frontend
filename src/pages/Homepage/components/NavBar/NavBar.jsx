@@ -35,7 +35,7 @@ const NavBar = () => {
         <div
           className={`bg-white lg:flex lg:justify-between 
         lg:px-[2rem] lg:py-[2rem] h-screen lg:h-[5vh]
-         lg:w-screen w-[80%] ml-[30vw] lg:ml-0
+         lg:w-screen w-[50vw] ml-[30vw] lg:ml-0
          ${
           !showMobileNavBar ? "hidden" : "block" 
         }`}
