@@ -73,7 +73,7 @@ const SignInDesktop = ({ viewSignUp }) => {
           sessionStorage.setItem("userData", userData);
           console.log(200);
           if (response.data) {
-            navigate('/admin');
+            navigate('/admin',{name: userData.user.bioData.firstName});
           }
         }
         console.log(response);
