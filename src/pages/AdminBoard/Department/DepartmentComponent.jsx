@@ -68,7 +68,7 @@ const DepartmentComponent = ({ hideSideBar }) => {
             <div
               className="fontLink bg-[#F66D0A] text-white h-[6vh] w-[55%] md:w-[40%] lg:w-[20%]
                rounded-md hover:bg-[#f62d0a] transition-all duration-150 delay-100 my-[0.9rem] lg:my-0
-               text-center pt-[0.7rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] 
+               text-center pt-[0.7rem] md:pt-[1.1rem] lg:pt-[0.4rem] md:text-2xl lg:text-[1rem] hidden
               "
             >
               <button

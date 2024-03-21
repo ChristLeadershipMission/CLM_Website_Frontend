@@ -1,0 +1,13 @@
+.heading_One{
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    background: url("../../../../assets//pictures/Marriage.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Masking CSS */

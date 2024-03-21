@@ -9,6 +9,7 @@ import "./NavBar.css";
 
 const NavBar = () => {
   const [showMobileNavBar, setShowMobileNavBar] = useState();
+  const [showMediaDropDown, setShowMediaDropDown] = useState(false);
 
   // const outerWidth = window.outerWidth;
 
@@ -27,30 +28,33 @@ const NavBar = () => {
           <Link to={"/"}>
             <img src={clmLogo} alt="" className="w-[5vw]" />
           </Link>
-          <div onClick={toggleMobileNavBar} 
-           className=" cursor-pointer font-black text-blue-400">
-            <FontAwesomeIcon icon={faBars}  className="text-black text-[1.2rem]"/>
+          <div
+            onClick={toggleMobileNavBar}
+            className=" cursor-pointer font-black text-blue-400"
+          >
+            <FontAwesomeIcon
+              icon={faBars}
+              className="text-black text-[1.2rem]"
+            />
           </div>
         </div>
         <div
           className={`bg-white lg:flex lg:justify-between 
         lg:px-[2rem] lg:py-[2rem] h-screen lg:h-[5vh]
-         lg:w-screen w-[80%] ml-[30vw] lg:ml-0
-         ${
-          !showMobileNavBar ? "hidden" : "block" 
-        }`}
+         lg:w-screen w-[50vw] ml-[30vw] lg:ml-0
+         ${!showMobileNavBar ? "hidden" : "block"}`}
         >
           <motion.div
-          initial={{
-            opacity: 0,
-          }}
-          whileInView={{
-            opacity: 1,
-            transition:{
-              duration: 1,
-              delay: 0.2,
-            }
-          }}
+            initial={{
+              opacity: 0,
+            }}
+            whileInView={{
+              opacity: 1,
+              transition: {
+                duration: 1,
+                delay: 0.2,
+              },
+            }}
           >
             <Link to={"/"}>
               <img
@@ -61,12 +65,15 @@ const NavBar = () => {
             </Link>
           </motion.div>
           <div>
-            <span 
-            className="absolute right-[15vw] top-[2vw] font-black lg:hidden cursor-pointer
+            <span
+              className="absolute right-[15vw] top-[2vw] font-black lg:hidden cursor-pointer
             z-[900]"
-            onClick={toggleMobileNavBar}
+              onClick={toggleMobileNavBar}
             >
-              <FontAwesomeIcon icon={faXmark}  className="text-black text-[1.5rem]"/>
+              <FontAwesomeIcon
+                icon={faXmark}
+                className="text-black text-[1.5rem]"
+              />
             </span>
             <motion.ul
               className='lg:flex lg:gap-[3rem] lg:text-xl 
@@ -78,49 +85,105 @@ const NavBar = () => {
               }}
               whileInView={{
                 opacity: 1,
-                transition:{
+                transition: {
                   duration: 1,
                   delay: 0.3,
-                  bounce: 1
-                }
+                  bounce: 1,
+                },
               }}
             >
               <Link to={"/"}>
                 {" "}
                 <li className=" relative">Home</li>{" "}
               </Link>
-              <hr className="by-blue-900 ring-[0.01rem] ring-blue-900
-                  mb-[5vh] lg:hidden" />
+              <hr
+                className="by-blue-900 ring-[0.01rem] ring-blue-900
+                  mb-[5vh] lg:hidden"
+              />
               <Link to={"/about"}>
                 {" "}
                 <li className=" relative">About us</li>{" "}
               </Link>
-              <hr className="by-blue-900 ring-[0.01rem] ring-blue-900
-                  mb-[5vh] lg:hidden" />
+              <hr
+                className="by-blue-900 ring-[0.01rem] ring-blue-900
+                  mb-[5vh] lg:hidden"
+              />
               <Link to={"/giving"}>
                 {" "}
                 <li className=" relative">Online Giving</li>{" "}
               </Link>
-              <hr className="by-blue-900 ring-[0.01rem] ring-blue-900
-                  mb-[5vh] lg:hidden" />
+              <hr
+                className="by-blue-900 ring-[0.01rem] ring-blue-900
+                  mb-[5vh] lg:hidden"
+              />
               <Link to={"/Events"}>
                 {" "}
                 <li className=" relative">Events</li>{" "}
               </Link>
               <Link to={"/Campus"}>
-              <hr className="by-blue-900 ring-[0.01rem] ring-blue-900
-                  mb-[5vh] lg:hidden" />
-                {" "}
+                <hr
+                  className="by-blue-900 ring-[0.01rem] ring-blue-900
+                  mb-[5vh] lg:hidden"
+                />{" "}
                 <li className=" relative">Campus</li>{" "}
               </Link>
-              <hr className="by-blue-900 ring-[0.01rem] ring-blue-900
-                  mb-[5vh] lg:hidden" />
-              <Link to={"/Quick Links"}>
+              <hr
+                className="by-blue-900 ring-[0.01rem] ring-blue-900
+                  mb-[5vh] lg:hidden"
+              />
+              <Link>
                 {" "}
-                <li className=" relative">Quick Links</li>{" "}
+                <li
+                  className=" relative"
+                  onMouseOver={() => setShowMediaDropDown(true)}
+                  onMouseLeave={() => setShowMediaDropDown(false)}
+                >
+                  Media +
+                  {showMediaDropDown ? (
+                    <motion.ul
+                      className="bg-white text-black absolute right-[-1.5rem] top-7 rounded-md px-5 py-5 text-xl"
+                      // animate="visible"
+                      // initial="hidden"
+                      // variants={ulContainer}
+                      animate={{ height: "auto" }}
+                      initial={{ height: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <motion.li
+                        className="text-center px-2 py-3 hover:text-gray-400"
+                        // variants={listContainer}
+                        // animate="visible"
+                        // initial="hidden"
+                        animate={{ y: 0, opacity: 1 }}
+                        initial={{ y: -10, opacity: 0 }}
+                        transition={{ delay: 0.1, duration: 0.5 }}
+                      >
+                        <Link to={"/media/sermon"}>Video</Link>
+                      </motion.li>
+                      <motion.hr
+                        animate={{ y: 0, opacity: 1 }}
+                        initial={{ y: -10, opacity: 0 }}
+                        transition={{ delay: 0.2, duration: 0.5 }}
+                      />
+                      <motion.li
+                        className="text-center px-2 py-3 hover:text-gray-400"
+                        // variants={listContainer}
+                        // animate="visible"
+                        // initial="hidden"
+                        animate={{ y: 0, opacity: 1 }}
+                        initial={{ y: -10, opacity: 0 }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                      >
+                        <Link to={"/media/gallery"}>Gallery</Link>
+                      </motion.li>
+                    </motion.ul>
+                  ) : null}
+                </li>{" "}
               </Link>
-              <hr className="by-blue-900 ring-[0.01rem] ring-blue-900
-                  mb-[5vh] lg:hidden" />
+              <hr
+                className="by-blue-900 ring-[0.01rem] ring-blue-900
+                  mb-[5vh] lg:hidden"
+              />
               <Link to={"/admin"}>
                 {" "}
                 <li className=" relative">Admin</li>{" "}

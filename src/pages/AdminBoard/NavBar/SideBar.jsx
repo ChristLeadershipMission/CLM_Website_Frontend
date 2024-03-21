@@ -1,19 +1,28 @@
 import { faDashboard, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 // import dashboard from "./Images/dashboard.svg";
 // import event from "./Images/event.svg";
 // import file from "./Images/file.svg";
 // import people from "./Images/people.svg";
 // import person from "./Images/person.svg";
-import avatar from "./Images/avatar.jpg";
+import avatar from "./Images/avatar.png";
 import PropTypes from "prop-types";
 
 const SideBar = ({ displaySideBar }) => {
   const [closeSideBar, setcloseSideBar] = useState(false);
   const sideBarRef = useRef(null);
+  const [userName, setUserName] = useState(null);
+
+  useEffect(()=>{
+    const getUserName = () =>{
+      const name = JSON.parse(sessionStorage.getItem("userData")).user.bioData.firstName;
+      setUserName(name);
+    };
+    getUserName();
+  },[]);
 
   const sideBarHandle = () => {
     setcloseSideBar(!closeSideBar);
@@ -22,6 +31,7 @@ const SideBar = ({ displaySideBar }) => {
       sideBarRef.current.hidden = "true";
     }, 400);
   };
+  console.log(JSON.parse(sessionStorage.getItem("userData")).user.bioData.firstName, "userData");
 
 
   return (
@@ -48,7 +58,7 @@ const SideBar = ({ displaySideBar }) => {
               className=" rounded-full w-[25%] h-[25%] ml-[30vw] md:w-[35%] md:h-[35%] md:ml-[14vw] lg:w-[40%] lg:h-[40%] lg:ml-[3vw]"
             />
             <h3 className="text-center mr-[3vw] py-[3vh]">
-              Welcome Olamilekan
+              Welcome {userName}
             </h3>
           </div>
           <ul className="break-all lg:text-[1rem] font-bold ">
