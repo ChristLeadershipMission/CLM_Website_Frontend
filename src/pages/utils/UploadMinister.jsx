@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import baseUrl from "./baseUrl";
 import SubmitButton from "./SubmitButton";
 
+
 const UploadMinister = ({
   uploadMinisterHandler,
   ministerData,
@@ -102,7 +103,16 @@ const UploadMinister = ({
         ministerDataUpdate.lastName &&
         ministerDataUpdate.portfolio
       ) {
-        console.log("got here");
+        console.log("got here")
+        if (ministerDataUpdate.firstName.length > 10  ) {
+          return toast("First name is too long. Max length is 10")
+        }
+        if (ministerDataUpdate.lastName.length > 10  ) {
+          return toast("Last name is too long. Max length is 10")
+        }
+        if (ministerDataUpdate.portfolio.length > 40  ) {
+          return toast("portfolio is too long. Max length is 40")
+        }
         const data = {
           firstName: ministerDataUpdate.firstName,
           lastName: ministerDataUpdate.lastName,

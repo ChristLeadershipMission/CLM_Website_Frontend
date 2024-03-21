@@ -206,9 +206,9 @@ const MinisterComponent = ({ hideSideBar }) => {
                 return (
                   <div
                     key={id}
-                    className={`lg:w-[100%] md:w-[90%] w-[85vw] relative py-5 md:py-5 lg:py-5
+                    className={`lg:w-[100%] md:w-[90%] w-[89vw] relative py-5 md:py-5 lg:py-5
                     ring-1 rounded-md lg:h-[60vh] md:h-[41vh] md:my-3 lg:my-0 shadow-black
-                    ${ height >= 880 && height <= 952 ? "h-[55vh]" : "h-[65vh]" }
+                    ${ height >= 880 && height <= 952 ? "h-[59vh]" : "h-[62vh]" }
                     my-3 shadow-md ring-[#F76D0A] text-black overflow-hidden`}
                   >
                     {/* ring-[#F76D0A] bg-[#0A063E] shadow-orange-600*/}
@@ -217,7 +217,7 @@ const MinisterComponent = ({ hideSideBar }) => {
                         src={profilePicture ? profilePicture : avatar}
                         alt="avatar"
                         className=" rounded-full w-[70%] md:h-[20vh] lg:w-[70%] lg:h-[25vh]
-                        h-[35%]"
+                        h-[32vh]"
                       />
                     </div>
                     <h1 
@@ -228,7 +228,7 @@ const MinisterComponent = ({ hideSideBar }) => {
                     <p 
                      className="text-center font-normal lg:px-5 py-1 md:text-[1.3rem] 
                      lg:text-[1rem] font-['Arial']">
-                      {portfolio}
+                      {portfolio}, CLM Worldwide
                     </p>
                     <p className="text-center md:text-[1.3rem] lg:text-[1rem]">
                       {emailAddress}

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 // import file from "./Images/file.svg";
 // import people from "./Images/people.svg";
 // import person from "./Images/person.svg";
-import avatar from "./Images/avatar.jpg";
+import avatar from "./Images/avatar.png";
 import PropTypes from "prop-types";
 
 const SideBar = ({ displaySideBar }) => {

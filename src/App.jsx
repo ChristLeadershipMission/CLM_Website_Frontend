@@ -10,6 +10,8 @@ import Department from "./pages/AdminBoard/Department/Index";
 import Minister from "./pages/AdminBoard/Minister/Index";
 import PrivateRoute from "./pages/PrivateRoute/PrivateRoute";
 import AboutUsPage from "./pages/AboutUsPage/Components/Index/Index";
+import SermonPage from "./pages/Media/Sermon";
+import Gallery from "./pages/Media/Gallery/Index";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/login" element={<FormPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutUsPage />} />
+        <Route path="/media/sermon" element={<SermonPage />} />
+        <Route path="/media/gallery" element={<Gallery />} />
         <Route element={<PrivateRoute />}>
           <Route path="/admin" element={<AdminBoard />} />
           <Route path="/admin/event" element={<EventManagement />} />
