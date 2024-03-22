@@ -62,20 +62,20 @@ const SideBar = ({ displaySideBar }) => {
             </h3>
           </div>
           <ul className="break-all lg:text-[1rem] font-bold ">
-          <li className="py-[1.2vh]">
-              <Link to={"/"}>
-                <span className="text-[#043E7D] pr-[2vw]">
-                  <FontAwesomeIcon icon={faDashboard} />
-                </span>
-                Home
-              </Link>
-            </li>
             <li className="py-[1.2vh]">
               <Link to={"/admin"}>
                 <span className="text-[#043E7D] pr-[2vw]">
                   <FontAwesomeIcon icon={faDashboard} />
                 </span>
                 <span className="text-center">Dashboard</span>
+              </Link>
+            </li>
+            <li className="py-[1.2vh]">
+              <Link to={"/"}>
+                <span className="text-[#043E7D] pr-[2vw]">
+                  <FontAwesomeIcon icon={faDashboard} />
+                </span>
+                Home
               </Link>
             </li>
             <li className="py-[1.2vh]">

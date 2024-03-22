@@ -41,7 +41,7 @@ const NavBar = () => {
         <div
           className={`bg-white lg:flex lg:justify-between 
         lg:px-[2rem] lg:py-[2rem] h-screen lg:h-[5vh]
-         lg:w-screen w-[60%] ml-[30vw] lg:ml-0
+         lg:w-screen w-[50vw] ml-[30vw] lg:ml-0
          ${!showMobileNavBar ? "hidden" : "block"}`}
         >
           <motion.div
@@ -108,7 +108,15 @@ const NavBar = () => {
                 className="by-blue-900 ring-[0.01rem] ring-blue-900
                   mb-[5vh] lg:hidden"
               />
-              {/* <Link to={"/Events"}>
+              <Link to={"/giving"}>
+                {" "}
+                <li className=" relative">Online Giving</li>{" "}
+              </Link>
+              <hr
+                className="by-blue-900 ring-[0.01rem] ring-blue-900
+                  mb-[5vh] lg:hidden"
+              />
+              <Link to={"/Events"}>
                 {" "}
                 <li className=" relative">Events</li>{" "}
               </Link>
@@ -122,7 +130,7 @@ const NavBar = () => {
               <hr
                 className="by-blue-900 ring-[0.01rem] ring-blue-900
                   mb-[5vh] lg:hidden"
-              /> */}
+              />
               <Link>
                 {" "}
                 <li
@@ -133,7 +141,7 @@ const NavBar = () => {
                   Media +
                   {showMediaDropDown ? (
                     <motion.ul
-                    className="bg-grey text-black absolute right-[-1.5rem] top-7 rounded-md px-0 py-3 text-xl"
+                      className="bg-white text-black absolute right-[-1.5rem] top-7 rounded-md px-5 py-5 text-xl"
                       // animate="visible"
                       // initial="hidden"
                       // variants={ulContainer}

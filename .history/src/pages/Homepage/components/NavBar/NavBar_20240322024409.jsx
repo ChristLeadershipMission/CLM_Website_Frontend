@@ -21,7 +21,7 @@ const NavBar = () => {
     <>
       <div className=" z-[800] relative">
         <div
-          className={`lg:hidden flex justify-between px-[4vw] py-[1vh] ${
+          className={`lg:hidden flex justify-between px-[4vw] py-[1vh] w-[60%] ${
             showMobileNavBar ? "hidden" : "block"
           }`}
         >
@@ -41,7 +41,7 @@ const NavBar = () => {
         <div
           className={`bg-white lg:flex lg:justify-between 
         lg:px-[2rem] lg:py-[2rem] h-screen lg:h-[5vh]
-         lg:w-screen w-[60%] ml-[30vw] lg:ml-0
+         lg:w-screen w-[50vw] ml-[30vw] lg:ml-0
          ${!showMobileNavBar ? "hidden" : "block"}`}
         >
           <motion.div
