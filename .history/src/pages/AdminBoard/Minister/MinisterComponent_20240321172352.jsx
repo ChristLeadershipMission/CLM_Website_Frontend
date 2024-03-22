@@ -228,7 +228,7 @@ const MinisterComponent = ({ hideSideBar }) => {
                     <p 
                      className="text-center font-normal lg:px-5 py-1 md:text-[1.3rem] 
                      lg:text-[1rem] font-['Arial']">
-                      {portfolio}
+                      {portfolio}, CLM Worldwide
                     </p>
                     <p className="text-center md:text-[1.3rem] lg:text-[1rem]">
                       {emailAddress}
