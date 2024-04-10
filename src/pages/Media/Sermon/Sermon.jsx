@@ -5,10 +5,10 @@ const Sermon = () => {
   return (
     <>
       <div
-        className="bg-[#D9D9D9] relative py-[20vh] lg:p-[10rem] bg-cover bg-no-repeat"
+        className="bg-[#D9D9D9] relative py-[20vh] lg:p-[10rem] bg-cover bg-no-repeat w-screen"
         // style={{ backgroundImage: `url(${clmLogo})` }}
       >
-        <div className="bg-[rgba(0,0,0,0.4)] absolute top-0 w-screen h-screen"></div>
+        <div className="absolute top-0 w-screen h-screen"></div>
         <LiveStream />
         <SermonList />
       </div>
