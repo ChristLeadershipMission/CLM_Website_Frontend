@@ -2,12 +2,13 @@ import axios from "axios";
 import { Suspense, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import baseUrl from "../../utils/baseUrl";
+import Telegram_Audio_Integration from "../Audio/Index";
 
 const SermonList = () => {
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [videos, setVideos] = useState([]);
   const [isActive, setIsActive] = useState("Youtube sermon");
-  const [changeState, setChangeState] = useState(false);
+  const [changeState, setChangeState] = useState(true);
 
   // const isActiveStyles = {
   //   color: "red"
@@ -15,8 +16,12 @@ const SermonList = () => {
 
   const change_active_state = (e) => {
     setIsActive(e.target.innerText);
-    setChangeState(!changeState);
-    console.log(changeState);
+    if (e.target.innerText === "Youtube sermon") {
+      setChangeState(true);
+    } else {
+      setChangeState(false);
+    }
+    console.log(isActive);
   };
 
   // const color_validation_youtbe = isActive === "Youtube sermon" ? isActiveStyles : {color: "black"};
@@ -99,7 +104,7 @@ const SermonList = () => {
                       const { videoUrl, title, category } = list;
                       return (
                         <>
-                          <div className="relative">
+                          <div className="relative w-full">
                             <iframe
                               height="215"
                               src={videoUrl}
@@ -130,28 +135,33 @@ const SermonList = () => {
                                 <span className="sr-only">Loading...</span>
                               </div>
                             )}
-                            <h3
+                            <div
                               className="text-black text-sm lg:text-md mt-[0.1rem] font-[''Arial] font-semibold
-                          lg:mt-0 py-2 lg:py-5 px-3 lg:px-0 bg-[#FFF] lg:bg-transparent shadow-xl"
+                             lg:mt-0 py-2 lg:py-5 px-3 lg:px-5 bg-[#FFF] lg:bg-transparent shadow-xl w-[120%]"
                             >
-                              <a
-                                href={videoUrl}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="hover:underline"
-                              >
-                                {title ? title : "Title goes here"}
-                              </a>
-                              <br />
-                              <span>{category}</span>
-                            </h3>
+                              <div>
+                                <span>&#9758; </span>
+                                <a
+                                  href={videoUrl}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="hover:underline"
+                                >
+                                  {title ? title : "Title goes here"}
+                                </a>
+                              </div>
+                              <div>
+                              <span>&#9758;  &nbsp;</span>
+                                <span className="">{category}</span>
+                              </div>
+                            </div>
                           </div>
                         </>
                       );
                     })}
                   </>
                 ) : (
-                  <h1> hello</h1>
+                  <Telegram_Audio_Integration />
                 )}
               </div>
             </Suspense>
@@ -159,7 +169,8 @@ const SermonList = () => {
         ) : (
           <div className="flex justify-center items-center h-[50vh]">
             <h1 className="bg-black text-white p-20">
-              No sermon available yet. Please check back later
+              No sermon available yet here. Please check back later or try our
+              audios messages
             </h1>
           </div>
         )}
