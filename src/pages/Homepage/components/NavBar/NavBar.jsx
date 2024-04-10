@@ -192,7 +192,7 @@ const NavBar = () => {
           <img src={facebook} alt="" className="lg:w-[10%] w-[70%]" />
           <img src={youtube} alt="" className="lg:w-[10%] w-[70%]" />
           <img src={instagram} alt="" className="lg:w-[10%] w-[70%]" />
-          <img src={mixlr} alt="" className="lg:w-[10%] w-[70%]" />
+          <img src={mixlr} alt="" className="lg:w-[30%] w-[100%]" />
         </div>
         {/* --------------------------- */}
       </div>
