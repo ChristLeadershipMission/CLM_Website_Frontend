@@ -255,7 +255,7 @@ const CampusManagementComponent = ({ hideSideBar }) => {
                   <div
                     className={`shadow-md flex justify-center lg:gap-5
                    lg:py-3 py-3 gap-3 text-black rounded-b-md bg-[${buttonColour}]`}
-                    onClick={() => MoreInfo(id)}
+                    // onClick={() => MoreInfo(id)}
                   >
                     <span
                       className="font-bold cursor-pointer md:text-[1.5rem] lg:text-[1rem]

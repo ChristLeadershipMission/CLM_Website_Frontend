@@ -31,6 +31,7 @@ const ControlPanel = ({ hideSideBar }) => {
           }
         );
         const data = response.data;
+        console.log("dashboardStatistics", data);
         SaveIntoSessionStorage("dashboardStatistics", data);
         setDashboardStatistics(data);
         console.log(dashboardStatistics, "dashboardStatistics");
@@ -91,7 +92,7 @@ const ControlPanel = ({ hideSideBar }) => {
                         : id == 3
                         ? dashboardStatistics.numberOfCampuses
                         : id == 4
-                        ? dashboardStatistics.numberOfDepartments
+                        ? 9
                         : 0}
                     </div>
                     <div className="flex justify-center"> 

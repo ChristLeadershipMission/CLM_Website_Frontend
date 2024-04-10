@@ -62,6 +62,14 @@ const SideBar = ({ displaySideBar }) => {
             </h3>
           </div>
           <ul className="break-all lg:text-[1rem] font-bold ">
+          <li className="py-[1.2vh]">
+              <Link to={"/"}>
+                <span className="text-[#043E7D] pr-[2vw]">
+                  <FontAwesomeIcon icon={faDashboard} />
+                </span>
+                Home
+              </Link>
+            </li>
             <li className="py-[1.2vh]">
               <Link to={"/admin"}>
                 <span className="text-[#043E7D] pr-[2vw]">
@@ -102,14 +110,14 @@ const SideBar = ({ displaySideBar }) => {
                 Minister Management
               </Link>
             </li>
-            <li className="py-[1.2vh]">
+            {/* <li className="py-[1.2vh]">
               <Link to={"/admin/profile"}>
                 <span className="text-[#043E7D] pr-[2vw]">
                   <FontAwesomeIcon icon={faDashboard} />
                 </span>
                 Profile
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </motion.div>
