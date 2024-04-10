@@ -9,10 +9,7 @@ const SermonList = () => {
   const [videos, setVideos] = useState([]);
   const [isActive, setIsActive] = useState("Youtube sermon");
   const [changeState, setChangeState] = useState(true);
-
-  // const isActiveStyles = {
-  //   color: "red"
-  // };
+  const [audios, setAudios] = useState([]);
 
   const change_active_state = (e) => {
     setIsActive(e.target.innerText);
@@ -33,7 +30,8 @@ const SermonList = () => {
         const response = await axios.get(
           `${baseUrl}/media/retrieve-media-data`
         );
-        setVideos(response.data.videos, "response");
+        setVideos(response.data.videos);
+        setAudios(response.data.audios);
       } catch (error) {
         toast(error);
       }
@@ -151,7 +149,7 @@ const SermonList = () => {
                                 </a>
                               </div>
                               <div>
-                              <span>&#9758;  &nbsp;</span>
+                                <span>&#9758; &nbsp;</span>
                                 <span className="">{category}</span>
                               </div>
                             </div>
@@ -161,7 +159,23 @@ const SermonList = () => {
                     })}
                   </>
                 ) : (
-                  <Telegram_Audio_Integration />
+                  <>
+                    {audios.map((details, index) => {
+                      const { audioUrl, category, channel, id, title } =
+                      details;
+                      console.log(audioUrl, category, channel, id, title,"details")
+                      return (
+                        <Telegram_Audio_Integration
+                          key={index}
+                          audioUrl={audioUrl}
+                          category={category}
+                          channel={channel}
+                          id={id}
+                          title={title}
+                        />
+                      );
+                    })}
+                  </>
                 )}
               </div>
             </Suspense>

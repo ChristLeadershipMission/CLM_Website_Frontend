@@ -14,7 +14,7 @@ const Intro = () => {
         </h1>
         <p className=" relative text-center">
           Each of you should give what you have decided in your heart to give,
-          not reluctantly or under compulsion, for God loves a cheerful giver <br />
+          not reluctantly or under compulsion, for God loves a cheerful giver <br />
           2 Corinthians 9:7 (NIV)
 
         </p>

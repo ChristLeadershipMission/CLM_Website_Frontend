@@ -1,6 +1,9 @@
 import playButtonWhite_black from "../../../assets/pictures/playButtonWhite_black.svg";
 
-const Audio_Integration = () => {
+
+
+const Audio_Integration = ({ audioUrl, category, channel, id, title }) => {
+  console.log(audioUrl, title)
   return (
     <div className="bg-[rgba(10,6,62,0.85)] w-[50vw] p-[2rem] rounded-md">
       <div>
@@ -9,18 +12,18 @@ const Audio_Integration = () => {
           <div className="bg-[rgba(10,6,62,1)] w-[10%] h-[10vh] flex 
           justify-center items-center rounded-full hover:cursor-pointer
          hover:scale-[1.05] transition ease-in-out delay-150"
-          onClick={()=> window.open('https://t.me/taiwoadewaleM/1756')}
+          onClick={()=> window.open(`${audioUrl}`)}
           >
             <img src={playButtonWhite_black} alt="" className="w-[50%]" />
           </div>
           <div className="pt-2">
             <h1 className="text-white font-bold hover:cursor-pointer hover:opacity-[.5]
             transition ease-in-out delay-150"
-            onClick={()=> window.open('https://t.me/taiwoadewaleM/1756')}
+            onClick={()=> window.open(`${audioUrl}`)}
             >
-              Evangelist Taiwo Adewale - Built Up Series
+               {title}
             </h1>
-            <p className=" text-gray-400">2:05:27, 35.9 MB</p>
+            <p className=" text-gray-400">1:28:39, 35.9 MB</p>
           </div>
         </div>
       </div>
