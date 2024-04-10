@@ -34,19 +34,14 @@ const NavBar = () => {
             <img src={clmLogo} alt="" className="w-[10%] bg-black" />
           </Link>
         </div>
-          <div
-            onClick={toggleMobileNavBar}
-            className={`cursor-pointer font-black text-blue-400 lg:hidden
+        <div
+          onClick={toggleMobileNavBar}
+          className={`cursor-pointer font-black text-blue-400 lg:hidden
            order-4 w-[60%] relative left-[3.5rem] pt-2
-              ${
-            showMobileNavBar ? "hidden" : "block"
-          }`}
-          >
-            <FontAwesomeIcon
-              icon={faBars}
-              className="text-black text-[1.5rem]"
-            />
-          </div>
+              ${showMobileNavBar ? "hidden" : "block"}`}
+        >
+          <FontAwesomeIcon icon={faBars} className="text-black text-[1.5rem]" />
+        </div>
         {/* ---------------------- */}
         <div
           className={`bg-white lg:flex lg:justify-between 
@@ -136,7 +131,7 @@ const NavBar = () => {
                   Media +
                   {showMediaDropDown ? (
                     <motion.ul
-                    className="bg-grey text-black absolute right-[-1.5rem] top-7 rounded-md px-0 py-3 text-xl"
+                      className="bg-grey text-black absolute right-[-1.5rem] top-7 rounded-md px-0 py-3 text-xl"
                       // animate="visible"
                       // initial="hidden"
                       // variants={ulContainer}
@@ -188,11 +183,42 @@ const NavBar = () => {
           {/* End of list */}
         </div>
         <div className=" relative flex w-[25%] z-[50] lg:left-0 left-[-10rem] gap-2">
-          <img src={telegramIcon} alt="" className="lg:w-[10%] w-[70%]" />
-          <img src={facebook} alt="" className="lg:w-[10%] w-[70%]" />
-          <img src={youtube} alt="" className="lg:w-[10%] w-[70%]" />
-          <img src={instagram} alt="" className="lg:w-[10%] w-[70%]" />
-          <img src={mixlr} alt="" className="lg:w-[30%] w-[100%]" />
+          <img
+            src={telegramIcon}
+            alt=""
+            className="lg:w-[10%] w-[70%] hover:cursor-pointer"
+            onClick={() => window.open("https://t.me/taiwoadewaleM")}
+          />
+          <img
+            src={facebook}
+            alt=""
+            className="lg:w-[10%] w-[70%] hover:cursor-pointer"
+            onClick={() =>
+              window.open("https://www.facebook.com/ChristLeadershipfellowship")
+            }
+          />
+          <img
+            src={youtube}
+            alt=""
+            className="lg:w-[10%] w-[70%] hover:cursor-pointer"
+            onClick={() =>
+              window.open("https://youtube.com/@christleadershipmission4803")
+            }
+          />
+          <img
+            src={instagram}
+            alt=""
+            className="lg:w-[10%] w-[70%] hover:cursor-pointer"
+            onClick={() =>
+              window.open("https://www.instagram.com/christleadershipmission")
+            }
+          />
+          <img
+            src={mixlr}
+            alt=""
+            className="lg:w-[30%] w-[100%] hover:cursor-pointer"
+            onClick={() => window.open("https://mixlr.com/clm-rad)}
+          />
         </div>
         {/* --------------------------- */}
       </div>

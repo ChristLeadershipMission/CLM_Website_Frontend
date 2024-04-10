@@ -5,7 +5,7 @@ import playButtonWhite_black from "../../../assets/pictures/playButtonWhite_blac
 const Audio_Integration = ({ audioUrl, category, channel, id, title }) => {
   console.log(audioUrl, title)
   return (
-    <div className="bg-[rgba(10,6,62,0.85)] w-[50vw] p-[2rem] rounded-md">
+    <div className="bg-[rgba(10,6,62,0.85)] lg:w-[50vw] p-[2rem] rounded-md mx-2">
       <div>
         <h1 className="text-white font-bold">CLM messages (March 24)</h1>
         <div className="flex gap-[1rem]">

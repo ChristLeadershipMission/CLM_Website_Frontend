@@ -57,19 +57,19 @@ const SermonList = () => {
       <div className="mt-[7rem] relative">
         <ToastContainer />
         <div className="flex lg:gap-[35vw]">
-          <h1
+          {/* <h1
             className="text-black font-black md:text-xl lg:text-2xl 
               pb-3 pl-3 md:pl-5 lg:pl-0"
           >
             Latest sermons
-          </h1>
+          </h1> */}
           <div
             className=" font-black md:text-sm lg:text-xl
               pb-3 pl-3 md:pl-5 lg:pl-0"
           >
-            <ul className="flex gap-[2rem]">
+            <ul className="flex gap-[2rem] justify-center items-center">
               <li
-                className={`hover:cursor-pointer ${
+                className={`hover:cursor-pointer lg:pb-0 pb-1 ${
                   isActive == "Youtube sermon" ? "text-gray-400" : "text-black"
                 } `}
                 onClick={(e) => change_active_state(e)}
@@ -86,11 +86,6 @@ const SermonList = () => {
               </li>
             </ul>
           </div>
-          {/* <select name="" id="">
-            <option value="Select sermon type" disabled='true' className=" text-gray-400">Select sermon type</option>
-            <option value="Audio message">Audio messages</option>
-            <option value="Youtube sermons">Youtube sermons</option>
-          </select> */}
         </div>
         {videos.length > 0 ? (
           <div>
