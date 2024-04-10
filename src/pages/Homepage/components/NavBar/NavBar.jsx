@@ -217,7 +217,7 @@ const NavBar = () => {
             src={mixlr}
             alt=""
             className="lg:w-[30%] w-[100%] hover:cursor-pointer"
-            onClick={() => window.open("https://mixlr.com/clm-rad)}
+            onClick={() => window.open("https://mixlr.com/clm-rad")}
           />
         </div>
         {/* --------------------------- */}
