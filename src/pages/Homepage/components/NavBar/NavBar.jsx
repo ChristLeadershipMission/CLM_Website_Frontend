@@ -6,6 +6,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import "./NavBar.css";
+import telegramIcon from "../../../../assets/pictures/telegramIcon.svg";
+import facebook from "../../../../assets/pictures/facebook.svg";
+import youtube from "../../../../assets/pictures/youtube.svg";
+import instagram from "../../../../assets/pictures/instagram.svg";
+import mixlr from "../../../../assets/pictures/mixlr.svg";
 
 const NavBar = () => {
   const [showMobileNavBar, setShowMobileNavBar] = useState();
@@ -19,30 +24,35 @@ const NavBar = () => {
   };
   return (
     <>
-      <div className=" z-[800] relative">
+      <div className=" z-[800] relative bg-white flex justify-around">
         <div
-          className={`lg:hidden flex justify-between px-[4vw] py-[1vh] ${
+          className={`lg:hidden flex justify-between px-[4vw] py-[1vh] relative ${
             showMobileNavBar ? "hidden" : "block"
           }`}
         >
           <Link to={"/"}>
-            <img src={clmLogo} alt="" className="w-[5vw]" />
+            <img src={clmLogo} alt="" className="w-[10%] bg-black" />
           </Link>
+        </div>
           <div
             onClick={toggleMobileNavBar}
-            className=" cursor-pointer font-black text-blue-400"
+            className={`cursor-pointer font-black text-blue-400 lg:hidden
+           order-4 w-[60%] relative left-[3.5rem] pt-2
+              ${
+            showMobileNavBar ? "hidden" : "block"
+          }`}
           >
             <FontAwesomeIcon
               icon={faBars}
-              className="text-black text-[1.2rem]"
+              className="text-black text-[1.5rem]"
             />
           </div>
-        </div>
+        {/* ---------------------- */}
         <div
           className={`bg-white lg:flex lg:justify-between 
         lg:px-[2rem] lg:py-[2rem] h-screen lg:h-[5vh]
-         lg:w-screen w-[60%] ml-[30vw] lg:ml-0
-         ${!showMobileNavBar ? "hidden" : "block"}`}
+         lg:w-screen w-[60%] ml-[30vw] lg:ml-0 relative 
+         ${!showMobileNavBar ? "hidden" : "block"} `}
         >
           <motion.div
             initial={{
@@ -116,21 +126,6 @@ const NavBar = () => {
                 className="by-blue-900 ring-[0.01rem] ring-blue-900
                   mb-[5vh] lg:hidden"
               />
-              {/* <Link to={"/Events"}>
-                {" "}
-                <li className=" relative">Events</li>{" "}
-              </Link>
-              <Link to={"/Campus"}>
-                <hr
-                  className="by-blue-900 ring-[0.01rem] ring-blue-900
-                  mb-[5vh] lg:hidden"
-                />{" "}
-                <li className=" relative">Campus</li>{" "}
-              </Link>
-              <hr
-                className="by-blue-900 ring-[0.01rem] ring-blue-900
-                  mb-[5vh] lg:hidden"
-              /> */}
               <Link>
                 {" "}
                 <li
@@ -190,7 +185,16 @@ const NavBar = () => {
               </Link>
             </motion.ul>
           </div>
+          {/* End of list */}
         </div>
+        <div className=" relative flex w-[25%] z-[50] lg:left-0 left-[-10rem] gap-2">
+          <img src={telegramIcon} alt="" className="lg:w-[10%] w-[70%]" />
+          <img src={facebook} alt="" className="lg:w-[10%] w-[70%]" />
+          <img src={youtube} alt="" className="lg:w-[10%] w-[70%]" />
+          <img src={instagram} alt="" className="lg:w-[10%] w-[70%]" />
+          <img src={mixlr} alt="" className="lg:w-[10%] w-[70%]" />
+        </div>
+        {/* --------------------------- */}
       </div>
     </>
   );
