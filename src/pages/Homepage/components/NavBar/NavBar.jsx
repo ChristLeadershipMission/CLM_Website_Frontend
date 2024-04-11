@@ -37,7 +37,7 @@ const NavBar = () => {
         <div
           onClick={toggleMobileNavBar}
           className={`cursor-pointer font-black text-blue-400 lg:hidden
-           order-4 w-[60%] relative left-[3.5rem] pt-2
+           order-4 w-[60%] relative left-[3rem] pt-2
               ${showMobileNavBar ? "hidden" : "block"}`}
         >
           <FontAwesomeIcon icon={faBars} className="text-black text-[1.5rem]" />
@@ -46,7 +46,7 @@ const NavBar = () => {
         <div
           className={`bg-white lg:flex lg:justify-between 
         lg:px-[2rem] lg:py-[2rem] h-screen lg:h-[5vh]
-         lg:w-screen w-[60%] ml-[30vw] lg:ml-0 relative 
+         lg:w-screen w-[100%] lg:ml-0 relative 
          ${!showMobileNavBar ? "hidden" : "block"} `}
         >
           <motion.div
@@ -69,9 +69,9 @@ const NavBar = () => {
               />
             </Link>
           </motion.div>
-          <div>
+          <div className="">
             <span
-              className="absolute right-[15vw] top-[2vw] font-black lg:hidden cursor-pointer
+              className="absolute right-[5vw] top-[3vw] font-black lg:hidden cursor-pointer
             z-[900]"
               onClick={toggleMobileNavBar}
             >
@@ -81,9 +81,9 @@ const NavBar = () => {
               />
             </span>
             <motion.ul
-              className='lg:flex lg:gap-[3rem] lg:text-xl 
-                lg:font-semibold font-["Arial"] lg:mr-[10vw] text-center 
-                text-[5vw] mt-[18vh] lg:mt-[-2vh] w-[89%] lg:w-auto 
+              className='lg:flex lg:gap-[3rem] lg:text-xl mr-5
+                lg:font-semibold font-["Arial"] lg:mr-[10vw] text-center
+                text-[5vw] mt-[18vh] lg:mt-[-2vh] text-black lg:w-auto 
                 '
               initial={{
                 opacity: 0,
@@ -182,44 +182,49 @@ const NavBar = () => {
           </div>
           {/* End of list */}
         </div>
-        <div className=" relative flex w-[25%] z-[50] lg:left-0 left-[-10rem] gap-2">
-          <img
-            src={telegramIcon}
-            alt=""
-            className="lg:w-[10%] w-[70%] hover:cursor-pointer"
-            onClick={() => window.open("https://t.me/taiwoadewaleM")}
-          />
-          <img
-            src={facebook}
-            alt=""
-            className="lg:w-[10%] w-[70%] hover:cursor-pointer"
-            onClick={() =>
-              window.open("https://www.facebook.com/ChristLeadershipfellowship")
-            }
-          />
-          <img
-            src={youtube}
-            alt=""
-            className="lg:w-[10%] w-[70%] hover:cursor-pointer"
-            onClick={() =>
-              window.open("https://youtube.com/@christleadershipmission4803")
-            }
-          />
-          <img
-            src={instagram}
-            alt=""
-            className="lg:w-[10%] w-[70%] hover:cursor-pointer"
-            onClick={() =>
-              window.open("https://www.instagram.com/christleadershipmission")
-            }
-          />
-          <img
-            src={mixlr}
-            alt=""
-            className="lg:w-[30%] w-[100%] hover:cursor-pointer"
-            onClick={() => window.open("https://mixlr.com/clm-rad")}
-          />
-        </div>
+        {!showMobileNavBar ? (
+          <div className=" relative flex w-[25%] z-[50] lg:left-0 left-[-10rem] gap-2">
+            <img
+              src={telegramIcon}
+              alt=""
+              className="lg:w-[10%] w-[70%] hover:cursor-pointer"
+              onClick={() => window.open("https://t.me/taiwoadewaleM")}
+            />
+            <img
+              src={facebook}
+              alt=""
+              className="lg:w-[10%] w-[70%] hover:cursor-pointer"
+              onClick={() =>
+                window.open(
+                  "https://www.facebook.com/ChristLeadershipfellowship"
+                )
+              }
+            />
+            <img
+              src={youtube}
+              alt=""
+              className="lg:w-[10%] w-[70%] hover:cursor-pointer"
+              onClick={() =>
+                window.open("https://youtube.com/@christleadershipmission4803")
+              }
+            />
+            <img
+              src={instagram}
+              alt=""
+              className="lg:w-[10%] w-[70%] hover:cursor-pointer"
+              onClick={() =>
+                window.open("https://www.instagram.com/christleadershipmission")
+              }
+            />
+            <img
+              src={mixlr}
+              alt=""
+              className="lg:w-[30%] w-[100%] hover:cursor-pointer"
+              onClick={() => window.open("https://mixlr.com/clm-rad")}
+            />
+          </div>
+        ) : null}
+
         {/* --------------------------- */}
       </div>
     </>
