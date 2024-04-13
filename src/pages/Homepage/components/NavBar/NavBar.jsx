@@ -131,7 +131,7 @@ const NavBar = () => {
                   Media +
                   {showMediaDropDown ? (
                     <motion.ul
-                      className="bg-grey text-black absolute right-[2.5rem] top-7 rounded-md px-0 py-3 text-xl"
+                      className="bg-grey text-black absolute right-[5.5rem] top-2 bg-black rounded-md px-0 py-3 text-xl"
                       // animate="visible"
                       // initial="hidden"
                       // variants={ulContainer}
