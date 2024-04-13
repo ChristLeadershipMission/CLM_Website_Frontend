@@ -127,11 +127,12 @@ const NavBar = () => {
                   className=" relative"
                   onMouseOver={() => setShowMediaDropDown(true)}
                   onMouseLeave={() => setShowMediaDropDown(false)}
+                  onClick={( => setShowMediaDropDown(true))}
                 >
                   Media +
                   {showMediaDropDown ? (
                     <motion.ul
-                      className="bg-grey text-black absolute right-[5.5rem] top-2 bg-black rounded-md px-0 py-3 text-xl"
+                      className="bg-grey text-white absolute right-[5.5rem] top-2 rounded-md px-0 py-3 text-xl"
                       // animate="visible"
                       // initial="hidden"
                       // variants={ulContainer}
