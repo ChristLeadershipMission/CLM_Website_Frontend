@@ -125,14 +125,14 @@ const NavBar = () => {
                   mb-[5vh] lg:hidden"
               />
               <Link
-              // onClick={()=> setShowMediaDropDown(true)}
+              onClick={()=> setShowMediaDropDown(true)}
               >
                 {" "}
                 <li
                   className=" relative"
                   // onMouseOver={() => setShowMediaDropDown(true)}
                   // onMouseLeave={() => setShowMediaDropDown(false)}
-                  onClick={() => setShowMediaDropDown(!showMediaDropDown)}
+                  onClick={() => setShowMediaDropDown(true)}
                 >
                   Media +
                   {showMediaDropDown ? (

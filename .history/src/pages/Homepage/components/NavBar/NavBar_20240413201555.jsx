@@ -125,7 +125,7 @@ const NavBar = () => {
                   mb-[5vh] lg:hidden"
               />
               <Link
-              // onClick={()=> setShowMediaDropDown(true)}
+              onClick={()=> setShowMediaDropDown(true)}
               >
                 {" "}
                 <li

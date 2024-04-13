@@ -24,10 +24,7 @@ const NavBar = () => {
   };
   return (
     <>
-      
-      <div className=" z-[800] relative bg-white flex justify-around"
-      // onClick={() => setShowMediaDropDown(false)}
-      >
+      <div className=" z-[800] relative bg-white flex justify-around">
         <div
           className={`lg:hidden flex justify-between px-[4vw] py-[1vh] relative ${
             showMobileNavBar ? "hidden" : "block"
@@ -125,14 +122,14 @@ const NavBar = () => {
                   mb-[5vh] lg:hidden"
               />
               <Link
-              // onClick={()=> setShowMediaDropDown(true)}
+              onClick={()=> setShowMediaDropDown(true)}
               >
                 {" "}
                 <li
                   className=" relative"
                   // onMouseOver={() => setShowMediaDropDown(true)}
-                  // onMouseLeave={() => setShowMediaDropDown(false)}
-                  onClick={() => setShowMediaDropDown(!showMediaDropDown)}
+                  onMouseLeave={() => setShowMediaDropDown(false)}
+                  onClick={() => setShowMediaDropDown(true)}
                 >
                   Media +
                   {showMediaDropDown ? (
