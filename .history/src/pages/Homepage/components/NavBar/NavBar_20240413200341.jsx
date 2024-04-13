@@ -127,7 +127,7 @@ const NavBar = () => {
                   className=" relative"
                   onMouseOver={() => setShowMediaDropDown(true)}
                   onMouseLeave={() => setShowMediaDropDown(false)}
-                  onClick={() => setShowMediaDropDown(true)}
+                  onClick={( => setShowMediaDropDown(true))}
                 >
                   Media +
                   {showMediaDropDown ? (
