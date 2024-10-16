@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
+// import axios from "axios";
 
 const GalleryList = () => {
   const [ImagePath, setImagePath] = useState();

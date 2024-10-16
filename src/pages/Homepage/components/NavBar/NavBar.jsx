@@ -6,8 +6,49 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import "./NavBar.css";
+import telegramIcon from "../../../../assets/pictures/telegramIcon.svg";
+import facebook from "../../../../assets/pictures/facebook.svg";
+import youtube from "../../../../assets/pictures/youtube.svg";
+import instagram from "../../../../assets/pictures/instagram.svg";
+import mixlr from "../../../../assets/pictures/mixlr.svg";
+import axios from "axios";
+import { useEffect } from "react";
+
 
 const NavBar = () => {
+
+  useEffect(() => {
+    const fetchCampuses = async () => {
+      try {
+        const payload = {
+          "baseCurrency": "usd",
+          "amount": "1",
+          "targetCurrency": "ngn",
+          "rateType": "LT"
+      };
+    
+        const url = 'https://xchangeapp.onrender.com/api/v1/xchange/converter';
+        // const token = JSON.parse(
+        //   sessionStorage.getItem("userData")
+        // ).access_token;
+        // const headers = {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        // };
+        const response = await axios.post(url, payload);
+        const data = response.data;
+        console.log(data);
+        alert(response)
+      } catch (error) {
+        console.log(error);
+        alert('udone')
+      }
+    };
+    fetchCampuses();
+  }, []);
+
+
   const [showMobileNavBar, setShowMobileNavBar] = useState();
   const [showMediaDropDown, setShowMediaDropDown] = useState(false);
 
@@ -19,30 +60,30 @@ const NavBar = () => {
   };
   return (
     <>
-      <div className=" z-[800] relative">
+      <div className=" z-[800] relative bg-white flex justify-around">
         <div
-          className={`lg:hidden flex justify-between px-[4vw] py-[1vh] ${
+          className={`lg:hidden flex justify-between px-[4vw] py-[1vh] relative ${
             showMobileNavBar ? "hidden" : "block"
           }`}
         >
           <Link to={"/"}>
-            <img src={clmLogo} alt="" className="w-[5vw]" />
+            <img src={clmLogo} alt="" className="w-[10%] bg-black" />
           </Link>
-          <div
-            onClick={toggleMobileNavBar}
-            className=" cursor-pointer font-black text-blue-400"
-          >
-            <FontAwesomeIcon
-              icon={faBars}
-              className="text-black text-[1.2rem]"
-            />
-          </div>
         </div>
+        <div
+          onClick={toggleMobileNavBar}
+          className={`cursor-pointer font-black text-blue-400 lg:hidden
+           order-4 w-[60%] relative left-[3rem] pt-2
+              ${showMobileNavBar ? "hidden" : "block"}`}
+        >
+          <FontAwesomeIcon icon={faBars} className="text-black text-[1.5rem]" />
+        </div>
+        {/* ---------------------- */}
         <div
           className={`bg-white lg:flex lg:justify-between 
         lg:px-[2rem] lg:py-[2rem] h-screen lg:h-[5vh]
-         lg:w-screen w-[50vw] ml-[30vw] lg:ml-0
-         ${!showMobileNavBar ? "hidden" : "block"}`}
+         lg:w-screen w-[100%] lg:ml-0 relative 
+         ${!showMobileNavBar ? "hidden" : "block"} `}
         >
           <motion.div
             initial={{
@@ -64,9 +105,9 @@ const NavBar = () => {
               />
             </Link>
           </motion.div>
-          <div>
+          <div className="">
             <span
-              className="absolute right-[15vw] top-[2vw] font-black lg:hidden cursor-pointer
+              className="absolute right-[5vw] top-[3vw] font-black lg:hidden cursor-pointer
             z-[900]"
               onClick={toggleMobileNavBar}
             >
@@ -76,9 +117,9 @@ const NavBar = () => {
               />
             </span>
             <motion.ul
-              className='lg:flex lg:gap-[3rem] lg:text-xl 
-                lg:font-semibold font-["Arial"] lg:mr-[10vw] text-center 
-                text-[5vw] mt-[18vh] lg:mt-[-2vh] w-[89%] lg:w-auto 
+              className='lg:flex lg:gap-[3rem] lg:text-xl mr-5
+                lg:font-semibold font-["Arial"] lg:mr-[10vw] text-center
+                text-[5vw] mt-[18vh] lg:mt-[-2vh] text-black lg:w-auto 
                 '
               initial={{
                 opacity: 0,
@@ -100,32 +141,17 @@ const NavBar = () => {
                 className="by-blue-900 ring-[0.01rem] ring-blue-900
                   mb-[5vh] lg:hidden"
               />
+              <Link to={"/give"}>
+                {" "}
+                <li className=" relative">Give</li>{" "}
+              </Link>
+              <hr
+                className="by-blue-900 ring-[0.01rem] ring-blue-900
+                  mb-[5vh] lg:hidden"
+              />
               <Link to={"/about"}>
                 {" "}
                 <li className=" relative">About us</li>{" "}
-              </Link>
-              <hr
-                className="by-blue-900 ring-[0.01rem] ring-blue-900
-                  mb-[5vh] lg:hidden"
-              />
-              <Link to={"/giving"}>
-                {" "}
-                <li className=" relative">Online Giving</li>{" "}
-              </Link>
-              <hr
-                className="by-blue-900 ring-[0.01rem] ring-blue-900
-                  mb-[5vh] lg:hidden"
-              />
-              <Link to={"/Events"}>
-                {" "}
-                <li className=" relative">Events</li>{" "}
-              </Link>
-              <Link to={"/Campus"}>
-                <hr
-                  className="by-blue-900 ring-[0.01rem] ring-blue-900
-                  mb-[5vh] lg:hidden"
-                />{" "}
-                <li className=" relative">Campus</li>{" "}
               </Link>
               <hr
                 className="by-blue-900 ring-[0.01rem] ring-blue-900
@@ -137,11 +163,12 @@ const NavBar = () => {
                   className=" relative"
                   onMouseOver={() => setShowMediaDropDown(true)}
                   onMouseLeave={() => setShowMediaDropDown(false)}
+                  onClick={() => setShowMediaDropDown(true)}
                 >
                   Media +
                   {showMediaDropDown ? (
                     <motion.ul
-                      className="bg-white text-black absolute right-[-1.5rem] top-7 rounded-md px-5 py-5 text-xl"
+                      className="bg-grey text-white absolute right-[5.5rem] top-2 rounded-md px-0 py-3 text-xl"
                       // animate="visible"
                       // initial="hidden"
                       // variants={ulContainer}
@@ -190,7 +217,52 @@ const NavBar = () => {
               </Link>
             </motion.ul>
           </div>
+          {/* End of list */}
         </div>
+        {!showMobileNavBar ? (
+          <div className=" relative flex w-[25%] z-[50] lg:left-0 left-[-10rem] gap-2">
+            <img
+              src={telegramIcon}
+              alt=""
+              className="lg:w-[10%] w-[70%] hover:cursor-pointer"
+              onClick={() => window.open("https://t.me/taiwoadewaleM")}
+            />
+            <img
+              src={facebook}
+              alt=""
+              className="lg:w-[10%] w-[70%] hover:cursor-pointer"
+              onClick={() =>
+                window.open(
+                  "https://www.facebook.com/ChristLeadershipfellowship"
+                )
+              }
+            />
+            <img
+              src={youtube}
+              alt=""
+              className="lg:w-[10%] w-[70%] hover:cursor-pointer"
+              onClick={() =>
+                window.open("https://youtube.com/@christleadershipmission4803")
+              }
+            />
+            <img
+              src={instagram}
+              alt=""
+              className="lg:w-[10%] w-[70%] hover:cursor-pointer"
+              onClick={() =>
+                window.open("https://www.instagram.com/christleadershipmission")
+              }
+            />
+            <img
+              src={mixlr}
+              alt=""
+              className="lg:w-[30%] w-[100%] hover:cursor-pointer"
+              onClick={() => window.open("https://mixlr.com/clm-rad")}
+            />
+          </div>
+        ) : null}
+
+        {/* --------------------------- */}
       </div>
     </>
   );

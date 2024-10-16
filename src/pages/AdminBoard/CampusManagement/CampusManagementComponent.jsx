@@ -1,18 +1,16 @@
+/* eslint-disable no-unused-vars */
 // import shape from "./Images/shape.svg";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
   faCalendarPlus,
-  // faPenToSquare,
-  // faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import UploadEvent from "../../utils/UploadCampus";
 import axios from "axios";
 import baseUrl from "../../utils/baseUrl";
 import ShowMoreCampusInfo from "../../utils/showMoreCampusInfo";
-// import ShowMoreCampusInfo from "../../../pages/utils/ShowMoreCampusInfo";
 import { useNavigate } from "react-router-dom";
 import EmptyData from "../../utils/EmptyData";
 import {
@@ -255,7 +253,7 @@ const CampusManagementComponent = ({ hideSideBar }) => {
                   <div
                     className={`shadow-md flex justify-center lg:gap-5
                    lg:py-3 py-3 gap-3 text-black rounded-b-md bg-[${buttonColour}]`}
-                    onClick={() => MoreInfo(id)}
+                    // onClick={() => MoreInfo(id)}
                   >
                     <span
                       className="font-bold cursor-pointer md:text-[1.5rem] lg:text-[1rem]
