@@ -1,0 +1,35 @@
+  input[type="file"]::file-selector-button {
+    background-color: #0D0A25;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    right: 0.8rem;
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="tel"], 
+input[type="date"], 
+select {
+  background-color:#0D0A25;
+  color: white;
+  border: 1px solid white;
+  outline: none;
+}
+
+input::placeholder {
+  color: #b3b3b3; /* You can adjust this color to your liking */
+}
+
+input:focus {
+  background-color: #0D0A25;
+  border-color: #6979F8; 
+}
+
+select:focus, 
+input[type="file"]:focus {
+  background-color: #0D0A25;
+  border-color: #6979F8;
+}

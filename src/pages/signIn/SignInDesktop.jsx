@@ -111,11 +111,11 @@ const SignInDesktop = ({ viewSignUp }) => {
           initial={{ x: 40, opacity: 0 }}
           transition={{ duration: 1 }}
         >
-          <div
-            className="bg-[url('/src\assets\pictures\clmLogo.svg')] bg-cover 
-          absolute top-[9rem] w-[80vw] h-[50%] -ml-4 rounded-lg opacity-[.04] 
-          md:left-[15vw] md:h-[80vh] md:top-[1rem] overflow-hidden"
-          ></div>
+            <div
+              className="bg-[url('/src\assets\pictures\clmLogo.svg')] bg-cover 
+            absolute top-[9rem] w-[80vw] h-[50%] -ml-4 rounded-lg opacity-[.04] 
+            md:left-[15vw] md:h-[80vh] md:top-[1rem] overflow-hidden"
+            ></div>
           <div>
             <h1
               className={`text-center font-['Arial'] text-2xl 

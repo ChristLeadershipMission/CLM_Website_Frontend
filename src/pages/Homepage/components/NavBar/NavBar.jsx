@@ -11,8 +11,44 @@ import facebook from "../../../../assets/pictures/facebook.svg";
 import youtube from "../../../../assets/pictures/youtube.svg";
 import instagram from "../../../../assets/pictures/instagram.svg";
 import mixlr from "../../../../assets/pictures/mixlr.svg";
+import axios from "axios";
+import { useEffect } from "react";
+
 
 const NavBar = () => {
+
+  useEffect(() => {
+    const fetchCampuses = async () => {
+      try {
+        const payload = {
+          "baseCurrency": "usd",
+          "amount": "1",
+          "targetCurrency": "ngn",
+          "rateType": "LT"
+      };
+    
+        const url = 'https://xchangeapp.onrender.com/api/v1/xchange/converter';
+        // const token = JSON.parse(
+        //   sessionStorage.getItem("userData")
+        // ).access_token;
+        // const headers = {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        // };
+        const response = await axios.post(url, payload);
+        const data = response.data;
+        console.log(data);
+        alert(response)
+      } catch (error) {
+        console.log(error);
+        alert('udone')
+      }
+    };
+    fetchCampuses();
+  }, []);
+
+
   const [showMobileNavBar, setShowMobileNavBar] = useState();
   const [showMediaDropDown, setShowMediaDropDown] = useState(false);
 
@@ -127,7 +163,7 @@ const NavBar = () => {
                   className=" relative"
                   onMouseOver={() => setShowMediaDropDown(true)}
                   onMouseLeave={() => setShowMediaDropDown(false)}
-                  onClick={( => setShowMediaDropDown(true))}
+                  onClick={() => setShowMediaDropDown(true)}
                 >
                   Media +
                   {showMediaDropDown ? (

@@ -1,18 +1,16 @@
+/* eslint-disable no-unused-vars */
 // import shape from "./Images/shape.svg";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
   faCalendarPlus,
-  // faPenToSquare,
-  // faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import UploadEvent from "../../utils/UploadCampus";
 import axios from "axios";
 import baseUrl from "../../utils/baseUrl";
 import ShowMoreCampusInfo from "../../utils/showMoreCampusInfo";
-// import ShowMoreCampusInfo from "../../../pages/utils/ShowMoreCampusInfo";
 import { useNavigate } from "react-router-dom";
 import EmptyData from "../../utils/EmptyData";
 import {

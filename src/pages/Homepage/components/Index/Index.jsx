@@ -8,8 +8,9 @@ import "./Index.css";
 // import { useEffect, useState } from "react";
 import ClmPrayer from "../ClmOneFamily/ClmPrayer";
 
-const HomePage = () => {
 
+const HomePage = () => {
+ 
   return (
       <div>
         <NavBar />
