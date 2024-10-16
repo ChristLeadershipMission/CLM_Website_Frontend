@@ -155,11 +155,7 @@ const Biodata = () => {
                   <>
                     <label key={index}>
                       <h1
-                        className={`mb-1 text-[#fff] font-medium ${
-                          bioDataUpdate?.picture &&
-                          labelName.name === "Profile Picture" &&
-                          "hidden"
-                        }`}
+                        className={`mb-1 text-[#fff] font-medium`}
                       >
                         {labelName.name}:
                       </h1>
@@ -206,18 +202,14 @@ const Biodata = () => {
                           </select>
                         </>
                       ) : labelName.name === "Profile Picture" ? (
-                        <>
-                          {!bioDataUpdate?.picture && (
                             <input
                               type="file"
-                              required
+                              required={bioDataUpdate?.picture ? false : true}
                               name={labelName.dbName}
                               onChange={selectImage}
                               className={`w-[18rem] font-medium bg-[#0D0A25] border border-white py-1 rounded-md
                            mb-2 px-3 text-white`}
                             />
-                          )}
-                        </>
                       ) : (
                         <input
                           type={inputType}
@@ -281,19 +273,14 @@ const Biodata = () => {
                     </label>
                   </div>
                 </label>
-                {!bioDataUpdate?.location ? (
                   <>
                     <h1
-                      className={`text-[#fff] font-medium mt-1 ${
-                        bioDataUpdate?.location && "hidden"
-                      }`}
+                      className={`text-[#fff] font-medium mt-1`}
                     >
                       Location(choose location type):
                     </h1>
                     <div
-                      className={`flex gap-1 justify-between items-center ${
-                        bioDataUpdate?.location && "hidden"
-                      }`}
+                      className={`flex gap-1 justify-between items-center`}
                     >
                       <label className="flex gap-1">
                         <h1 className="text-white font-medium text-lg">
@@ -301,7 +288,7 @@ const Biodata = () => {
                         </h1>
                         <input
                           type="radio"
-                          required
+                          required={bioDataUpdate?.location ? false : true}
                           name="locationType"
                           value="state"
                           className="w-[100%] "
@@ -313,7 +300,7 @@ const Biodata = () => {
                           Campus
                         </h1>
                         <input
-                          required
+                          required={bioDataUpdate?.location ? false : true}
                           type="radio"
                           name="locationType"
                           value="campus"
@@ -323,7 +310,6 @@ const Biodata = () => {
                       </label>
                     </div>
                   </>
-                ) : null}
 
                 {/* ... */}
                 {locationType === "state" ? (
