@@ -6,7 +6,7 @@ export const InputTypeLogic = (arg)=>{
     : arg === "DOB (Date of birth)"
     ? "date"
     : "text";
-    return InputTypeLogic;
+    return InputType;
 };
 export const InputValueLogic = (arg, data)=>{
     const InputValue =   arg === "First Name"

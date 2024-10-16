@@ -283,7 +283,7 @@ const Biodata = () => {
                       type="radio"
                       name="locationType"
                       value="campus"
-                      className="w-[100%] "
+                      className="w-[100%] mt-1"
                       onChange={(e) => setLocationType(e.target.value)}
                     />
                   </label>

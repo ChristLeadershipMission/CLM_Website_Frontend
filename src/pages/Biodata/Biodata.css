@@ -18,7 +18,10 @@ select {
   border: 1px solid white;
   outline: none;
 }
-
+input[type="date"]{
+  position: relative;
+  color: white !important;
+}
 input::placeholder {
   color: #b3b3b3; /* You can adjust this color to your liking */
 }
