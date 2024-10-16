@@ -80,7 +80,6 @@ const Biodata = () => {
       // toast("An error occurred. Please ensure all fields are completed, and confirm that the image has been successfully uploaded with a confirmation notification.");
     }
     console.log("Submitting data: ", bioDataUpdate);
-
   };
   const name = [
     {
@@ -121,14 +120,13 @@ const Biodata = () => {
       {successfulBiodata ? (
         <Successfull />
       ) : (
-        <div 
-        className=" relative w-screen h-screen bg-[#0D0A25] overflow-y-scroll">
+        <div className=" relative w-screen h-screen bg-[#0D0A25] overflow-y-scroll">
           <ToastContainer />
           <div
             className="bg-cover 
           absolute top-[0%] w-screen h-screen -ml-4 rounded-lg opacity-[.04] 
            overflow-hidden left-[0%]"
-           style={{ backgroundImage: `url(${clmLogo})`}}
+            style={{ backgroundImage: `url(${clmLogo})` }}
           ></div>
           {showPopUp && (
             <div
@@ -147,7 +145,7 @@ const Biodata = () => {
           <div className=" flex justify-center items-center h-screen relative">
             <form onSubmit={handleSubmit}>
               {name.map((labelName, index) => {
-                console.log(labelName.dbName);
+                // console.log(labelName.dbName);
                 const inputType = InputTypeLogic(labelName.name);
 
                 const value = InputValueLogic(labelName.name, bioDataUpdate);
@@ -155,7 +153,13 @@ const Biodata = () => {
                 return (
                   <>
                     <label key={index}>
-                      <h1 className="mb-1 text-[#fff] font-medium">
+                      <h1
+                        className={`mb-1 text-[#fff] font-medium ${
+                          bioDataUpdate?.picture &&
+                          labelName.name === "Profile Picture" &&
+                          "hidden"
+                        }`}
+                      >
                         {labelName.name}:
                       </h1>
                       {labelName.name === "Marital Status" ? (
@@ -203,7 +207,10 @@ const Biodata = () => {
                           required
                           name={labelName.dbName}
                           onChange={selectImage}
-                          className="w-[18rem] font-medium bg-[#0D0A25] border border-white py-1 rounded-md mb-2 px-3 text-white"
+                          className={`w-[18rem] font-medium bg-[#0D0A25] border border-white py-1 rounded-md
+                           mb-2 px-3 text-white ${
+                             bioDataUpdate?.picture && "hidden"
+                           } `}
                         />
                       ) : (
                         <input
@@ -232,6 +239,9 @@ const Biodata = () => {
                       <h1 className="text-white font-medium text-lg">Male</h1>
                       <input
                         type="radio"
+                        checked={
+                          bioDataUpdate?.gender === "male" ? true : false
+                        }
                         required
                         name="gender"
                         value="male"
@@ -248,6 +258,9 @@ const Biodata = () => {
                       <h1 className="text-white font-medium text-lg">Female</h1>
                       <input
                         type="radio"
+                        checked={
+                          bioDataUpdate?.gender === "female" ? true : false
+                        }
                         required
                         name="gender"
                         value="female"
@@ -263,10 +276,10 @@ const Biodata = () => {
                   </div>
                 </label>
 
-                <h1 className=" text-[#fff] font-medium mt-1">
+                <h1 className={`text-[#fff] font-medium mt-1 ${bioDataUpdate?.location && "hidden"}`}>
                   Location(choose location type):
                 </h1>
-                <div className="flex gap-1 justify-between items-center">
+                <div className={`flex gap-1 justify-between items-center ${bioDataUpdate?.location && "hidden"}`}>
                   <label className="flex gap-1">
                     <h1 className="text-white font-medium text-lg">State</h1>
                     <input
@@ -281,7 +294,7 @@ const Biodata = () => {
                   <label className="flex gap-1">
                     <h1 className="text-white font-medium text-lg">Campus</h1>
                     <input
-                    required 
+                      required
                       type="radio"
                       name="locationType"
                       value="campus"
@@ -292,7 +305,7 @@ const Biodata = () => {
                 </div>
                 {locationType === "state" ? (
                   <select
-                  required
+                    required
                     name="location"
                     id=""
                     className="w-[18rem] mt-2 font-medium mr-[1rem] bg-transparent text-white border border-white py-1 rounded-md mb-2"
@@ -338,15 +351,15 @@ const Biodata = () => {
                 ) : null}
               </div>
               <div className="mt-3 flex justify-center items-center relative bottom-1">
-            <button
-              type="submit"
-              className="w-[100%] h-[2rem] rounded-md bg-[#F26C0C] lg:w-[100%]
+                <button
+                  type="submit"
+                  className="w-[100%] h-[2rem] rounded-md bg-[#F26C0C] lg:w-[100%]
               text-xl font-semibold text-black relative"
-              // onClick={handleSubmit}
-            >
-              Submit
-            </button>
-          </div>
+                  // onClick={handleSubmit}
+                >
+                  Submit
+                </button>
+              </div>
             </form>
           </div>
         </div>
