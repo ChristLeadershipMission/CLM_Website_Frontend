@@ -9,6 +9,7 @@ import { statesInNigeria } from "./data";
 import axios from "axios";
 import Successfull from "./Successfull";
 import { InputTypeLogic, InputValueLogic } from "./Logic";
+import clmLogo from "../../assets/pictures/clmLogo.svg";
 
 const Biodata = () => {
   const [showPopUp, setShowPopUp] = useState(false);
@@ -124,9 +125,10 @@ const Biodata = () => {
         className=" relative w-screen h-screen bg-[#0D0A25] overflow-y-scroll">
           <ToastContainer />
           <div
-            className="bg-[url('/src\assets\pictures\clmLogo.svg')] bg-cover 
+            className="bg-cover 
           absolute top-[0%] w-screen h-screen -ml-4 rounded-lg opacity-[.04] 
            overflow-hidden left-[0%]"
+           style={{ backgroundImage: `url(${clmLogo})`}}
           ></div>
           {showPopUp && (
             <div
@@ -233,7 +235,7 @@ const Biodata = () => {
                         required
                         name="gender"
                         value="male"
-                        className="w-[100%]"
+                        className="w-[100%] mt-2"
                         onChange={(e) =>
                           setBioDataUpdate({
                             ...bioDataUpdate,
