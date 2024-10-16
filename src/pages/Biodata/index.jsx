@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import PopUpForm from "./PopUpForm";
 import "./Biodata.css";
@@ -63,7 +64,7 @@ const Biodata = () => {
     e.preventDefault();
 
     // Check if image is uploaded before submitting
-    if (!imageUploaded || isImageUploading) {
+    if (!bioDataUpdate.picture) {
       toast("Please upload an image before submitting.");
       return;
     }
@@ -176,7 +177,7 @@ const Biodata = () => {
                             <option
                               value="select an option"
                               disabled
-                              selected
+                              selected={!bioDataUpdate?.maritalStatus ? true : false}
                               className=" mb-1 text-[#fff]"
                             >
                               Select an option
@@ -184,34 +185,39 @@ const Biodata = () => {
                             <option
                               value="Single"
                               className=" mb-1 text-[#fff]"
+                              selected={bioDataUpdate?.maritalStatus === "single" ? true : false}
                             >
                               Single
                             </option>
                             <option
                               value="Engaged"
                               className=" mb-1 text-[#fff]"
+                              selected={bioDataUpdate?.maritalStatus === "engaged" ? true : false}
                             >
                               Engaged
                             </option>
                             <option
                               value="Married"
                               className=" mb-1 text-[#fff]"
+                              selected={bioDataUpdate?.maritalStatus === "married" ? true : false}
                             >
                               Married
                             </option>
                           </select>
                         </>
                       ) : labelName.name === "Profile Picture" ? (
-                        <input
-                          type="file"
-                          required
-                          name={labelName.dbName}
-                          onChange={selectImage}
-                          className={`w-[18rem] font-medium bg-[#0D0A25] border border-white py-1 rounded-md
-                           mb-2 px-3 text-white ${
-                             bioDataUpdate?.picture && "hidden"
-                           } `}
-                        />
+                        <>
+                          {!bioDataUpdate?.picture && (
+                            <input
+                              type="file"
+                              required
+                              name={labelName.dbName}
+                              onChange={selectImage}
+                              className={`w-[18rem] font-medium bg-[#0D0A25] border border-white py-1 rounded-md
+                           mb-2 px-3 text-white`}
+                            />
+                          )}
+                        </>
                       ) : (
                         <input
                           type={inputType}
@@ -275,34 +281,51 @@ const Biodata = () => {
                     </label>
                   </div>
                 </label>
+                {!bioDataUpdate?.location ? (
+                  <>
+                    <h1
+                      className={`text-[#fff] font-medium mt-1 ${
+                        bioDataUpdate?.location && "hidden"
+                      }`}
+                    >
+                      Location(choose location type):
+                    </h1>
+                    <div
+                      className={`flex gap-1 justify-between items-center ${
+                        bioDataUpdate?.location && "hidden"
+                      }`}
+                    >
+                      <label className="flex gap-1">
+                        <h1 className="text-white font-medium text-lg">
+                          State
+                        </h1>
+                        <input
+                          type="radio"
+                          required
+                          name="locationType"
+                          value="state"
+                          className="w-[100%] "
+                          onChange={(e) => setLocationType(e.target.value)}
+                        />
+                      </label>
+                      <label className="flex gap-1">
+                        <h1 className="text-white font-medium text-lg">
+                          Campus
+                        </h1>
+                        <input
+                          required
+                          type="radio"
+                          name="locationType"
+                          value="campus"
+                          className="w-[100%] mt-1"
+                          onChange={(e) => setLocationType(e.target.value)}
+                        />
+                      </label>
+                    </div>
+                  </>
+                ) : null}
 
-                <h1 className={`text-[#fff] font-medium mt-1 ${bioDataUpdate?.location && "hidden"}`}>
-                  Location(choose location type):
-                </h1>
-                <div className={`flex gap-1 justify-between items-center ${bioDataUpdate?.location && "hidden"}`}>
-                  <label className="flex gap-1">
-                    <h1 className="text-white font-medium text-lg">State</h1>
-                    <input
-                      type="radio"
-                      required
-                      name="locationType"
-                      value="state"
-                      className="w-[100%] "
-                      onChange={(e) => setLocationType(e.target.value)}
-                    />
-                  </label>
-                  <label className="flex gap-1">
-                    <h1 className="text-white font-medium text-lg">Campus</h1>
-                    <input
-                      required
-                      type="radio"
-                      name="locationType"
-                      value="campus"
-                      className="w-[100%] mt-1"
-                      onChange={(e) => setLocationType(e.target.value)}
-                    />
-                  </label>
-                </div>
+                {/* ... */}
                 {locationType === "state" ? (
                   <select
                     required
