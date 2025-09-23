@@ -157,6 +157,14 @@ const NavBar = () => {
                 className="by-blue-900 ring-[0.01rem] ring-blue-900
                   mb-[5vh] lg:hidden"
               />
+              <Link to={"/hymns"}>
+                {" "}
+                <li className=" relative">Hymns</li>{" "}
+              </Link>
+              <hr
+                className="by-blue-900 ring-[0.01rem] ring-blue-900
+                  mb-[5vh] lg:hidden"
+              />
               <Link>
                 {" "}
                 <li

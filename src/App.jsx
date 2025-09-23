@@ -14,29 +14,34 @@ import SermonPage from "./pages/Media/Sermon";
 import Gallery from "./pages/Media/Gallery/Index";
 import Give__to_church from "./pages/Give/Index";
 import Biodata from "./pages/Biodata";
+import HymnHomePage from "./pages/hymns/pages/HymnHomePage.jsx";
+import HymnsListPage from "./pages/hymns/pages/HymnsListPage.jsx";
+import HymnDetailPage from "./pages/hymns/pages/HymnDetailPage.jsx";
 
 function App() {
-  return (
-    <>
-      <Routes>
-        <Route path="/login" element={<FormPage />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/give" element={<Give__to_church />} />
-        <Route path="/about" element={<AboutUsPage />} />
-        <Route path="/media/sermon" element={<SermonPage />} />
-        <Route path="/media/gallery" element={<Gallery />} />
-        <Route path="/Biodata" element={<Biodata />} />
-        <Route element={<PrivateRoute />}>
-          <Route path="/admin" element={<AdminBoard />} />
-          <Route path="/admin/event" element={<EventManagement />} />
-          <Route path="/admin/campus" element={<CampusManagement />} />
-          <Route path="/admin/department" element={<Department />} />
-          <Route path="/admin/minister" element={<Minister />} />
-        </Route>
-        <Route path="/private" element={<PrivateRoute />} />
-        <Route path="/confirmation" element={<SignupConfirmation />} />
-      </Routes>
-    </>
+  return (<>
+        <Routes>
+          <Route path="/login" element={<FormPage/>}/>
+          <Route path="/" element={<HomePage/>}/>
+          <Route path="/give" element={<Give__to_church/>}/>
+          <Route path="/about" element={<AboutUsPage/>}/>
+          <Route path="/media/sermon" element={<SermonPage/>}/>
+          <Route path="/media/gallery" element={<Gallery/>}/>
+          <Route path="/Biodata" element={<Biodata/>}/>
+          <Route path="/hymns" element={<HymnHomePage/>}/>
+          <Route path="/hymns/explore" element={<HymnsListPage/>}/>
+          <Route path="/hymns/:hymnId" element={<HymnDetailPage />} />
+          <Route element={<PrivateRoute/>}>
+            <Route path="/admin" element={<AdminBoard/>}/>
+            <Route path="/admin/event" element={<EventManagement/>}/>
+            <Route path="/admin/campus" element={<CampusManagement/>}/>
+            <Route path="/admin/department" element={<Department/>}/>
+            <Route path="/admin/minister" element={<Minister/>}/>
+          </Route>
+          <Route path="/private" element={<PrivateRoute/>}/>
+          <Route path="/confirmation" element={<SignupConfirmation/>}/>
+        </Routes>
+      </>
   );
 }
 
