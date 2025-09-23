@@ -182,8 +182,8 @@ const HymnHomePage = () => {
                         className="text-xl md:text-2xl text-slate-200 mb-8 max-w-3xl mx-auto leading-relaxed"
                         style={{ fontFamily: 'Inter, sans-serif' }}
                     >
-                        Discover the beauty of sacred music with our collection of timeless hymns.
-                        Experience worship through song and find inspiration in every verse.
+                        Explore timeless hymns that uplift the soul.
+                        Worship through song and find inspiration in every verse.
                     </motion.p>
 
                     <motion.div
