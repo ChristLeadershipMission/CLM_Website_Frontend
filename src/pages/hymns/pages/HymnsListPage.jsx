@@ -5,19 +5,23 @@ import {hymns} from '../data/hymns.js';
 import Footer from '../components/Footer';
 import HymnCard from '../components/HymnCard';
 import SearchBar from '../components/SearchBar';
-import AnimatedCross from '../components/AnimatedCross';
+import AnimatedCross from '../components/AnimatedLogo.jsx';
+import { getLyricsText } from '../utils/hymn-utils.js';
 
 const HymnsListPage = () => {
-
     const [filteredHymns, setFilteredHymns] = useState(hymns);
     const [searchQuery, setSearchQuery] = useState('');
 
-    // Handle search functionality
+    // Handle search functionality - with debug logging
     const handleSearch = (query) => {
+        console.log('Search triggered with query:', query); // Debug log
         setSearchQuery(query);
 
-        if (!query.trim()) {
-            setFilteredHymns(hymns); // Show all hymns
+        if (!query || query.trim() === '') {
+            console.log('Empty query - resetting to all hymns'); // Debug log
+            console.log('Total hymns available:', hymns.length); // Debug log
+            setFilteredHymns(hymns); // Reset to show all hymns when search is cleared
+            console.log('After reset, filteredHymns should be:', hymns.length); // Debug log
             return;
         }
 
@@ -25,16 +29,24 @@ const HymnsListPage = () => {
             hymn.title.toLowerCase().includes(query.toLowerCase()) ||
             hymn.author.toLowerCase().includes(query.toLowerCase()) ||
             hymn.category.toLowerCase().includes(query.toLowerCase()) ||
-            hymn.lyrics.toLowerCase().includes(query.toLowerCase())
+            getLyricsText(hymn.lyrics).toLowerCase().includes(query.toLowerCase())
         );
 
+        console.log('Filtered hymns:', filtered.length); // Debug log
         setFilteredHymns(filtered);
     };
 
     // Reset to all hymns when component mounts
     useEffect(() => {
         setFilteredHymns(hymns);
+        setSearchQuery('');
     }, []);
+
+    // Debug effect to monitor filteredHymns changes
+    useEffect(() => {
+        console.log('filteredHymns state changed to:', filteredHymns.length, 'hymns');
+        console.log('First few hymns:', filteredHymns.slice(0, 3).map(h => h.title));
+    }, [filteredHymns]);
 
     const headerVariants = {
         hidden: {opacity: 0, y: -30},
@@ -112,6 +124,22 @@ const HymnsListPage = () => {
                 ease: "easeOut"
             }
         }
+    };
+
+    const handleCategoryFilter = (category) => {
+        if (category === 'all') {
+            setFilteredHymns(hymns);
+            setSearchQuery('');
+        } else {
+            const filtered = hymns.filter(h => h.category === category);
+            setFilteredHymns(filtered);
+            setSearchQuery('');
+        }
+    };
+
+    const handleShowAllHymns = () => {
+        setFilteredHymns(hymns);
+        setSearchQuery('');
     };
 
     return (
@@ -254,15 +282,20 @@ const HymnsListPage = () => {
                 <div className="max-w-7xl mx-auto">
                     {filteredHymns.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {filteredHymns.map((hymn, index) => (
-                                <motion.div
-                                    key={hymn.id}
-                                    variants={cardVariants}
-                                    custom={index}
-                                >
-                                    <HymnCard hymn={hymn}/>
-                                </motion.div>
-                            ))}
+                            {filteredHymns.map((hymn, index) => {
+                                console.log('Rendering hymn:', hymn.title, 'at index:', index); // Debug log
+                                return (
+                                    <motion.div
+                                        key={`hymn-${hymn.id}-${searchQuery}`} // Force re-render with search query
+                                        variants={cardVariants}
+                                        custom={index}
+                                        initial="hidden"
+                                        animate="visible"
+                                    >
+                                        <HymnCard hymn={hymn}/>
+                                    </motion.div>
+                                );
+                            })}
                         </div>
                     ) : (
                         <motion.div
@@ -287,10 +320,7 @@ const HymnsListPage = () => {
                                 We couldn't find any hymns matching your search. Try adjusting your search terms.
                             </p>
                             <motion.button
-                                onClick={() => {
-                                    setFilteredHymns(hymns);
-                                    setSearchQuery('');
-                                }}
+                                onClick={handleShowAllHymns}
                                 whileHover={{
                                     scale: 1.05,
                                     backgroundColor: '#10B981',
@@ -337,11 +367,7 @@ const HymnsListPage = () => {
                                         transition: {duration: 0.2}
                                     }}
                                     whileTap={{scale: 0.95}}
-                                    onClick={() => {
-                                        const filtered = hymns.filter(h => h.category === category);
-                                        setFilteredHymns(filtered);
-                                        setSearchQuery('');
-                                    }}
+                                    onClick={() => handleCategoryFilter(category)}
                                     className="px-4 py-2 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium hover:bg-emerald-500 hover:text-white transition-all duration-300"
                                     style={{fontFamily: 'Inter, sans-serif'}}
                                 >
@@ -358,10 +384,7 @@ const HymnsListPage = () => {
                                     transition: {duration: 0.2}
                                 }}
                                 whileTap={{scale: 0.95}}
-                                onClick={() => {
-                                    setFilteredHymns(hymns);
-                                    setSearchQuery('');
-                                }}
+                                onClick={() => handleCategoryFilter('all')}
                                 className="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium hover:bg-slate-600 hover:text-white transition-all duration-300"
                                 style={{fontFamily: 'Inter, sans-serif'}}
                             >

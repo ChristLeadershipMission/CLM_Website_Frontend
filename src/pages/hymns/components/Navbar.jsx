@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {useNavigate} from "react-router-dom";
 import { motion, AnimatePresence } from 'framer-motion';
+import clmLogo from "../../../assets/pictures/clmLogo.svg";
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -51,15 +52,19 @@ const Navbar = () => {
                                     whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0], transition: { duration: 0.3 } }}
                                     className="relative"
                                 >
-                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" className="text-orange-400">
-                                        <rect x="14" y="4" width="4" height="24" rx="2" />
-                                        <rect x="8" y="12" width="16" height="4" rx="2" />
-                                        <path
-                                            d="M4 14c2-2 4-1 6 0 1 2 2 4 6 4s5-2 6-4c2-1 4-2 6 0-2 6-6 8-12 8s-10-2-12-8z"
-                                            className="text-white opacity-30"
-                                            fillRule="evenodd"
-                                        />
-                                    </svg>
+                                    <motion.img
+                                        src={clmLogo}
+                                        alt="CLM Logo"
+                                        className="w-8 h-8 object-contain"
+                                        animate={{
+                                            scale: [1, 1.05, 1],
+                                        }}
+                                        transition={{
+                                            duration: 2,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                    />
                                 </motion.div>
                                 <motion.span
                                     whileHover={{ scale: 1.05 }}
@@ -192,15 +197,19 @@ const Navbar = () => {
                                 transition={{ duration: 0.6, delay: 0.5, type: "spring", stiffness: 200 }}
                                 className="mt-12 opacity-20"
                             >
-                                <svg width="64" height="64" viewBox="0 0 32 32" fill="currentColor" className="text-orange-400">
-                                    <rect x="14" y="4" width="4" height="24" rx="2" />
-                                    <rect x="8" y="12" width="16" height="4" rx="2" />
-                                    <path
-                                        d="M4 14c2-2 4-1 6 0 1 2 2 4 6 4s5-2 6-4c2-1 4-2 6 0-2 6-6 8-12 8s-10-2-12-8z"
-                                        className="text-white opacity-50"
-                                        fillRule="evenodd"
-                                    />
-                                </svg>
+                                <motion.img
+                                    src={clmLogo}
+                                    alt="CLM Logo"
+                                    className="w-16 h-16 object-contain"
+                                    animate={{
+                                        scale: [1, 1.05, 1],
+                                    }}
+                                    transition={{
+                                        duration: 2,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    }}
+                                />
                             </motion.div>
                         </div>
                     </motion.div>

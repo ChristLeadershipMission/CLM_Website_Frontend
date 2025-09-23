@@ -50,16 +50,33 @@ const SearchBar = ({ setFilteredHymns, allHymns, onSearch, searchQuery, filtered
         }
     };
 
-    const clearSearch = () => {
-        if (onSearch) {
-            onSearch('');
-        }
+    const clearSearch = (e) => {
+        e?.preventDefault();
+        e?.stopPropagation();
 
+        console.log('Clear search clicked'); // Debug log
+
+        // Reset all local state immediately
         setSearchTerm('');
         setIsFocused(false);
         setSuggestions([]);
+
+        // Force parent to reset with empty search - use setTimeout to ensure state is updated
+        setTimeout(() => {
+            if (onSearch) {
+                console.log('Calling onSearch with empty string'); // Debug log
+                onSearch('');
+            }
+        }, 0);
     };
 
+    const handleBlur = (e) => {
+        // Only hide suggestions on blur, don't interfere with search functionality
+        setTimeout(() => {
+            setIsFocused(false);
+            setSuggestions([]);
+        }, 150);
+    };
 
     const containerVariants = {
         hidden: { opacity: 0, y: -20 },
@@ -157,6 +174,7 @@ const SearchBar = ({ setFilteredHymns, allHymns, onSearch, searchQuery, filtered
             initial="hidden"
             animate="visible"
             className="w-full max-w-md mx-auto relative"
+            onBlur={handleBlur}
         >
             {/* Search Input Container */}
             <motion.div
@@ -180,16 +198,11 @@ const SearchBar = ({ setFilteredHymns, allHymns, onSearch, searchQuery, filtered
                     value={searchTerm}
                     onChange={handleInputChange}
                     onFocus={() => setIsFocused(true)}
-                    mousedown={() => setTimeout(() => setIsFocused(false), 200)}
-                    className="w-full pl-10 pr-10 py-3 border-2 border-blue-200 rounded-lg focus:outline-none focus:border-orange-400 transition-all duration-300 text-black placeholder-gray-800"
+                    className="w-full pl-10 pr-10 py-3 border-2 border-blue-200 rounded-lg focus:outline-none focus:border-orange-400 transition-all duration-300 text-black placeholder-gray-500"
                     style={{
                         backgroundColor: '#FFF7ED',
                         fontFamily: 'Inter, sans-serif',
-                        color: '#000000' // Explicitly set black text
-                    }}
-                    whileFocus={{
-                        borderColor: '#ED8936',
-                        transition: { duration: 0.2 }
+                        color: '#000000'
                     }}
                 />
 
@@ -251,7 +264,6 @@ const SearchBar = ({ setFilteredHymns, allHymns, onSearch, searchQuery, filtered
                         </div>
 
                         {/* Suggestions Footer */}
-                        {/* Suggestions Footer */}
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -265,7 +277,6 @@ const SearchBar = ({ setFilteredHymns, allHymns, onSearch, searchQuery, filtered
                                 {filteredHymns.length} hymn{filteredHymns.length !== 1 ? 's' : ''} found
                             </p>
                         </motion.div>
-
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -280,20 +291,12 @@ const SearchBar = ({ setFilteredHymns, allHymns, onSearch, searchQuery, filtered
                         transition={{ duration: 0.3 }}
                         className="mt-2 text-center"
                     >
-            <span
-                className="text-sm text-gray-600"
-                style={{ fontFamily: 'Inter, sans-serif' }}
-            >
-              Found {allHymns.filter(hymn =>
-                hymn.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                hymn.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                (hymn.author && hymn.author.toLowerCase().includes(searchTerm.toLowerCase()))
-            ).length} hymn{allHymns.filter(hymn =>
-                hymn.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                hymn.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                (hymn.author && hymn.author.toLowerCase().includes(searchTerm.toLowerCase()))
-            ).length !== 1 ? 's' : ''} for "{searchTerm}"
-            </span>
+                        <span
+                            className="text-sm text-gray-600"
+                            style={{ fontFamily: 'Inter, sans-serif' }}
+                        >
+                            Found {filteredHymns.length} hymn{filteredHymns.length !== 1 ? 's' : ''} for "{searchTerm}"
+                        </span>
                     </motion.div>
                 )}
             </AnimatePresence>

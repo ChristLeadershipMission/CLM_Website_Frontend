@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import clmLogo from "../../../assets/pictures/clmLogo.svg";
 
 const AnimatedCross = ({ size = 'md' }) => {
     const sizeMap = {

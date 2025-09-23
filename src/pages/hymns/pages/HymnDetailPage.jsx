@@ -3,8 +3,9 @@ import { motion } from 'framer-motion';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import AnimatedCross from '../components/AnimatedCross';
+import AnimatedLogo from '../components/AnimatedLogo';
 import { hymns } from '../data/hymns.js';
+import { formatLyricsForDisplay } from '../utils/hymn-utils.js';
 
 const HymnDetailPage = () => {
     const { hymnId } = useParams();
@@ -88,28 +89,51 @@ const HymnDetailPage = () => {
         }
     };
 
-    const formatLyrics = (lyrics) => {
-        return lyrics.split('\n\n').map((stanza, index) => (
-            <motion.div
-                key={index}
-                variants={stanzaVariants}
-                className="mb-6 last:mb-0"
-            >
-                {stanza.split('\n').map((line, lineIndex) => (
-                    <motion.p
-                        key={lineIndex}
-                        className={`text-gray-700 leading-relaxed ${line.trim() === '' ? 'mb-2' : ''}`}
-                        style={{ fontFamily: 'Inter, sans-serif' }}
-                        whileHover={{
-                            x: 2,
-                            transition: { duration: 0.2 }
-                        }}
+    // Format lyrics using the utility function
+    const formatLyrics = (lyricsArray) => {
+        const formattedSections = formatLyricsForDisplay(lyricsArray);
+
+        return formattedSections.map((section, index) => {
+            return (
+                <motion.div
+                    key={index}
+                    variants={stanzaVariants}
+                    className={`mb-8 last:mb-0 ${section.isChorus ? 'bg-emerald-25 rounded-lg p-6 border-l-4 border-emerald-400' : ''}`}
+                >
+                    {/* Verse/Chorus Label */}
+                    <motion.div
+                        className="flex items-center mb-3"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
                     >
-                        {line || '\u00A0'}
-                    </motion.p>
-                ))}
-            </motion.div>
-        ));
+                        <span
+                            className={`text-sm font-semibold ${section.isChorus ? 'text-emerald-700 bg-emerald-100' : 'text-slate-600 bg-slate-100'} px-3 py-1 rounded-full`}
+                            style={{ fontFamily: 'Inter, sans-serif' }}
+                        >
+                            {section.displayLabel}
+                        </span>
+                    </motion.div>
+
+                    {/* Stanza Lines */}
+                    <div className={`${section.isChorus ? 'pl-4' : ''}`}>
+                        {section.lines.map((line, lineIndex) => (
+                            <motion.p
+                                key={lineIndex}
+                                className={`${section.isChorus ? 'text-emerald-800 font-medium' : 'text-gray-700'} leading-relaxed mb-1`}
+                                style={{ fontFamily: 'Inter, sans-serif' }}
+                                whileHover={{
+                                    x: section.isChorus ? 4 : 2,
+                                    transition: { duration: 0.2 }
+                                }}
+                            >
+                                {line}
+                            </motion.p>
+                        ))}
+                    </div>
+                </motion.div>
+            );
+        });
     };
 
     return (
@@ -165,7 +189,7 @@ const HymnDetailPage = () => {
                                 variants={itemVariants}
                                 className="mb-4"
                             >
-                                <AnimatedCross size="md" />
+                                <AnimatedLogo size="md" />
                             </motion.div>
 
                             <motion.h1
@@ -259,7 +283,7 @@ const HymnDetailPage = () => {
                             variants={itemVariants}
                             className="mb-6"
                         >
-                            <AnimatedCross size="sm" />
+                            <AnimatedLogo size="sm" />
                         </motion.div>
 
                         <motion.h3
@@ -293,6 +317,7 @@ const HymnDetailPage = () => {
                                     transition: { duration: 0.2 }
                                 }}
                                 whileTap="tap"
+                                onClick={() => window.print()}
                                 className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-lg text-lg font-medium transition-all duration-300 shadow-lg"
                                 style={{ fontFamily: 'Inter, sans-serif' }}
                             >
@@ -377,7 +402,7 @@ const HymnDetailPage = () => {
                                     className="p-4"
                                 >
                                     <div className="text-emerald-500 mb-2">
-                                        <AnimatedCross size="sm" />
+                                        <AnimatedLogo size="sm" />
                                     </div>
                                     <h4
                                         className="font-semibold text-slate-800 mb-1"

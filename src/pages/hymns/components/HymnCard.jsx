@@ -5,9 +5,28 @@ import { useNavigate } from 'react-router-dom';
 const HymnCard = ({ hymn }) => {
     const navigate = useNavigate();
 
-    const getExcerpt = (lyrics) => {
-        if (!lyrics || lyrics.length <= 50) return lyrics || '';
-        return lyrics.substring(0, 50) + '...';
+    // Helper function to get text excerpt from the new lyrics structure
+    const getExcerpt = (lyricsArray) => {
+        if (!lyricsArray || lyricsArray.length === 0) return '';
+
+        // Get the first verse or section
+        const firstSection = lyricsArray[0];
+        if (!firstSection.lines || firstSection.lines.length === 0) return '';
+
+        // Take the first line or two from the first section
+        const excerpt = firstSection.lines.slice(0, 2).join(' ');
+        if (excerpt.length <= 50) return excerpt;
+
+        return excerpt.substring(0, 50) + '...';
+    };
+
+    // Helper function to convert lyrics array to searchable text (for search functionality)
+    const getLyricsText = (lyricsArray) => {
+        if (!lyricsArray || lyricsArray.length === 0) return '';
+
+        return lyricsArray
+            .map(section => section.lines.join(' '))
+            .join(' ');
     };
 
     const handleViewHymn = () => {
