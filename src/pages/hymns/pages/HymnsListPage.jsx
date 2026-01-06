@@ -11,6 +11,26 @@ import { getLyricsText } from '../utils/hymn-utils.js';
 const HymnsListPage = () => {
   const [filteredHymns, setFilteredHymns] = useState(hymns);
   const [searchQuery, setSearchQuery] = useState('');
+  const [displayCount, setDisplayCount] = useState(10); // Show 30 hymns initially
+  const HYMNS_PER_LOAD = 10; // Load 30 more each time
+
+  // Ref for scrolling to results
+  const resultsRef = React.useRef(null);
+
+  // Function to scroll to results
+  const scrollToResults = () => {
+    if (resultsRef.current) {
+      resultsRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      });
+      // Add small offset to account for fixed navbar
+      setTimeout(() => {
+        window.scrollBy({ top: -100, behavior: 'smooth' });
+      }, 500);
+    }
+  };
 
   // CRITICAL DEBUG LOGGING - ADD THIS FIRST
   useEffect(() => {
@@ -51,10 +71,11 @@ const HymnsListPage = () => {
   const handleSearch = (query) => {
     console.log('Search triggered with query:', query);
     setSearchQuery(query);
+    setDisplayCount(30); // Reset display count on new search
 
     if (!query || query.trim() === '') {
       console.log('Empty query - resetting to all hymns');
-      setFilteredHymns(hymns);
+      setFilteredHymns(sortHymnsAlphabetically(hymns));
       return;
     }
 
@@ -125,12 +146,30 @@ const HymnsListPage = () => {
     setFilteredHymns(sorted);
   };
 
+  // Sort hymns alphabetically by title
+  const sortHymnsAlphabetically = (hymnsArray) => {
+    return [...hymnsArray].sort((a, b) => {
+      const titleA = (a.title || '').toLowerCase();
+      const titleB = (b.title || '').toLowerCase();
+      return titleA.localeCompare(titleB);
+    });
+  };
+
   // Reset to all hymns when component mounts
   useEffect(() => {
     console.log('Component mounted, setting initial hymns');
-    setFilteredHymns(hymns);
+    setFilteredHymns(sortHymnsAlphabetically(hymns));
     setSearchQuery('');
   }, []);
+
+  // Get hymns to display (limited by displayCount)
+  const hymnsToDisplay = filteredHymns.slice(0, displayCount);
+  const hasMore = displayCount < filteredHymns.length;
+
+  // Load more hymns
+  const loadMore = () => {
+    setDisplayCount(prev => prev + HYMNS_PER_LOAD);
+  };
 
   const headerVariants = {
     hidden: {opacity: 0, y: -30},
@@ -211,19 +250,25 @@ const HymnsListPage = () => {
   };
 
   const handleCategoryFilter = (category) => {
+    setDisplayCount(30); // Reset display count
     if (category === 'all') {
-      setFilteredHymns(hymns);
+      setFilteredHymns(sortHymnsAlphabetically(hymns));
       setSearchQuery('');
     } else {
       const filtered = hymns.filter(h => h.category === category);
-      setFilteredHymns(filtered);
+      setFilteredHymns(sortHymnsAlphabetically(filtered));
       setSearchQuery('');
     }
+    // Scroll to results after filtering
+    setTimeout(scrollToResults, 100);
   };
 
   const handleShowAllHymns = () => {
-    setFilteredHymns(hymns);
+    setDisplayCount(30); // Reset display count
+    setFilteredHymns(sortHymnsAlphabetically(hymns));
     setSearchQuery('');
+    // Scroll to results
+    setTimeout(scrollToResults, 100);
   };
 
   // CRITICAL: Check if we have data to render
@@ -317,13 +362,13 @@ const HymnsListPage = () => {
             filteredHymns={filteredHymns}
           />
           <div className="mt-4 text-center text-sm text-slate-500" style={{fontFamily: 'Inter, sans-serif'}}>
-            Showing {filteredHymns.length} of {hymns.length} hymns
+            Showing {hymnsToDisplay.length} of {filteredHymns.length} hymns
           </div>
         </div>
       </motion.section>
 
       {/* Hymns Grid Section */}
-      <section className="max-w-7xl mx-auto px-6 pb-20">
+      <section ref={resultsRef} className="max-w-7xl mx-auto px-6 pb-20">
         <motion.div
           variants={gridVariants}
           initial="hidden"
@@ -332,16 +377,50 @@ const HymnsListPage = () => {
           {console.log('🎨 About to render grid. filteredHymns:', filteredHymns?.length)}
 
           {filteredHymns && filteredHymns.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredHymns.map((hymn, index) => {
-                console.log(`Rendering hymn ${index}:`, hymn.title, 'ID:', hymn.id);
-                return (
-                  <motion.div key={`hymn-${hymn.id}-${index}`} variants={cardVariants}>
-                    <HymnCard hymn={hymn} />
-                  </motion.div>
-                );
-              })}
-            </div>
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {hymnsToDisplay.map((hymn, index) => {
+                  console.log(`Rendering hymn ${index}:`, hymn.title, 'ID:', hymn.id);
+                  return (
+                    <motion.div key={`hymn-${hymn.id}-${index}`} variants={cardVariants}>
+                      <HymnCard hymn={hymn} />
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Load More Button */}
+              {hasMore && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                  className="flex justify-center mt-12"
+                >
+                  <button
+                    onClick={loadMore}
+                    className="group relative px-8 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden"
+                    style={{fontFamily: 'Inter, sans-serif'}}
+                  >
+                    <span className="relative z-10 flex items-center gap-2">
+                      Load More Hymns
+                      <svg
+                        className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-300"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-emerald-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </button>
+                  <div className="text-center mt-4 text-sm text-slate-600" style={{fontFamily: 'Inter, sans-serif'}}>
+                    Showing {hymnsToDisplay.length} of {filteredHymns.length} hymns
+                  </div>
+                </motion.div>
+              )}
+            </>
           ) : (
             <div className="text-center py-20">
               <div className="text-6xl mb-4">🎵</div>
