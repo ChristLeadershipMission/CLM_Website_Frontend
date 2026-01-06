@@ -8321,6 +8321,7 @@ export const hymns = [
         "That's why I love Him so,",
         "And to the children He said, \"Come to Me,\"",
         "That's why I love Him so."
+      ]
       },
       {
       type:"chorus",
@@ -8568,6 +8569,7 @@ export const hymns = [
         "Tho' the storm rages dark o'er the sea;",
         "For this anchor of promise is sure",
         "'My grace is sufficient for thee'."
+      ]
       },
       {
       type:"chorus",
@@ -10346,7 +10348,7 @@ export const hymns = [
           "If grief thy sorrowing heart has found",
           "It reached a holier than thou"
         ]
-      }
+      },
       {
         type: "verse",
       number:  4,
