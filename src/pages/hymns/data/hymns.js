@@ -1,5 +1,3 @@
-console.log('hymns.js is loading...');
-
 export const hymns = [
     {
         id: "1",
@@ -31259,9 +31257,3 @@ export const hymns = [
 }
 
 ];
-
-
-
-console.log('hymns.js loaded successfully!');
-console.log('Total hymns:', hymns.length);
-console.log('First hymn:', hymns[0]?.title);
