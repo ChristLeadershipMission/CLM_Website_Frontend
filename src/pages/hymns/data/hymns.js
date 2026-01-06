@@ -1,3 +1,5 @@
+console.log('hymns.js is loading...');
+
 export const hymns = [
     {
         id: "1",
@@ -226,54 +228,7 @@ export const hymns = [
             }
         ]
     },
-    {
-    id: "7",
-    title: "There's a Sweet, Sweet Spirit in This Place",
-    author: "Doris Akers",
-    category: "Holy Ghost",
-    lyrics: [
-        {
-            type: "verse",
-            number: 1,
-            lines: [
-                "There's a sweet, sweet Spirit in this place,",
-                "And I know that it's the Spirit of the Lord;",
-                "There are sweet expressions on each face,",
-                "And I know that it's the presence of the Lord."
-            ]
-        },
-        {
-            type: "chorus",
-            lines: [
-                "Sweet Holy Spirit, Sweet heavenly Dove,",
-                "Stay right here with us, filling us with Your love;",
-                "And for these blessings we lift our hearts in praise,",
-                "Without a doubt we know that we'll have been revived,",
-                "When we shall leave this place."
-            ]
-        },
-        {
-            type: "verse",
-            number: 2,
-            lines: [
-                "There are blessings you cannot receive,",
-                "'Till you know Him in His fullness and believe;",
-                "You're the one to profit when you say,",
-                "\"I am going to walk with Jesus all the way.\""
-            ]
-        },
-        {
-            type: "verse",
-            number: 3,
-            lines: [
-                "If you say He saved you from your sin,",
-                "Now you're weak, you're bound and cannot enter in;",
-                "You can make it right if you will yield,",
-                "You'll enjoy the Holy Spirit that we feel."
-            ]
-        }
-    ]
-},
+
 {
         id: "8",
         title: "O Lord, Send the Power Just Now",
@@ -1581,63 +1536,6 @@ export const hymns = [
   ]
 },
 
-
-{
-  id: "26",
-  title: "All Hail the Power of Jesus' Name",
-  author: "Edward Perronet",
-  category: "Praise / Worship",
-  lyrics: [
-    {
-      type: "verse",
-      number: 1,
-      lines: [
-        "All hail the power of Jesus' name!",
-        "Let angels prostrate fall.",
-        "Bring forth the royal diadem,",
-        "and crown him Lord of all.",
-        "Bring forth the royal diadem,",
-        "and crown him Lord of all!"
-      ]
-    },
-    {
-      type: "verse",
-      number: 2,
-      lines: [
-        "O seed of Israel's chosen race",
-        "now ransomed from the fall,",
-        "hail him who saves you by his grace,",
-        "and crown him Lord of all.",
-        "Hail him who saves you by his grace,",
-        "and crown him Lord of all!"
-      ]
-    },
-    {
-      type: "verse",
-      number: 3,
-      lines: [
-        "Let every tongue and every tribe",
-        "responsive to his call,",
-        "to him all majesty ascribe,",
-        "and crown him Lord of all.",
-        "To him all majesty ascribe,",
-        "and crown him Lord of all!"
-      ]
-    },
-    {
-      type: "verse",
-      number: 4,
-      lines: [
-        "Oh, that with all the sacred throng",
-        "we at his feet may fall!",
-        "We'll join the everlasting song",
-        "and crown him Lord of all.",
-        "We'll join the everlasting song",
-        "and crown him Lord of all."
-      ]
-    }
-  ]
-},
 {
   id: "26",
   title: "All Hail the Power of Jesus' Name",
@@ -8443,64 +8341,6 @@ export const hymns = [
 {
   id: 158,
   title: "Come, Holy Spirit, Raise Our Songs",
-  author: "Unknown",
-  lyrics: [
-    {
-      type: "verse",
-      number:  1,
-      lines: [
-        "Come, Holy Spirit, raise our songs",
-        "To reach the wonders of the day,",
-        "When with Thy fiery cloven tongues",
-        "Thou didst those glorious scenes display."
-      ]
-    },
-    {
-      type: "verse",
-      number:  2,
-      lines: [
-        "O 'twas a most auspicious hour,",
-        "Season of grace and sweet delight,",
-        "When Thou didst come with mighty power,",
-        "And light of truth divinely bright!"
-      ]
-    },
-    {
-      type: "verse",
-      number:  3,
-      lines: [
-        "By this the blest disciples knew",
-        "Their risen Head had entered heaven;",
-        "Had now obtained the promise due,",
-        "Fully by God the Father given."
-      ]
-    },
-    {
-      type: "verse",
-      number:  4,
-      lines: [
-        "Lord, we believe to us and ours",
-        "The apostolic promise given;",
-        "We wait the Pentecostal powers,",
-        "The Holy Ghost sent down from heaven."
-      ]
-    },
-    {
-      type: "verse",
-      number:  5,
-      lines: [
-        "Assembled here with one accord,",
-        "Calmly we wait the promised grace,",
-        "The purchase of our dying Lord:",
-        "Come, Holy Ghost, and fill the place."
-      ]
-    }
-  ]
-},
-
-{
-  id: 158,
-  title: "Come, Holy Spirit, Raise Our Songs",
   author: "Charles Wesley",
   lyrics: [
     {
@@ -11247,56 +11087,7 @@ export const hymns = [
 },
 
 {
-  id: 240,
-  title: "There’s a Sweet, Sweet Spirit",
-  author: "Doris Akers",
-  category: "Holy Spirit",
-  lyrics: [
-    {
-      type: "verse",
-      number: 1,
-      lines: [
-        "There's a sweet, sweet Spirit in this place,",
-        "And I know that it's the Spirit of the Lord;",
-        "There are sweet expressions on each face,",
-        "And I know they feel the presence of the Lord."
-      ]
-    },
-    {
-      type: "chorus",
-      lines: [
-        "Sweet Holy Spirit, Sweet heavenly Dove,",
-        "Stay right here with us, filling us with Your love.",
-        "And for these blessings we lift our hearts in praise;",
-        "Without a doubt we'll know that we have been revived,",
-        "When we shall leave this place."
-      ]
-    },
-    {
-      type: "verse",
-      number: 2,
-      lines: [
-        "There are blessings you cannot receive",
-        "Till you know Him in His fullness and believe;",
-        "You're the one to profit when you say,",
-        "\"I am going to walk with Jesus all the way.\""
-      ]
-    },
-    {
-      type: "verse",
-      number: 3,
-      lines: [
-        "If you say He saved you from your sin,",
-        "Now you're weak, you're bound and cannot enter in,",
-        "You can make it right if you will yield,",
-        "You'll enjoy the Holy Spirit that we feel."
-      ]
-    }
-  ]
-},
-
-{
-  id: 241,
+  id: 249,
   title: "Lord, as of Old at Pentecost",
   author: "Charles H. Gabriel",
   category: "Holy Spirit",
@@ -11819,7 +11610,7 @@ export const hymns = [
 },
 
 {
-  id: 248,
+  id: 208,
   title: "Praise, My Soul, the King of Heaven",
   author: "Henry Francis Lyte",
   category: "Praise and Adoration",
@@ -13996,43 +13787,7 @@ export const hymns = [
     }
   ]
 },
-{
-  id: 300,
-  title: "Grace Greater Than Our Sin",
-  author: "Julia H. Johnston",
-  category: "Grace",
-  lyrics: [
-    {
-      type: "verse",
-      number: 1,
-      lines: [
-        "Marvelous grace of our loving Lord,",
-        "Grace that exceeds our sin and our guilt!",
-        "Yonder on Calvary's mount outpoured,",
-        "There where the blood of the Lamb was spilt."
-      ]
-    },
-    {
-      type: "chorus",
-      lines: [
-        "Grace, grace, God’s grace,",
-        "Grace that will pardon and cleanse within;",
-        "Grace, grace, God’s grace,",
-        "Grace that is greater than all our sin!"
-      ]
-    },
-    {
-      type: "verse",
-      number: 2,
-      lines: [
-        "Sin and despair, like the sea waves cold,",
-        "Threaten the soul with infinite loss;",
-        "Grace that is greater, yes, grace untold,",
-        "Points to the refuge, the mighty cross."
-      ]
-    }
-  ]
-},
+
 {
   id: 301,
   title: "Just As I Am, Without One Plea",
@@ -23910,29 +23665,7 @@ export const hymns = [
     }
   ]
 },
-{
-  id: 604,
-  title: "Grace Greater Than Our Sin",
-  author: "Julia H. Johnston",
-  category: "Assurance",
-  lyrics: [
-    {
-      type: "verse",
-      number: 1,
-      lines: [
-        "Marvelous grace of our loving Lord, grace that exceeds our sin and our guilt!",
-        "Yonder on Calvary’s mount outpoured, there where the blood of the Lamb was spilt."
-      ]
-    },
-    {
-      type: "chorus",
-      lines: [
-        "Grace, grace, God’s grace, grace that will pardon and cleanse within;",
-        "Grace, grace, God’s grace, grace that is greater than all our sin!"
-      ]
-    }
-  ]
-},
+
 {
   id: 605,
   title: "Saved by Grace",
@@ -31527,3 +31260,8 @@ export const hymns = [
 
 ];
 
+
+
+console.log('hymns.js loaded successfully!');
+console.log('Total hymns:', hymns.length);
+console.log('First hymn:', hymns[0]?.title);

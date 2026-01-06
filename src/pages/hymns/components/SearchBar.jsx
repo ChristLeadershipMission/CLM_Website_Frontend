@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {useNavigate} from 'react-router-dom';
 
-const SearchBar = ({ setFilteredHymns, allHymns, onSearch, searchQuery, filteredHymns }) => {
+const SearchBar = ({ setFilteredHymns, allHymns = [], onSearch, searchQuery, filteredHymns = [] }) => {
     const [searchTerm, setSearchTerm] = useState(searchQuery || '');
     const [isFocused, setIsFocused] = useState(false);
     const [suggestions, setSuggestions] = useState([]);
@@ -16,14 +16,14 @@ const SearchBar = ({ setFilteredHymns, allHymns, onSearch, searchQuery, filtered
     // Only handle suggestions, let parent handle filtering
     useEffect(() => {
         // Generate suggestions for dropdown
-        if (searchTerm.length > 0) {
+        if (searchTerm.length > 0 && allHymns.length > 0) {
             const uniqueSuggestions = Array.from(new Set([
                 ...allHymns
-                    .filter(hymn => hymn.title.toLowerCase().includes(searchTerm.toLowerCase()))
+                    .filter(hymn => hymn?.title && hymn.title.toLowerCase().includes(searchTerm.toLowerCase()))
                     .map(hymn => hymn.title)
                     .slice(0, 3),
                 ...allHymns
-                    .filter(hymn => hymn.category.toLowerCase().includes(searchTerm.toLowerCase()))
+                    .filter(hymn => hymn?.category && hymn.category.toLowerCase().includes(searchTerm.toLowerCase()))
                     .map(hymn => hymn.category)
                     .slice(0, 2)
             ])).slice(0, 5);
